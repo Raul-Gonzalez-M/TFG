@@ -10940,3 +10940,2248 @@ Freq: D, Name: Time Series, Length: 1832, dtype: float64
 2024-10-01 00:14:36,809:WARNING:C:\Users\raulg\AppData\Local\Temp\ipykernel_16540\3917876181.py:7: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
   Vali1aux.append(aux[i])
 
+2024-10-01 00:38:02,955:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:03,281:INFO:PyCaret TSForecastingExperiment
+2024-10-01 00:38:03,281:INFO:Logging name: ts-default-name
+2024-10-01 00:38:03,282:INFO:ML Usecase: MLUsecase.TIME_SERIES
+2024-10-01 00:38:03,282:INFO:version 3.3.2
+2024-10-01 00:38:03,282:INFO:Initializing setup()
+2024-10-01 00:38:03,282:INFO:self.USI: c9c5
+2024-10-01 00:38:03,282:INFO:self._variable_keys: {'seasonality_present', 'seed', 'X_train', 'pipeline', 'strictly_positive', 'candidate_sps', 'significant_sps', 'log_plots_param', 'html_param', 'enforce_exogenous', 'y_train', 'gpu_n_jobs_param', 'USI', 'y_transformed', 'y_test', 'data', 'exp_id', 'all_sps_to_use', '_ml_usecase', 'exogenous_present', 'X', 'X_test', 'index_type', 'logging_param', 'gpu_param', 'enforce_pi', 'significant_sps_no_harmonics', 'idx', '_available_plots', 'X_test_transformed', 'X_train_transformed', 'X_transformed', 'fold_generator', 'primary_sp_to_use', 'memory', 'y_train_transformed', 'y', 'fold_param', 'model_engines', 'approach_type', 'exp_name_log', 'n_jobs_param', 'y_test_transformed', 'fh'}
+2024-10-01 00:38:03,282:INFO:Checking environment
+2024-10-01 00:38:03,282:INFO:python_version: 3.10.11
+2024-10-01 00:38:03,282:INFO:python_build: ('tags/v3.10.11:7d4cc5a', 'Apr  5 2023 00:38:17')
+2024-10-01 00:38:03,282:INFO:machine: AMD64
+2024-10-01 00:38:03,282:INFO:platform: Windows-10-10.0.22631-SP0
+2024-10-01 00:38:03,284:INFO:Memory: svmem(total=34268418048, available=24314023936, percent=29.0, used=9954394112, free=24314023936)
+2024-10-01 00:38:03,284:INFO:Physical Core: 8
+2024-10-01 00:38:03,284:INFO:Logical Core: 16
+2024-10-01 00:38:03,284:INFO:Checking libraries
+2024-10-01 00:38:03,285:INFO:System:
+2024-10-01 00:38:03,285:INFO:    python: 3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]
+2024-10-01 00:38:03,285:INFO:executable: C:\Users\raulg\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\python.exe
+2024-10-01 00:38:03,285:INFO:   machine: Windows-10-10.0.22631-SP0
+2024-10-01 00:38:03,285:INFO:PyCaret required dependencies:
+2024-10-01 00:38:03,302:INFO:                 pip: 23.0.1
+2024-10-01 00:38:03,302:INFO:          setuptools: 65.5.0
+2024-10-01 00:38:03,302:INFO:             pycaret: 3.3.2
+2024-10-01 00:38:03,302:INFO:             IPython: 8.26.0
+2024-10-01 00:38:03,302:INFO:          ipywidgets: 8.1.5
+2024-10-01 00:38:03,302:INFO:                tqdm: 4.66.5
+2024-10-01 00:38:03,302:INFO:               numpy: 1.26.4
+2024-10-01 00:38:03,302:INFO:              pandas: 2.1.4
+2024-10-01 00:38:03,302:INFO:              jinja2: 3.1.4
+2024-10-01 00:38:03,302:INFO:               scipy: 1.11.4
+2024-10-01 00:38:03,302:INFO:              joblib: 1.3.2
+2024-10-01 00:38:03,302:INFO:             sklearn: 1.4.2
+2024-10-01 00:38:03,302:INFO:                pyod: 2.0.2
+2024-10-01 00:38:03,302:INFO:            imblearn: 0.12.3
+2024-10-01 00:38:03,302:INFO:   category_encoders: 2.6.3
+2024-10-01 00:38:03,302:INFO:            lightgbm: 4.5.0
+2024-10-01 00:38:03,302:INFO:               numba: 0.60.0
+2024-10-01 00:38:03,302:INFO:            requests: 2.32.3
+2024-10-01 00:38:03,302:INFO:          matplotlib: 3.7.5
+2024-10-01 00:38:03,302:INFO:          scikitplot: 0.3.7
+2024-10-01 00:38:03,302:INFO:         yellowbrick: 1.5
+2024-10-01 00:38:03,302:INFO:              plotly: 5.24.1
+2024-10-01 00:38:03,302:INFO:    plotly-resampler: Not installed
+2024-10-01 00:38:03,302:INFO:             kaleido: 0.2.1
+2024-10-01 00:38:03,302:INFO:           schemdraw: 0.15
+2024-10-01 00:38:03,302:INFO:         statsmodels: 0.14.3
+2024-10-01 00:38:03,302:INFO:              sktime: 0.26.0
+2024-10-01 00:38:03,302:INFO:               tbats: 1.1.3
+2024-10-01 00:38:03,302:INFO:            pmdarima: 2.0.4
+2024-10-01 00:38:03,302:INFO:              psutil: 6.0.0
+2024-10-01 00:38:03,302:INFO:          markupsafe: 2.1.5
+2024-10-01 00:38:03,302:INFO:             pickle5: Not installed
+2024-10-01 00:38:03,302:INFO:         cloudpickle: 3.0.0
+2024-10-01 00:38:03,302:INFO:         deprecation: 2.1.0
+2024-10-01 00:38:03,302:INFO:              xxhash: 3.5.0
+2024-10-01 00:38:03,302:INFO:           wurlitzer: Not installed
+2024-10-01 00:38:03,302:INFO:PyCaret optional dependencies:
+2024-10-01 00:38:03,316:INFO:                shap: Not installed
+2024-10-01 00:38:03,316:INFO:           interpret: Not installed
+2024-10-01 00:38:03,316:INFO:                umap: Not installed
+2024-10-01 00:38:03,316:INFO:     ydata_profiling: Not installed
+2024-10-01 00:38:03,317:INFO:  explainerdashboard: Not installed
+2024-10-01 00:38:03,317:INFO:             autoviz: Not installed
+2024-10-01 00:38:03,317:INFO:           fairlearn: Not installed
+2024-10-01 00:38:03,317:INFO:          deepchecks: Not installed
+2024-10-01 00:38:03,317:INFO:             xgboost: Not installed
+2024-10-01 00:38:03,317:INFO:            catboost: Not installed
+2024-10-01 00:38:03,317:INFO:              kmodes: Not installed
+2024-10-01 00:38:03,317:INFO:             mlxtend: Not installed
+2024-10-01 00:38:03,317:INFO:       statsforecast: Not installed
+2024-10-01 00:38:03,317:INFO:        tune_sklearn: Not installed
+2024-10-01 00:38:03,317:INFO:                 ray: Not installed
+2024-10-01 00:38:03,317:INFO:            hyperopt: Not installed
+2024-10-01 00:38:03,317:INFO:              optuna: 4.0.0
+2024-10-01 00:38:03,317:INFO:               skopt: Not installed
+2024-10-01 00:38:03,317:INFO:              mlflow: Not installed
+2024-10-01 00:38:03,317:INFO:              gradio: Not installed
+2024-10-01 00:38:03,317:INFO:             fastapi: Not installed
+2024-10-01 00:38:03,317:INFO:             uvicorn: Not installed
+2024-10-01 00:38:03,317:INFO:              m2cgen: Not installed
+2024-10-01 00:38:03,317:INFO:           evidently: Not installed
+2024-10-01 00:38:03,317:INFO:               fugue: Not installed
+2024-10-01 00:38:03,317:INFO:           streamlit: Not installed
+2024-10-01 00:38:03,317:INFO:             prophet: Not installed
+2024-10-01 00:38:03,317:INFO:None
+2024-10-01 00:38:03,317:INFO:Set up GPU usage.
+2024-10-01 00:38:03,318:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,318:WARNING:cuML is outdated or not found. Required version is >=23.08.
+                Please visit https://rapids.ai/install for installation instructions.
+2024-10-01 00:38:03,324:INFO:Set Forecast Horizon.
+2024-10-01 00:38:03,324:INFO:Set up Train-Test Splits.
+2024-10-01 00:38:03,342:INFO:Finished creating preprocessing pipeline.
+2024-10-01 00:38:03,344:INFO:Pipeline: ForecastingPipeline(steps=[('forecaster',
+                            TransformedTargetForecaster(steps=[('model',
+                                                                DummyForecaster())]))])
+2024-10-01 00:38:03,344:INFO:Set up Seasonal Period.
+2024-10-01 00:38:03,350:INFO:Setting the seasonal component type - 'add' or 'mul'.
+2024-10-01 00:38:03,350:INFO:Checking if data is strictly positive.
+2024-10-01 00:38:03,366:INFO:Creating final display dataframe.
+2024-10-01 00:38:03,371:INFO:Setup Display Container:                                          Description  \
+0                                         session_id   
+1                                             Target   
+2                                           Approach   
+3                                Exogenous Variables   
+4                                Original data shape   
+5                             Transformed data shape   
+6                        Transformed train set shape   
+7                         Transformed test set shape   
+8                           Rows with missing values   
+9                                     Fold Generator   
+10                                       Fold Number   
+11                       Enforce Prediction Interval   
+12                   Splits used for hyperparameters   
+13                   User Defined Seasonal Period(s)   
+14                           Ignore Seasonality Test   
+15                        Seasonality Detection Algo   
+16                            Max Period to Consider   
+17                         Seasonal Period(s) Tested   
+18                    Significant Seasonal Period(s)   
+19  Significant Seasonal Period(s) without Harmonics   
+20                                  Remove Harmonics   
+21                            Harmonics Order Method   
+22                          Num Seasonalities to Use   
+23                          All Seasonalities to Use   
+24                               Primary Seasonality   
+25                               Seasonality Present   
+26                                  Seasonality Type   
+27                          Target Strictly Positive   
+28                                Target White Noise   
+29                                     Recommended d   
+30                            Recommended Seasonal D   
+31                                        Preprocess   
+32                                          CPU Jobs   
+33                                           Use GPU   
+34                                    Log Experiment   
+35                                   Experiment Name   
+36                                               USI   
+
+                                      Value  
+0                                      5774  
+1                               Time Series  
+2                                Univariate  
+3                               Not Present  
+4                                 (1856, 1)  
+5                                 (1856, 1)  
+6                                 (1832, 1)  
+7                                   (24, 1)  
+8                                      0.0%  
+9                   ExpandingWindowSplitter  
+10                                        3  
+11                                    False  
+12                                      all  
+13                                     None  
+14                                    False  
+15                                     auto  
+16                                       60  
+17  [10, 5, 20, 33, 48, 44, 19, 43, 17, 58]  
+18  [10, 5, 20, 33, 48, 44, 19, 43, 17, 58]  
+19         [20, 33, 48, 44, 19, 43, 17, 58]  
+20                                    False  
+21                             harmonic_max  
+22                                        1  
+23                                     [10]  
+24                                       10  
+25                                     True  
+26                                      mul  
+27                                     True  
+28                                       No  
+29                                        1  
+30                                        0  
+31                                    False  
+32                                       -1  
+33                                     True  
+34                                    False  
+35                          ts-default-name  
+36                                     c9c5  
+2024-10-01 00:38:03,375:INFO:Engine successfully changes for model 'auto_arima' to 'pmdarima'.
+2024-10-01 00:38:03,402:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:03,402:INFO:Engine for model 'lr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,402:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,402:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,402:INFO:Engine for model 'en_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,402:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,402:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,402:INFO:Engine for model 'ridge_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,402:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,402:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,402:INFO:Engine for model 'lasso_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,402:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,402:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,404:INFO:Engine for model 'llar_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,404:INFO:Engine for model 'br_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,404:INFO:Engine for model 'huber_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,405:INFO:Engine for model 'omp_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,406:INFO:Engine for model 'knn_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,406:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,406:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,406:INFO:Engine for model 'dt_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,406:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,407:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,407:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,407:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,407:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,407:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:03,407:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:03,407:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,752:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,752:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:03,752:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:03,754:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:03,754:INFO:Engine for model 'lr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,754:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,754:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,754:INFO:Engine for model 'en_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,754:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,754:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,755:INFO:Engine for model 'ridge_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,755:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,755:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,755:INFO:Engine for model 'lasso_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,755:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,755:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,755:INFO:Engine for model 'llar_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,755:INFO:Engine for model 'br_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,756:INFO:Engine for model 'huber_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,757:INFO:Engine for model 'omp_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,757:INFO:Engine for model 'knn_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,758:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,758:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,758:INFO:Engine for model 'dt_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,758:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,758:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,758:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,759:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,759:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,759:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:03,759:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:03,759:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,990:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,990:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:03,990:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:03,991:INFO:Engine successfully changes for model 'lr_cds_dt' to 'sklearn'.
+2024-10-01 00:38:03,993:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:03,993:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,993:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,993:INFO:Engine for model 'en_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,993:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,993:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,993:INFO:Engine for model 'ridge_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,993:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,993:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,994:INFO:Engine for model 'lasso_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,994:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,994:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,994:INFO:Engine for model 'llar_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,994:INFO:Engine for model 'br_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,994:INFO:Engine for model 'huber_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,995:INFO:Engine for model 'omp_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,996:INFO:Engine for model 'knn_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,996:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,996:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:03,996:INFO:Engine for model 'dt_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,996:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,997:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,997:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,997:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,997:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:03,997:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:03,997:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:03,997:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,221:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,221:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:04,221:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:04,224:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:04,224:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,224:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,224:INFO:Engine for model 'en_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,224:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,224:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,224:INFO:Engine for model 'ridge_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,224:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,224:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,224:INFO:Engine for model 'lasso_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,224:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,224:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,225:INFO:Engine for model 'llar_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,225:INFO:Engine for model 'br_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,225:INFO:Engine for model 'huber_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,226:INFO:Engine for model 'omp_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,227:INFO:Engine for model 'knn_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,227:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,227:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,227:INFO:Engine for model 'dt_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,227:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,228:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,228:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,228:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,228:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,228:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:04,228:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:04,228:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,460:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,460:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:04,460:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:04,461:INFO:Engine successfully changes for model 'en_cds_dt' to 'sklearn'.
+2024-10-01 00:38:04,462:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:04,463:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,463:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,463:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,463:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,463:INFO:Engine for model 'ridge_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,463:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,463:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,463:INFO:Engine for model 'lasso_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,463:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,463:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,463:INFO:Engine for model 'llar_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,463:INFO:Engine for model 'br_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,463:INFO:Engine for model 'huber_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,464:INFO:Engine for model 'omp_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,465:INFO:Engine for model 'knn_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,465:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,465:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,465:INFO:Engine for model 'dt_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,466:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,466:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,466:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,466:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,466:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,466:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:04,466:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:04,467:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,703:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,703:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:04,704:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:04,707:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:04,707:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,707:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,707:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,707:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,708:INFO:Engine for model 'ridge_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,708:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,708:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,708:INFO:Engine for model 'lasso_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,708:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,708:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,708:INFO:Engine for model 'llar_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,708:INFO:Engine for model 'br_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,708:INFO:Engine for model 'huber_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,710:INFO:Engine for model 'omp_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,711:INFO:Engine for model 'knn_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,711:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,711:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,711:INFO:Engine for model 'dt_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,711:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,711:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,711:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,712:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,712:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,712:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:04,712:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:04,712:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,914:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,914:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:04,914:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:04,914:INFO:Engine successfully changes for model 'ridge_cds_dt' to 'sklearn'.
+2024-10-01 00:38:04,915:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:04,915:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,915:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,916:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,916:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,916:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,916:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,916:INFO:Engine for model 'lasso_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,916:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,916:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,916:INFO:Engine for model 'llar_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,917:INFO:Engine for model 'br_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,917:INFO:Engine for model 'huber_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,918:INFO:Engine for model 'omp_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,919:INFO:Engine for model 'knn_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,919:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,919:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:04,919:INFO:Engine for model 'dt_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,919:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,920:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,920:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,920:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,920:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:04,920:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:04,920:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:04,920:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,135:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,136:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:05,136:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:05,138:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:05,138:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,138:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,138:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,138:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,138:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,138:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,138:INFO:Engine for model 'lasso_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,138:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,138:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,139:INFO:Engine for model 'llar_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,139:INFO:Engine for model 'br_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,139:INFO:Engine for model 'huber_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,140:INFO:Engine for model 'omp_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,141:INFO:Engine for model 'knn_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,141:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,141:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,141:INFO:Engine for model 'dt_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,141:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,142:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,142:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,142:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,142:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,142:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:05,142:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:05,142:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,355:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,355:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:05,355:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:05,356:INFO:Engine successfully changes for model 'lasso_cds_dt' to 'sklearn'.
+2024-10-01 00:38:05,358:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:05,358:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,358:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,358:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,358:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,358:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,358:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,358:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,358:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,358:INFO:Engine for model 'llar_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,359:INFO:Engine for model 'br_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,359:INFO:Engine for model 'huber_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,360:INFO:Engine for model 'omp_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,361:INFO:Engine for model 'knn_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,361:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,361:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,361:INFO:Engine for model 'dt_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,361:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,362:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,362:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,362:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,362:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,362:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:05,362:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:05,362:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,578:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,578:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:05,578:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:05,580:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:05,581:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,581:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,581:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,581:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,581:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,581:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,581:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,581:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,581:INFO:Engine for model 'llar_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,582:INFO:Engine for model 'br_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,582:INFO:Engine for model 'huber_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,582:INFO:Engine for model 'omp_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,584:INFO:Engine for model 'knn_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,584:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,584:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,584:INFO:Engine for model 'dt_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,585:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,585:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,585:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,585:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,585:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,585:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:05,585:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:05,586:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,800:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,800:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:05,800:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:05,801:INFO:Engine successfully changes for model 'lar_cds_dt' to 'sklearn'.
+2024-10-01 00:38:05,803:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:05,803:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,803:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,803:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,803:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,803:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,803:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,803:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,804:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,804:INFO:Engine for model 'llar_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,804:INFO:Engine for model 'br_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,804:INFO:Engine for model 'huber_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,805:INFO:Engine for model 'omp_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,806:INFO:Engine for model 'knn_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,806:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,806:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:05,807:INFO:Engine for model 'dt_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,807:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,807:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,808:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,808:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,808:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:05,809:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:05,809:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:05,809:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,014:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,015:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:06,015:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:06,017:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:06,017:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,017:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,017:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,017:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,017:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,017:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,018:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,018:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,018:INFO:Engine for model 'llar_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,018:INFO:Engine for model 'br_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,018:INFO:Engine for model 'huber_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,019:INFO:Engine for model 'omp_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,020:INFO:Engine for model 'knn_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,020:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,020:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,021:INFO:Engine for model 'dt_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,021:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,021:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,021:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,021:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,022:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,022:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:06,022:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:06,022:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,241:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,241:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:06,241:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:06,241:INFO:Engine successfully changes for model 'llar_cds_dt' to 'sklearn'.
+2024-10-01 00:38:06,243:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:06,243:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,243:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,243:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,243:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,243:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,243:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,244:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,244:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,244:INFO:Engine for model 'br_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,245:INFO:Engine for model 'huber_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,246:INFO:Engine for model 'omp_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,247:INFO:Engine for model 'knn_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,247:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,247:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,247:INFO:Engine for model 'dt_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,247:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,247:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,248:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,248:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,248:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,248:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:06,248:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:06,248:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,452:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,452:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:06,452:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:06,454:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:06,454:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,454:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,454:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,454:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,454:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,454:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,454:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,454:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,455:INFO:Engine for model 'br_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,455:INFO:Engine for model 'huber_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,456:INFO:Engine for model 'omp_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,457:INFO:Engine for model 'knn_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,457:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,457:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,457:INFO:Engine for model 'dt_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,457:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,457:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,458:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,458:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,458:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,458:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:06,458:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:06,458:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,692:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,692:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:06,692:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:06,692:INFO:Engine successfully changes for model 'br_cds_dt' to 'sklearn'.
+2024-10-01 00:38:06,695:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:06,695:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,695:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,695:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,695:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,695:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,695:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,695:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,695:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,696:INFO:Engine for model 'huber_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,698:INFO:Engine for model 'omp_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,699:INFO:Engine for model 'knn_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,699:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,699:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,699:INFO:Engine for model 'dt_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,699:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,699:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,699:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,700:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,700:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,700:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:06,700:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:06,700:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,894:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,894:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:06,894:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:06,896:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:06,896:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,896:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,896:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,896:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,897:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,897:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,897:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,897:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,897:INFO:Engine for model 'huber_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,898:INFO:Engine for model 'omp_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,899:INFO:Engine for model 'knn_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,899:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,899:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:06,899:INFO:Engine for model 'dt_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,899:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,899:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,900:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,900:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,900:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:06,900:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:06,900:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:06,900:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,098:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,099:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:07,099:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:07,099:INFO:Engine successfully changes for model 'huber_cds_dt' to 'sklearn'.
+2024-10-01 00:38:07,101:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:07,101:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,101:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,101:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,101:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,101:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,102:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,102:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,102:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,104:INFO:Engine for model 'omp_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,105:INFO:Engine for model 'knn_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,106:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,106:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,106:INFO:Engine for model 'dt_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,106:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,106:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,107:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,107:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,107:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,107:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:07,107:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:07,107:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,315:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,315:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:07,315:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:07,317:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:07,317:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,317:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,317:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,317:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,317:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,317:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,318:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,318:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,320:INFO:Engine for model 'omp_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,321:INFO:Engine for model 'knn_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,321:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,321:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,322:INFO:Engine for model 'dt_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,322:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,322:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,323:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,323:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,323:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,323:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:07,323:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:07,323:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,536:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,536:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:07,536:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:07,536:INFO:Engine successfully changes for model 'par_cds_dt' to 'sklearn'.
+2024-10-01 00:38:07,539:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:07,539:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,540:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,540:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,540:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,540:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,540:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,541:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,541:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,542:INFO:Engine for model 'omp_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,544:INFO:Engine for model 'knn_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,544:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,544:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,545:INFO:Engine for model 'dt_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,545:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,545:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,546:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,546:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,546:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,546:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:07,547:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:07,547:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,751:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,751:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:07,751:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:07,753:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:07,753:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,753:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,753:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,753:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,754:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,754:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,754:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,754:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,756:INFO:Engine for model 'omp_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,757:INFO:Engine for model 'knn_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,757:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,757:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,757:INFO:Engine for model 'dt_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,757:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,758:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,758:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,758:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,758:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,758:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:07,758:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:07,758:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,973:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,973:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:07,973:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:07,973:INFO:Engine successfully changes for model 'omp_cds_dt' to 'sklearn'.
+2024-10-01 00:38:07,976:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:07,976:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,976:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,976:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,976:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,976:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,976:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,976:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,976:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,979:INFO:Engine for model 'knn_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,979:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,979:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:07,979:INFO:Engine for model 'dt_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,979:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,979:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,980:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,980:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,980:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:07,980:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:07,980:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:07,980:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,192:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,192:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:08,192:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:08,194:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:08,194:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,195:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,195:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,195:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,195:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,195:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,195:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,195:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,198:INFO:Engine for model 'knn_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,198:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,198:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,198:INFO:Engine for model 'dt_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,198:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,198:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,198:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,198:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,198:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,198:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:08,198:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:08,198:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,403:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,403:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:08,403:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:08,403:INFO:Engine successfully changes for model 'knn_cds_dt' to 'sklearn'.
+2024-10-01 00:38:08,405:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:08,405:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,405:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,405:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,405:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,405:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,405:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,406:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,406:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,408:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,408:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,408:INFO:Engine for model 'dt_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,409:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,409:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,409:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,409:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,410:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,410:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:08,410:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:08,410:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,646:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,646:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:08,646:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:08,648:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:08,649:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,649:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,649:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,649:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,649:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,649:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,649:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,649:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,652:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,652:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,652:INFO:Engine for model 'dt_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,652:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,652:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,653:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,653:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,653:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,653:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:08,653:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:08,653:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,871:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,871:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:08,872:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:08,872:INFO:Engine successfully changes for model 'dt_cds_dt' to 'sklearn'.
+2024-10-01 00:38:08,873:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:08,873:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,873:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,873:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,873:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,874:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,874:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,874:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,874:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,876:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,876:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:08,877:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,877:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,877:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,877:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,877:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:08,877:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:08,877:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:08,877:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,092:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,092:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:09,092:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:09,094:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:09,094:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,094:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,095:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,095:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,095:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,095:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,095:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,095:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,099:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,099:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,100:INFO:Engine for model 'rf_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,100:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,100:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,101:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,101:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,101:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:09,101:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:09,101:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,331:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,331:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:09,331:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:09,331:INFO:Engine successfully changes for model 'rf_cds_dt' to 'sklearn'.
+2024-10-01 00:38:09,334:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:09,334:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,334:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,334:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,334:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,334:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,334:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,334:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,334:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,337:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,337:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,337:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,338:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,338:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,338:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,338:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:09,338:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:09,338:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,558:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,558:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:09,558:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:09,560:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:09,560:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,560:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,560:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,560:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,560:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,560:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,561:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,561:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,563:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,563:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,564:INFO:Engine for model 'et_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,564:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,564:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,564:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,564:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:09,564:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:09,564:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,779:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,779:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:09,779:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:09,779:INFO:Engine successfully changes for model 'et_cds_dt' to 'sklearn'.
+2024-10-01 00:38:09,781:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:09,781:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,781:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,781:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,781:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,781:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,782:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,782:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,782:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,784:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,784:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,784:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,785:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,785:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,785:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:09,785:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:09,785:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,993:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:09,993:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:09,993:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:09,997:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:09,997:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,997:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,997:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,997:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,997:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,997:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,997:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:09,997:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,000:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,000:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,001:INFO:Engine for model 'gbr_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:10,001:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:10,001:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:10,001:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:10,002:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:10,002:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:10,217:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:10,218:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:10,218:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:10,218:INFO:Engine successfully changes for model 'gbr_cds_dt' to 'sklearn'.
+2024-10-01 00:38:10,221:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:10,221:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,221:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,222:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,222:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,222:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,222:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,222:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,222:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,225:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,225:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,226:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:10,226:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:10,226:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:10,226:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:10,226:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:10,455:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:10,455:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:10,455:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:10,457:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:10,458:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,458:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,458:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,458:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,458:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,458:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,458:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,458:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,461:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,461:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,461:INFO:Engine for model 'ada_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:10,462:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:10,462:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:10,462:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:10,462:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:10,701:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:10,701:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:10,701:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:10,701:INFO:Engine successfully changes for model 'ada_cds_dt' to 'sklearn'.
+2024-10-01 00:38:10,704:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:10,704:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,704:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,704:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,704:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,704:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,704:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,705:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,705:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,707:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,707:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,708:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:10,708:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:10,708:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:10,708:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:10,912:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:10,912:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:10,912:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:10,915:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:10,915:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,915:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,915:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,915:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,916:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,916:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,916:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,916:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,918:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,918:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:10,919:INFO:Engine for model 'xgboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:10,919:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:10,919:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:10,919:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:11,149:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:11,149:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:11,149:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:11,150:INFO:Engine successfully changes for model 'xgboost_cds_dt' to 'sklearn'.
+2024-10-01 00:38:11,152:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:11,152:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,152:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,152:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,152:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,152:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,152:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,152:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,152:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,154:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,154:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,155:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:11,155:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:11,155:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:11,375:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:11,375:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:11,375:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:11,378:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:11,378:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,378:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,378:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,378:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,378:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,378:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,378:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,378:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,381:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,381:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,382:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:11,382:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:11,382:INFO:Engine for model 'lightgbm_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:11,592:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:11,592:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:11,592:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:11,592:INFO:Engine successfully changes for model 'lightgbm_cds_dt' to 'sklearn'.
+2024-10-01 00:38:11,595:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:11,595:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,595:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,595:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,596:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,596:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,596:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,596:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,596:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,598:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,598:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,599:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:11,600:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:11,816:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:11,816:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:11,816:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:11,819:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:11,819:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,819:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,819:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,819:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,820:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,820:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,820:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,820:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,823:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,823:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:11,824:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:11,824:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:12,051:INFO:Engine for model 'catboost_cds_dt' has not been set explicitly, hence returning None.
+2024-10-01 00:38:12,051:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:12,051:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:12,051:INFO:Engine successfully changes for model 'catboost_cds_dt' to 'sklearn'.
+2024-10-01 00:38:12,053:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:12,053:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,053:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,053:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,053:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,054:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,054:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,054:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,054:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,056:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,056:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,057:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:12,057:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:12,276:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:12,276:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:12,279:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:12,279:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,279:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,279:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,279:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,279:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,279:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,279:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,279:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,282:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,282:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,283:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:12,283:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:12,492:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:12,492:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:12,494:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:12,494:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,494:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,494:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,494:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,494:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,494:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,494:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,494:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,497:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,497:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,498:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:12,498:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:12,710:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:12,710:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:12,712:WARNING:
+'prophet' is a soft dependency and not included in the pycaret installation. Please run: `pip install prophet` to install.
+2024-10-01 00:38:12,712:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,712:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,712:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,712:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,712:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,712:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,712:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,712:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,714:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,714:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2024-10-01 00:38:12,715:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:12,715:WARNING:
+'xgboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install xgboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:12,948:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:12,948:WARNING:
+'catboost' is a soft dependency and not included in the pycaret installation. Please run: `pip install catboost` to install.
+Alternately, you can install this by running `pip install pycaret[models]`
+2024-10-01 00:38:12,949:INFO:setup() successfully completed in 9.67s...............
+2024-10-01 00:38:12,958:INFO:Initializing compare_models()
+2024-10-01 00:38:12,958:INFO:compare_models(self=<pycaret.time_series.forecasting.oop.TSForecastingExperiment object at 0x0000029487CE8D00>, include=None, fold=None, round=4, cross_validation=True, sort=MAE, n_select=5, budget_time=None, turbo=True, errors=ignore, fit_kwargs=None, groups=None, experiment_custom_tags=None, probability_threshold=None, verbose=True, parallel=None, caller_params={'self': <pycaret.time_series.forecasting.oop.TSForecastingExperiment object at 0x0000029487CE8D00>, 'include': None, 'exclude': None, 'fold': None, 'round': 4, 'cross_validation': True, 'sort': 'MAE', 'n_select': 5, 'budget_time': None, 'turbo': True, 'errors': 'ignore', 'fit_kwargs': None, 'experiment_custom_tags': None, 'engine': None, 'verbose': True, 'parallel': None, '__class__': <class 'pycaret.time_series.forecasting.oop.TSForecastingExperiment'>}, exclude=None)
+2024-10-01 00:38:12,958:INFO:Checking exceptions
+2024-10-01 00:38:12,959:INFO:Preparing display monitor
+2024-10-01 00:38:12,977:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\pycaret\internal\pycaret_experiment\supervised_experiment.py:713: UserWarning: Unsupported estimator `ensemble_forecaster` for method `compare_models()`, removing from model_library
+  warnings.warn(
+
+2024-10-01 00:38:12,977:INFO:Initializing Naive Forecaster
+2024-10-01 00:38:12,977:INFO:Total runtime is 0.0 minutes
+2024-10-01 00:38:12,980:INFO:SubProcess create_model() called ==================================
+2024-10-01 00:38:12,980:INFO:Initializing create_model()
+2024-10-01 00:38:12,980:INFO:create_model(self=<pycaret.time_series.forecasting.oop.TSForecastingExperiment object at 0x0000029487CE8D00>, estimator=naive, fold=None, round=4, cross_validation=True, predict=True, fit_kwargs={}, groups=None, refit=False, probability_threshold=None, experiment_custom_tags=None, verbose=False, system=False, add_to_model_list=True, metrics=None, display=<pycaret.internal.display.display.CommonDisplay object at 0x0000029487CCB670>, model_only=True, return_train_score=False, error_score=0.0, kwargs={})
+2024-10-01 00:38:12,981:INFO:Checking exceptions
+2024-10-01 00:38:12,981:INFO:Importing libraries
+2024-10-01 00:38:12,981:INFO:Copying training dataset
+2024-10-01 00:38:12,985:INFO:Defining folds
+2024-10-01 00:38:12,985:INFO:Declaring metric variables
+2024-10-01 00:38:12,987:INFO:Importing untrained model
+2024-10-01 00:38:12,991:INFO:Naive Forecaster Imported successfully
+2024-10-01 00:38:12,998:INFO:Starting cross validation
+2024-10-01 00:38:12,999:INFO:Cross validating with ExpandingWindowSplitter(fh=ForecastingHorizon([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+       19, 20, 21, 22, 23, 24],
+      dtype='int32', is_relative=True),
+                        initial_window=1760, step_length=24), n_jobs=1
+2024-10-01 00:38:13,032:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,032:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,059:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,059:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,083:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,084:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,088:INFO:Calculating mean and std
+2024-10-01 00:38:13,088:INFO:Creating metrics dataframe
+2024-10-01 00:38:13,090:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\pycaret\time_series\forecasting\oop.py:2694: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  model_results = pd.concat((model_results, model_avgs), axis=0)
+
+2024-10-01 00:38:13,091:INFO:Uploading results into container
+2024-10-01 00:38:13,091:INFO:Uploading model into container now
+2024-10-01 00:38:13,091:INFO:_master_model_container: 1
+2024-10-01 00:38:13,091:INFO:_display_container: 2
+2024-10-01 00:38:13,091:INFO:NaiveForecaster()
+2024-10-01 00:38:13,091:INFO:create_model() successfully completed......................................
+2024-10-01 00:38:13,174:INFO:SubProcess create_model() end ==================================
+2024-10-01 00:38:13,174:INFO:Creating metrics dataframe
+2024-10-01 00:38:13,179:INFO:Initializing Grand Means Forecaster
+2024-10-01 00:38:13,179:INFO:Total runtime is 0.0033635695775349936 minutes
+2024-10-01 00:38:13,180:INFO:SubProcess create_model() called ==================================
+2024-10-01 00:38:13,181:INFO:Initializing create_model()
+2024-10-01 00:38:13,181:INFO:create_model(self=<pycaret.time_series.forecasting.oop.TSForecastingExperiment object at 0x0000029487CE8D00>, estimator=grand_means, fold=None, round=4, cross_validation=True, predict=True, fit_kwargs={}, groups=None, refit=False, probability_threshold=None, experiment_custom_tags=None, verbose=False, system=False, add_to_model_list=True, metrics=None, display=<pycaret.internal.display.display.CommonDisplay object at 0x0000029487CCB670>, model_only=True, return_train_score=False, error_score=0.0, kwargs={})
+2024-10-01 00:38:13,181:INFO:Checking exceptions
+2024-10-01 00:38:13,181:INFO:Importing libraries
+2024-10-01 00:38:13,181:INFO:Copying training dataset
+2024-10-01 00:38:13,182:INFO:Defining folds
+2024-10-01 00:38:13,182:INFO:Declaring metric variables
+2024-10-01 00:38:13,185:INFO:Importing untrained model
+2024-10-01 00:38:13,187:INFO:Grand Means Forecaster Imported successfully
+2024-10-01 00:38:13,192:INFO:Starting cross validation
+2024-10-01 00:38:13,193:INFO:Cross validating with ExpandingWindowSplitter(fh=ForecastingHorizon([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+       19, 20, 21, 22, 23, 24],
+      dtype='int32', is_relative=True),
+                        initial_window=1760, step_length=24), n_jobs=1
+2024-10-01 00:38:13,211:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,212:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,230:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,230:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,249:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,249:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,252:INFO:Calculating mean and std
+2024-10-01 00:38:13,252:INFO:Creating metrics dataframe
+2024-10-01 00:38:13,253:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\pycaret\time_series\forecasting\oop.py:2694: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  model_results = pd.concat((model_results, model_avgs), axis=0)
+
+2024-10-01 00:38:13,254:INFO:Uploading results into container
+2024-10-01 00:38:13,254:INFO:Uploading model into container now
+2024-10-01 00:38:13,254:INFO:_master_model_container: 2
+2024-10-01 00:38:13,254:INFO:_display_container: 2
+2024-10-01 00:38:13,254:INFO:NaiveForecaster(strategy='mean')
+2024-10-01 00:38:13,254:INFO:create_model() successfully completed......................................
+2024-10-01 00:38:13,329:INFO:SubProcess create_model() end ==================================
+2024-10-01 00:38:13,329:INFO:Creating metrics dataframe
+2024-10-01 00:38:13,334:INFO:Initializing Seasonal Naive Forecaster
+2024-10-01 00:38:13,334:INFO:Total runtime is 0.005942153930664063 minutes
+2024-10-01 00:38:13,336:INFO:SubProcess create_model() called ==================================
+2024-10-01 00:38:13,336:INFO:Initializing create_model()
+2024-10-01 00:38:13,336:INFO:create_model(self=<pycaret.time_series.forecasting.oop.TSForecastingExperiment object at 0x0000029487CE8D00>, estimator=snaive, fold=None, round=4, cross_validation=True, predict=True, fit_kwargs={}, groups=None, refit=False, probability_threshold=None, experiment_custom_tags=None, verbose=False, system=False, add_to_model_list=True, metrics=None, display=<pycaret.internal.display.display.CommonDisplay object at 0x0000029487CCB670>, model_only=True, return_train_score=False, error_score=0.0, kwargs={})
+2024-10-01 00:38:13,336:INFO:Checking exceptions
+2024-10-01 00:38:13,336:INFO:Importing libraries
+2024-10-01 00:38:13,336:INFO:Copying training dataset
+2024-10-01 00:38:13,338:INFO:Defining folds
+2024-10-01 00:38:13,338:INFO:Declaring metric variables
+2024-10-01 00:38:13,340:INFO:Importing untrained model
+2024-10-01 00:38:13,342:INFO:Seasonal Naive Forecaster Imported successfully
+2024-10-01 00:38:13,347:INFO:Starting cross validation
+2024-10-01 00:38:13,348:INFO:Cross validating with ExpandingWindowSplitter(fh=ForecastingHorizon([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+       19, 20, 21, 22, 23, 24],
+      dtype='int32', is_relative=True),
+                        initial_window=1760, step_length=24), n_jobs=1
+2024-10-01 00:38:13,391:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,391:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,434:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,434:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,475:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,475:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,478:INFO:Calculating mean and std
+2024-10-01 00:38:13,478:INFO:Creating metrics dataframe
+2024-10-01 00:38:13,479:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\pycaret\time_series\forecasting\oop.py:2694: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  model_results = pd.concat((model_results, model_avgs), axis=0)
+
+2024-10-01 00:38:13,480:INFO:Uploading results into container
+2024-10-01 00:38:13,480:INFO:Uploading model into container now
+2024-10-01 00:38:13,480:INFO:_master_model_container: 3
+2024-10-01 00:38:13,480:INFO:_display_container: 2
+2024-10-01 00:38:13,480:INFO:NaiveForecaster(sp=10)
+2024-10-01 00:38:13,480:INFO:create_model() successfully completed......................................
+2024-10-01 00:38:13,559:INFO:SubProcess create_model() end ==================================
+2024-10-01 00:38:13,559:INFO:Creating metrics dataframe
+2024-10-01 00:38:13,564:INFO:Initializing Polynomial Trend Forecaster
+2024-10-01 00:38:13,564:INFO:Total runtime is 0.009772626558939616 minutes
+2024-10-01 00:38:13,565:INFO:SubProcess create_model() called ==================================
+2024-10-01 00:38:13,565:INFO:Initializing create_model()
+2024-10-01 00:38:13,565:INFO:create_model(self=<pycaret.time_series.forecasting.oop.TSForecastingExperiment object at 0x0000029487CE8D00>, estimator=polytrend, fold=None, round=4, cross_validation=True, predict=True, fit_kwargs={}, groups=None, refit=False, probability_threshold=None, experiment_custom_tags=None, verbose=False, system=False, add_to_model_list=True, metrics=None, display=<pycaret.internal.display.display.CommonDisplay object at 0x0000029487CCB670>, model_only=True, return_train_score=False, error_score=0.0, kwargs={})
+2024-10-01 00:38:13,566:INFO:Checking exceptions
+2024-10-01 00:38:13,566:INFO:Importing libraries
+2024-10-01 00:38:13,566:INFO:Copying training dataset
+2024-10-01 00:38:13,567:INFO:Defining folds
+2024-10-01 00:38:13,567:INFO:Declaring metric variables
+2024-10-01 00:38:13,569:INFO:Importing untrained model
+2024-10-01 00:38:13,571:INFO:Polynomial Trend Forecaster Imported successfully
+2024-10-01 00:38:13,577:INFO:Starting cross validation
+2024-10-01 00:38:13,578:INFO:Cross validating with ExpandingWindowSplitter(fh=ForecastingHorizon([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+       19, 20, 21, 22, 23, 24],
+      dtype='int32', is_relative=True),
+                        initial_window=1760, step_length=24), n_jobs=1
+2024-10-01 00:38:13,590:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,591:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,604:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,605:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,621:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,621:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,624:INFO:Calculating mean and std
+2024-10-01 00:38:13,624:INFO:Creating metrics dataframe
+2024-10-01 00:38:13,625:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\pycaret\time_series\forecasting\oop.py:2694: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  model_results = pd.concat((model_results, model_avgs), axis=0)
+
+2024-10-01 00:38:13,626:INFO:Uploading results into container
+2024-10-01 00:38:13,626:INFO:Uploading model into container now
+2024-10-01 00:38:13,627:INFO:_master_model_container: 4
+2024-10-01 00:38:13,627:INFO:_display_container: 2
+2024-10-01 00:38:13,627:INFO:PolynomialTrendForecaster()
+2024-10-01 00:38:13,627:INFO:create_model() successfully completed......................................
+2024-10-01 00:38:13,706:INFO:SubProcess create_model() end ==================================
+2024-10-01 00:38:13,706:INFO:Creating metrics dataframe
+2024-10-01 00:38:13,711:INFO:Initializing ARIMA
+2024-10-01 00:38:13,711:INFO:Total runtime is 0.012218101819356283 minutes
+2024-10-01 00:38:13,713:INFO:SubProcess create_model() called ==================================
+2024-10-01 00:38:13,713:INFO:Initializing create_model()
+2024-10-01 00:38:13,713:INFO:create_model(self=<pycaret.time_series.forecasting.oop.TSForecastingExperiment object at 0x0000029487CE8D00>, estimator=arima, fold=None, round=4, cross_validation=True, predict=True, fit_kwargs={}, groups=None, refit=False, probability_threshold=None, experiment_custom_tags=None, verbose=False, system=False, add_to_model_list=True, metrics=None, display=<pycaret.internal.display.display.CommonDisplay object at 0x0000029487CCB670>, model_only=True, return_train_score=False, error_score=0.0, kwargs={})
+2024-10-01 00:38:13,713:INFO:Checking exceptions
+2024-10-01 00:38:13,713:INFO:Importing libraries
+2024-10-01 00:38:13,713:INFO:Copying training dataset
+2024-10-01 00:38:13,714:INFO:Defining folds
+2024-10-01 00:38:13,714:INFO:Declaring metric variables
+2024-10-01 00:38:13,716:INFO:Importing untrained model
+2024-10-01 00:38:13,719:INFO:ARIMA Imported successfully
+2024-10-01 00:38:13,724:INFO:Starting cross validation
+2024-10-01 00:38:13,725:INFO:Cross validating with ExpandingWindowSplitter(fh=ForecastingHorizon([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+       19, 20, 21, 22, 23, 24],
+      dtype='int32', is_relative=True),
+                        initial_window=1760, step_length=24), n_jobs=1
+2024-10-01 00:38:13,857:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,857:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,993:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:13,993:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:14,134:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:14,134:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\sklearn\metrics\_regression.py:483: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+
+2024-10-01 00:38:14,139:INFO:Calculating mean and std
+2024-10-01 00:38:14,139:INFO:Creating metrics dataframe
+2024-10-01 00:38:14,141:WARNING:C:\Users\raulg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\pycaret\time_series\forecasting\oop.py:2694: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  model_results = pd.concat((model_results, model_avgs), axis=0)
+
+2024-10-01 00:38:14,142:INFO:Uploading results into container
+2024-10-01 00:38:14,142:INFO:Uploading model into container now
+2024-10-01 00:38:14,142:INFO:_master_model_container: 5
+2024-10-01 00:38:14,142:INFO:_display_container: 2
+2024-10-01 00:38:14,142:INFO:ARIMA(seasonal_order=(0, 1, 0, 10))
+2024-10-01 00:38:14,143:INFO:create_model() successfully completed......................................
+2024-10-01 00:38:14,216:INFO:SubProcess create_model() end ==================================
+2024-10-01 00:38:14,216:INFO:Creating metrics dataframe
+2024-10-01 00:38:14,222:INFO:Initializing Auto ARIMA
+2024-10-01 00:38:14,222:INFO:Total runtime is 0.020748511950174967 minutes
+2024-10-01 00:38:14,224:INFO:SubProcess create_model() called ==================================
+2024-10-01 00:38:14,224:INFO:Initializing create_model()
+2024-10-01 00:38:14,224:INFO:create_model(self=<pycaret.time_series.forecasting.oop.TSForecastingExperiment object at 0x0000029487CE8D00>, estimator=auto_arima, fold=None, round=4, cross_validation=True, predict=True, fit_kwargs={}, groups=None, refit=False, probability_threshold=None, experiment_custom_tags=None, verbose=False, system=False, add_to_model_list=True, metrics=None, display=<pycaret.internal.display.display.CommonDisplay object at 0x0000029487CCB670>, model_only=True, return_train_score=False, error_score=0.0, kwargs={})
+2024-10-01 00:38:14,224:INFO:Checking exceptions
+2024-10-01 00:38:14,225:INFO:Importing libraries
+2024-10-01 00:38:14,225:INFO:Copying training dataset
+2024-10-01 00:38:14,226:INFO:Defining folds
+2024-10-01 00:38:14,226:INFO:Declaring metric variables
+2024-10-01 00:38:14,228:INFO:Importing untrained model
+2024-10-01 00:38:14,231:INFO:Auto ARIMA Imported successfully
+2024-10-01 00:38:14,235:INFO:Starting cross validation
+2024-10-01 00:38:14,236:INFO:Cross validating with ExpandingWindowSplitter(fh=ForecastingHorizon([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+       19, 20, 21, 22, 23, 24],
+      dtype='int32', is_relative=True),
+                        initial_window=1760, step_length=24), n_jobs=1
