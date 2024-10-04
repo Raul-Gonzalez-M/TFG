@@ -1,6 +1,6 @@
 Para el tratamiento de los datos se recomienda: numpy y pandas.
 Para predicciones estadísticas se recomienda: Statsmodels y Pycaret.
 Para predicciones usando machine learning: Scikit-learn.
-Para redes neuronales: Keras, Tensorflow y Pytorch. Utilizando Big Query Vertex AI.
+Para redes neuronales: Keras, Tensorflow y Pytorch. Utilizando Big Query Vertex AI. Considerar también fastai
 Visualización de datos: Matplotlib.
 Búsqueda de hiperparámetros: Skforecast.
