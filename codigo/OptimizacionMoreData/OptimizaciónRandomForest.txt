@@ -1,0 +1,8 @@
+Número de horas: 1 Profundidad: 9 Valor de emp obtenido: 0.7791437185511273
+Número de horas: 2 Profundidad: 8 Valor de emp obtenido: 0.7782057991495871
+Número de horas: 3 Profundidad: 9 Valor de emp obtenido: 0.7681179725377045
+Número de horas: 4 Profundidad: 9 Valor de emp obtenido: 0.776501429552167
+Número de horas: 5 Profundidad: 9 Valor de emp obtenido: 0.7771105392058072
+Número de horas: 6 Profundidad: 9 Valor de emp obtenido: 0.7817122045280501
+Número de horas: 7 Profundidad: 9 Valor de emp obtenido: 0.783032696636507
+Número de horas: 8 Profundidad: 8 Valor de emp obtenido: 0.7856518439670784
