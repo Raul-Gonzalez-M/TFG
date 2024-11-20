@@ -1,0 +1,1 @@
+[<__main__.position object at 0x00000239A94A0040>, '+', <__main__.position object at 0x00000239A94A0700>, '/', <__main__.position object at 0x00000239A94A01C0>, '*', <__main__.constant object at 0x00000239A94A01F0>] : 4.133840030143878
