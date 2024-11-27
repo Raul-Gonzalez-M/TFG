@@ -256,9 +256,6 @@ for i in range(0, df_train.shape[0] - NUMHORAS):
 pos = objeto_regresion.run2(10, X, y, 70.0)
 
 # %%
-pos
-
-# %%
 with open('ecuaciones.txt', 'a') as archivo:
     archivo.write(str(pos[0]) + " : " + str(pos[1]) + "_nh" + str(NUMHORAS) + "\n")
 
