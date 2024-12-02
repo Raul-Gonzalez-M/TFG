@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt 
 import random
+import cupy as cp
 
 # %%
 df = pd.read_csv('SOLUSTDAtas_tratado.csv')
@@ -75,6 +76,7 @@ class RegresionSimbolica:
             candidato_aux.append(valores[candidato[i]])
             candidato_aux.append(candidato[i+1])
         candidato_aux.append(valores[candidato[len(candidato) - 1]])
+        candidato_aux = cp.array(candidato_aux)
         for categoria_operaciones in self.operations:
             j_offset = 0
             for j in range(1, len(candidato_aux), 2):
@@ -90,10 +92,13 @@ class RegresionSimbolica:
     
     
     def fitness(self, X, y, candidato: list):
-        valores_generados = []
-        for elem in X:
-            valores_generados.append(self.__evaluate(elem, candidato))
-        return self.funcionOptimizacion(valores_generados, y)
+        X_gpu = cp.array(X)
+        y_gpu = cp.array(y)
+        valores_generados = cp.zeros(len(X))
+        for idx, elem in enumerate(X_gpu):
+            valores_generados[idx] = self.__evaluate(elem, candidato)
+        error = self.funcionOptimizacion(valores_generados, y_gpu)
+        return error.get()  
     
     def fitness2(self, X, y, candidato: list):
         valores_generados = []
@@ -253,7 +258,7 @@ for i in range(0, df_train.shape[0] - NUMHORAS):
     y.append(df_train.iloc[i + NUMHORAS].close)
 
 # %%
-pos = objeto_regresion.run2(10, X, y, 70.0)
+pos = objeto_regresion.run2(200, X, y, 1.0)
 
 # %%
 with open('ecuaciones.txt', 'a') as archivo:
