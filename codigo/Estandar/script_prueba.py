@@ -97,7 +97,7 @@ class RegresionSimbolica:
         for idx, elem in enumerate(X_gpu):
             valores_generados[idx] = self.__evaluate(elem, candidato)
         error = self.funcionOptimizacion(valores_generados, y_gpu)
-        return error.get()  
+        return error.get().tolist()  
     
     def fitness2(self, X, y, candidato: list):
         valores_generados = []
