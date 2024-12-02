@@ -76,7 +76,6 @@ class RegresionSimbolica:
             candidato_aux.append(valores[candidato[i]])
             candidato_aux.append(candidato[i+1])
         candidato_aux.append(valores[candidato[len(candidato) - 1]])
-        candidato_aux = cp.array(candidato_aux)
         for categoria_operaciones in self.operations:
             j_offset = 0
             for j in range(1, len(candidato_aux), 2):
@@ -210,12 +209,11 @@ class RegresionSimbolica:
 
 # %%
 def funcion_optimizacion_mape(valores_generados, y):
-    suma = 0
-    n = len(valores_generados)
-    for i in range(0,n):
-        suma = abs(valores_generados[i] - y[i])/y[i] +  suma
-    error_medio = suma/n
-    return error_medio*100 
+    valores_generados = cp.array(valores_generados)
+    y = cp.array(y)
+    error = cp.abs(valores_generados - y) / y
+    error_medio = cp.mean(error) * 100
+    return error_medio
 
 # %%
 
