@@ -1,7 +1,10 @@
 # %%
 import pandas as pd
+print("Importado pandas")
 import numpy as np
 import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Flatten
 
 
 # %%
@@ -42,11 +45,9 @@ df_valitest = pd.concat([df_vali, df_test], axis=0)
 # %%
 numhorasconst = 4
 
-# %% [markdown]
-# # Redes neuronales Densas
 
-# %%
-from tensorflow.keras.models import Sequential
+
+
 from tensorflow.keras.layers import Dense, Flatten
 
 # %%
@@ -103,19 +104,18 @@ def opti_redes_densas_multi_gpu(epoch_ini, epoch_fin, batch_array, numhoras, X_t
         for b in batch_array:
             best_value_of_the25 = 100
             best_model_of_the25 = None
-            with tf.device('/CPU:0'):
-                for i in range(0, 25):  # Número de veces que se entrena cada modelo
-                    with strategy.scope():
-                        model = Sequential()
-                        model.add(Dense(64, activation='relu', input_shape=(numhoras * 5,)))
+            for i in range(0, 25):  # Número de veces que se entrena cada modelo
+                with strategy.scope():
+                    model = Sequential()
+                    model.add(Dense(64, activation='relu', input_shape=(numhoras * 5,)))
 
-                        # Agregar 49 capas adicionales
-                        #for _ in range(150):  # En total serán 50 capas
-                        model.add(Dense(64, activation='relu'))
+                    # Agregar 49 capas adicionales
+                    #for _ in range(150):  # En total serán 50 capas
+                    model.add(Dense(64, activation='relu'))
 
-                        # Capa de salida
-                        model.add(Dense(1))
-                        model.compile(optimizer='adam', loss='mape')
+                    # Capa de salida
+                    model.add(Dense(1))
+                    model.compile(optimizer='adam', loss='mape')
 
                     history = model.fit(X_train, y_train, epochs=e, batch_size=b, validation_data=(X_vali, y_vali), shuffle=False)
                     y_pred = model.predict(X_test)
