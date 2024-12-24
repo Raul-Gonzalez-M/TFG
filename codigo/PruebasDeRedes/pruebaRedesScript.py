@@ -6,12 +6,12 @@ import tensorflow as tf
 
 
 # %%
-tf.config.set_visible_devices([], 'GPU')
-print("Dispositivos tras deshabilitar GPUs:", tf.config.get_visible_devices())
+#tf.config.set_visible_devices([], 'GPU')
+#print("Dispositivos tras deshabilitar GPUs:", tf.config.get_visible_devices())
 
 # %%
-df = pd.read_csv('SolAtasIMC_tratado.csv')
-df.head()
+df = pd.read_csv('SolAtasIMC_tratado.csv', nrows=100)
+print(df.head())
 
 # %%
 print(df.info())
