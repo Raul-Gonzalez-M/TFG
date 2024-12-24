@@ -2,9 +2,12 @@
 import pandas as pd
 print("Importado pandas")
 import numpy as np
+print("Importado numpy")
 import tensorflow as tf
+print("Importado tensorflow")
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten
+print("Importado tensorflow biblios")
 
 
 # %%
