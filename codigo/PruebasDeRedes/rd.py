@@ -1,15 +1,10 @@
 # %%
 import pandas as pd
-print("pd")
+print("Pandas importado")
 import numpy as np
-print("np")
+print("Numpy importado")
 import tensorflow as tf
-print("tf")
-
-
-# %%
-tf.config.set_visible_devices([], 'GPU')
-print("Dispositivos tras deshabilitar GPUs:", tf.config.get_visible_devices())
+print("Tensorflow importado")
 
 # %%
 df = pd.read_csv('SolAtasIMC_tratado.csv')
@@ -18,8 +13,7 @@ df.head()
 # %%
 print(df.info())
 
-# %% [markdown]
-# # Preprocesado de Datos
+
 
 # %%
 tamanio = df.shape[0]
@@ -39,14 +33,10 @@ df_test
 # %%
 df_valitest = pd.concat([df_vali, df_test], axis=0)
 
-# %% [markdown]
-# Numero de horas que se utilizan en la predicción
 
 # %%
 numhorasconst = 4
 
-# %% [markdown]
-# # Redes neuronales Densas
 
 # %%
 from tensorflow.keras.models import Sequential
@@ -101,34 +91,44 @@ def opti_redes_densas_multi_gpu(epoch_ini, epoch_fin, batch_array, numhoras, X_t
     epoch_best = 0
     bacth_best = 0
     best_model = None
+    training_results = []
 
     for e in range(epoch_ini, epoch_fin + 1):
         for b in batch_array:
             best_value_of_the25 = 100
             best_model_of_the25 = None
-            with tf.device('/CPU:0'):
-                for i in range(0, 25):  # Número de veces que se entrena cada modelo
-                    with strategy.scope():
-                        model = Sequential()
-                        model.add(Dense(64, activation='relu', input_shape=(numhoras * 5,)))
-
-                        # Agregar 49 capas adicionales
-                        #for _ in range(150):  # En total serán 50 capas
-                        model.add(Dense(64, activation='relu'))
-
-                        # Capa de salida
-                        model.add(Dense(1))
-                        model.compile(optimizer='adam', loss='mape')
+            seguir = True
+            m = 0
+            w = 0
+            while(m < 25 and seguir):  # Número de veces que se entrena cada modelo
+                with strategy.scope():
+                    model = Sequential()
+                    model.add(Dense(64, activation='relu', input_shape=(numhoras * 5,)))
+                    #for _ in range(150):
+                    model.add(Dense(64, activation='relu'))
+                    model.add(Dense(1))
+                    model.compile(optimizer='adam', loss='mape')
 
                     history = model.fit(X_train, y_train, epochs=e, batch_size=b, validation_data=(X_vali, y_vali), shuffle=False)
-                    y_pred = model.predict(X_test)
-                    valor = evalRedDensa(y_test, y_pred)
+                y_pred = model.predict(X_test)
+                valor = evalRedDensa(y_test, y_pred)
 
-                    if valor < best_value_of_the25:
-                        best_value_of_the25 = valor
-                        best_model_of_the25 = model
+                if valor < best_value_of_the25:
+                    best_value_of_the25 = valor
+                    best_model_of_the25 = model
+                m += 1
+                if valor > 3:
+                    w += 1
+                if w > 2:
+                    seguir =  False
 
             print(f"Epoch: {e}, Batch size: {b}, Value: {best_value_of_the25}")
+            
+            training_results.append({"epoch": e, 
+                                      "batch_size": b, 
+                                      "hours": numhoras, 
+                                      "value": best_value_of_the25})
+            
             with open('pasosdados.txt', 'w') as archivo:
                 archivo.write("epoch: "+str(e)+", batch_size:" + str(b))
 
@@ -136,12 +136,14 @@ def opti_redes_densas_multi_gpu(epoch_ini, epoch_fin, batch_array, numhoras, X_t
                 best = best_value_of_the25
                 epoch_best = e
                 bacth_best = b
-
-                cadena_guardado = f"ModelosDensosOptiMultiGPU/mi_modelo_denso_Opti_e{e}_b{b}_v{round(best_value_of_the25, 3)}_nh{numhoras}"
-                best_model_of_the25.save(cadena_guardado + ".h5")
-                best_model_of_the25.save(cadena_guardado + ".keras")
+                if best < 1.5:
+                    cadena_guardado = f"ModelosDensosOptiMultiGPU/mi_modelo_denso_Opti_e{e}_b{b}_v{round(best_value_of_the25, 3)}_nh{numhoras}"
+                    best_model_of_the25.save(cadena_guardado + ".h5")
+                    best_model_of_the25.save(cadena_guardado + ".keras")
                 best_model = best_model_of_the25
-
+    results_df = pd.DataFrame(training_results)
+    results_df.to_csv("densas.csv", index=False)
+    print("Resultados guardados en 'densas.csv'")
     return epoch_best, bacth_best, best, best_model
 
 
