@@ -163,7 +163,7 @@ def opti_rd_h(inih, finh, epoch_ini, epoch_fin, batch_array):
             bacth_best = valores[1]
             h_best = i
             best_model = valores[3]
-            cadena_guardado = "ModelosDensosOptiMoreDataIMCBest/mi_modelo_denso_Opti_e"+str(epoch_best)+"_b"+str(bacth_best)+"_h"+str(i)+"_v"+str(round(best, 3)+"_nh"+str(i))
+            cadena_guardado = "ModelosRDOptiMoreDataIMC/mi_modelo_denso_Opti_e"+str(epoch_best)+"_b"+str(bacth_best)+"_h"+str(i)+"_v"+str(round(best, 3)+"_nh"+str(i))
             best_model.save(cadena_guardado+".h5")
             best_model.save(cadena_guardado+".keras")
         with open('pasosdadoshoras.txt', 'w') as archivo:
