@@ -105,7 +105,7 @@ def opti_redes_densas_multi_gpu(epoch_ini, epoch_fin, batch_array, numhoras, X_t
             best_value_of_the25 = 100
             best_model_of_the25 = None
             with tf.device('/CPU:0'):
-                for m in range(25): # Número de veces que se entrena cada modelo
+                for m in range(15): # Número de veces que se entrena cada modelo
                     with strategy.scope():
                         model = Sequential()
                         model.add(Dense(64, activation='relu', input_shape=(numhoras * 5,)))
@@ -140,9 +140,8 @@ def opti_redes_densas_multi_gpu(epoch_ini, epoch_fin, batch_array, numhoras, X_t
                 bacth_best = b
                 best_model = best_model_of_the25
     results_df = pd.DataFrame(training_results)
-    results_df.to_csv("densas.csv", index=False)
     print("Resultados guardados en 'densas.csv'")
-    return epoch_best, bacth_best, best, best_model
+    return epoch_best, bacth_best, best, best_model, results_df
 
 
 # %%
@@ -157,6 +156,8 @@ def opti_rd_h(inih, finh, epoch_ini, epoch_fin, batch_array):
         Xvali, yvali = preparar_datos(df_vali, i)
         Xtest, ytest = preparar_datos(df_test, i)
         valores = opti_redes_densas_multi_gpu(epoch_ini, epoch_fin, batch_array, i, Xtrain, ytrain, Xvali, yvali, Xtest, ytest)
+        cadena_csv = "densas_h" + str(i) + ".csv"
+        valores[3].to_csv(cadena_csv, index=False)
         if valores[2] < best:
             best = valores[2]
             epoch_best = valores[0]
@@ -171,6 +172,6 @@ def opti_rd_h(inih, finh, epoch_ini, epoch_fin, batch_array):
     return best, epoch_best, bacth_best, h_best, best_model
 
 # %%
-data = opti_rd_h(7, 16, 3, 15, [4, 6, 8, 12, 16, 24, 32, 46, 64, 96, 128, 256])
+data = opti_rd_h(7, 15, 3, 15, [4, 6, 8, 12, 16, 24, 32, 46, 64, 96, 128, 256])
 
 

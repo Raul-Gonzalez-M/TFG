@@ -76,10 +76,11 @@ def opti_redes_LSTM(epoch_ini, epoch_fin, batch_array, X_trainLSTM, y_trainLSTM,
     epoch_best = 0
     bacth_best = 0
     best_model = None
+    training_results = []
     for e in range(epoch_ini, epoch_fin + 1):
         for b in batch_array:
             best = 100
-            for i in range(0, 25):
+            for i in range(0, 15):
                 with tf.device('/CPU:0'):
                     modelLSTM = Sequential()
                     modelLSTM.add(LSTM(64, activation='relu', input_shape=(numhoras, 5)))
@@ -95,8 +96,15 @@ def opti_redes_LSTM(epoch_ini, epoch_fin, batch_array, X_trainLSTM, y_trainLSTM,
                         bacth_best = b
                         best_model = modelLSTM
                         cadena_guardado = "ModelosLSTMOptiMoreDataIMC/mi_modelo_LSTMOpti_e"+str(e)+"_b"+str(b)+"_v"+str(round(valor, 3))
+            training_results.append({"epoch": epoch_best, 
+                                      "batch_size": bacth_best, 
+                                      "hours": numhoras, 
+                                      "value": best})
             best_model.save(cadena_guardado+".h5")
             best_model.save(cadena_guardado+".keras")
+    results_df = pd.DataFrame(training_results)
+    cadena_csv = "lstm_h" + str(numhoras) + ".csv"
+    results_df.to_csv(cadena_csv, index=False)
     return epoch_best, bacth_best, valor, best_model
 
 # %%
@@ -129,3 +137,5 @@ def opti_rLSTM_h(inih, finh, epoch_ini, epoch_fin, batch_array):
 data = opti_rLSTM_h(7, 16, 3, 20, BATCH_ARRAY)
 
 
+
+# %%
