@@ -73,12 +73,12 @@ def evalRedLSTM(ytest, y_pred):
 
 # %%
 def opti_redes_LSTM(epoch_ini, epoch_fin, batch_array, X_trainLSTM, y_trainLSTM, X_valiLSTM, y_valiLSTM, X_testLSTM, y_testLSTM, numhoras):
-    best = 100
     epoch_best = 0
     bacth_best = 0
     best_model = None
     for e in range(epoch_ini, epoch_fin + 1):
         for b in batch_array:
+            best = 100
             for i in range(0, 25):
                 with tf.device('/CPU:0'):
                     modelLSTM = Sequential()
