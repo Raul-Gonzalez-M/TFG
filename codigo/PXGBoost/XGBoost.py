@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt 
 import xgboost as xgb
-print("Librerías importadas")
+print("Bibliotecas incluidas")
 
 
 # %%
@@ -133,17 +133,22 @@ def train_XGB_depth(maxdepthmin, maxdepthmax, dtrainf, dvalif, dtestf, ytest):
     best = 100
     best_depth = 0
     for i in range(maxdepthmin, maxdepthmax):
-        param = {'max_depth': i, 'eta': 0.1, 'objective': 'reg:squarederror'}
-        evals = [(dtrainf, 'train'), (dvalif, 'validacion')]
-        bstaux = xgb.train(param, dtrainf, num_boost_round=1000, evals=evals, early_stopping_rounds=10, verbose_eval=10)
-        predict_xgb_test = bstaux.predict(dtestf)
-        valor = evalXGB(ytest, predict_xgb_test)
-        cadena = "Modelos/modelo_xgb_v.json" + str(valor)+ "_d" + str(i) + "_eta" + str(param.get("eta")) + ".json"
-        bstaux.save_model(cadena) 
-        resultados.append({'max_depth': i, 'eta': param['eta'], 'valor': valor})
-        if(valor < best):
-            best = valor
-            best_depth = i
+        etaAux = [0.3 , 0.1, 0.01, 0.001]
+        for e in etaAux:
+            param = {'max_depth': i, 'eta': e, 'objective': 'reg:squarederror'}
+            evals = [(dtrainf, 'train'), (dvalif, 'validacion')]
+            esr = int(1//e)
+            if(esr < 10):
+                esr = 10
+            bstaux = xgb.train(param, dtrainf, num_boost_round=int(100//e), evals=evals, early_stopping_rounds=esr, verbose_eval=10)
+            predict_xgb_test = bstaux.predict(dtestf)
+            valor = evalXGB(ytest, predict_xgb_test)
+            cadena = "Modelos/modelo_xgb_v.json" + str(valor)+ "_d" + str(i) + "_eta" + str(param.get("eta")) + ".json"
+            bstaux.save_model(cadena) 
+            resultados.append({'max_depth': i, 'eta': param['eta'], 'valor': valor})
+            if(valor < best):
+                best = valor
+                best_depth = i
     return (best_depth, best, resultados)
 
 # %%
@@ -164,13 +169,13 @@ def trainGlobalXGB(inid, find, inih, finh):
         cadena = "Dataframes/resultados_xgboost_h" + str(i) + ".csv"
         df_resultados.to_csv(cadena, index=False)
         with open('OptimizaciónXGBoostIMC.txt', 'a') as archivo:
-            archivo.write("Número de horas: "+str(i)+" Profundidad: "+str(values[0])+" Valor de emp obtenido: "+str(values[1]) + "\n")
+            archivo.write("Numero de horas: "+str(i)+" Profundidad: "+str(values[0])+" Valor de emp obtenido: "+str(values[1]) + "\n")
         if(values[1] < best):
             best = values[1]
             best_depth = values[0]
     return best, best_depth
 
 # %%
-data = trainGlobalXGB(1, 151, 1, 169)
+data = trainGlobalXGB(1, 5, 1, 3)
 
 
