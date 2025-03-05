@@ -213,13 +213,6 @@ class RegresionSimbolica:
                     candidato_best = self.genes[r]
             values_array = np.array(values_list)
             values_array.sort()
-            if(num_veces > 200):
-                aux = self.genes[dicc_aux[values_array[0]]]
-                for ind in range(1,20):
-                    indice =  dicc_aux[values_array[values_array.size - ind]]
-                    del self.genes[indice]
-                for rs in range(1,20):
-                    self.genes.append(aux)
             num_veces += 1
             print(f"Vez num:{num_veces}, valor{best}")
             genBest = self.display(candidato_best)
