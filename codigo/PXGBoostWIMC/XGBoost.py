@@ -175,6 +175,6 @@ def trainGlobalXGB(inid, find, inih, finh):
     return best, best_depth
 
 # %%
-data = trainGlobalXGB(1, 5, 1, 3)
+data = trainGlobalXGB(1, 151, 1, 169)
 
 
