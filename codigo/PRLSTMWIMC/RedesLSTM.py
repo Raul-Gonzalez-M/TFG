@@ -6,7 +6,7 @@ import tensorflow as tf
 
 
 # %%
-df = pd.read_csv('SolAtasIMC_tratado.csv')
+df = pd.read_csv('SOLUSTDAtas_tratado.csv')
 df.head()
 
 # %%
@@ -58,7 +58,7 @@ def create_sequences(data, n_steps):
 
 # %%
 def preparar_datosLSTM(df, numhoras):
-    return create_sequences(df[['open', 'high', 'low', 'close', 'value']].values, numhoras)
+    return create_sequences(df[['open', 'high', 'low', 'close']].values, numhoras)
 
 # %%
 def evalRedLSTM(ytest, y_pred):
@@ -79,10 +79,10 @@ def opti_redes_LSTM(epoch_ini, epoch_fin, batch_array, X_trainLSTM, y_trainLSTM,
     for e in range(epoch_ini, epoch_fin + 1):
         for b in batch_array:
             best = 100
-            for i in range(0, 25):
+            for i in range(0, 10):
                 with tf.device('/CPU:0'):
                     modelLSTM = Sequential()
-                    modelLSTM.add(LSTM(64, activation='relu', input_shape=(numhoras, 5)))
+                    modelLSTM.add(LSTM(64, activation='relu', input_shape=(numhoras, 4)))
                     modelLSTM.add(Dense(1))
                     modelLSTM.compile(optimizer='adam', loss='mape')
                     historyLSTM = modelLSTM.fit(X_trainLSTM, y_trainLSTM, epochs=e, batch_size=b, validation_data=(X_valiLSTM, y_valiLSTM), shuffle=False)
@@ -95,7 +95,7 @@ def opti_redes_LSTM(epoch_ini, epoch_fin, batch_array, X_trainLSTM, y_trainLSTM,
                         bacth_best = b
                         best_model = modelLSTM
                         if best < 0.75:
-                            cadena_guardado = "ModelosLSTMOptiMoreDataIMC/mi_modelo_LSTMOpti_e"+str(e)+"_b"+str(b)+"_v"+str(round(valor, 3))
+                            cadena_guardado = "ModelosLSTMOptiMoreData/mi_modelo_LSTMOpti_e"+str(e)+"_b"+str(b)+"_v"+str(round(valor, 3))
                             best_model.save(cadena_guardado+".keras")
     return epoch_best, bacth_best, valor, best_model
 
@@ -120,7 +120,7 @@ def opti_rLSTM_h(inih, finh, epoch_ini, epoch_fin, batch_array):
             bacth_best = valores[1]
             h_best = i
             best_model = valores[3]
-            cadena_guardado = "ModelosLSTMOptiMoreDataIMCBest/mi_modelo_LSTM_Opti_e"+str(epoch_best)+"_b"+str(bacth_best)+"_h"+str(i)+"_v"+str(round(best, 3))
+            cadena_guardado = "ModelosLSTMOptiMoreDataBest/mi_modelo_LSTM_Opti_e"+str(epoch_best)+"_b"+str(bacth_best)+"_h"+str(i)+"_v"+str(round(best, 3))
             best_model.save(cadena_guardado+".keras")
     return best, epoch_best, bacth_best, h_best, best_model
 

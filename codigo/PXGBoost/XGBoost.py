@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt 
 import xgboost as xgb
-print("Bibliotecas incluidas")
 
 
 # %%
@@ -143,12 +142,13 @@ def train_XGB_depth(maxdepthmin, maxdepthmax, dtrainf, dvalif, dtestf, ytest):
             bstaux = xgb.train(param, dtrainf, num_boost_round=int(100//e), evals=evals, early_stopping_rounds=esr, verbose_eval=10)
             predict_xgb_test = bstaux.predict(dtestf)
             valor = evalXGB(ytest, predict_xgb_test)
-            cadena = "Modelos/modelo_xgb_v.json" + str(valor)+ "_d" + str(i) + "_eta" + str(param.get("eta")) + ".json"
-            bstaux.save_model(cadena) 
             resultados.append({'max_depth': i, 'eta': param['eta'], 'valor': valor})
             if(valor < best):
                 best = valor
                 best_depth = i
+                if best < 0.75:
+                    cadena = "Modelos/modelo_xgb_v.json" + str(valor)+ "_d" + str(i) + "_eta" + str(param.get("eta")) + ".json"
+                    bstaux.save_model(cadena) 
     return (best_depth, best, resultados)
 
 # %%
@@ -176,6 +176,6 @@ def trainGlobalXGB(inid, find, inih, finh):
     return best, best_depth
 
 # %%
-data = trainGlobalXGB(1, 151, 1, 169)
+data = trainGlobalXGB(1, 5, 1, 3)
 
 

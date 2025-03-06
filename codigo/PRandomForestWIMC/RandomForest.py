@@ -6,7 +6,6 @@ import seaborn as sea
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.datasets import make_regression
 import joblib
-print("Se han importado las librerías")
 
 
 # %%
@@ -104,11 +103,12 @@ def train_randomForestdepth(ini, fin, Xtr, ytr, Xvtaux, yvtaux, numhoras):
         predictT = regr1.predict(Xvtaux)
         valor = evalRandomForest(yvtaux, predictT)
         resultados.append({'numhoras' : numhoras,'max_depth': i, 'valor': valor})
-        cadena = "Modelos/random_forest_modelNOIMC_h" + str(numhoras) + "_d" + str(i) + ".pkl"
-        joblib.dump(regr1, cadena)
         if valor < best:
             best = valor
             posbest = i
+            if valor < 0.8:
+                cadena = "Modelos/random_forest_model_h" + str(numhoras) + "_d" + str(i) + ".pkl"
+                joblib.dump(regr1, cadena)
     return(posbest, best, resultados)
         
 

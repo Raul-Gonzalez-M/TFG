@@ -104,22 +104,22 @@ def opti_redes_densas_multi_gpu(epoch_ini, epoch_fin, batch_array, numhoras, X_t
         for b in batch_array:
             best_value_of_the25 = 100
             best_model_of_the25 = None
-            with tf.device('/CPU:0'):
-                for m in range(15): # Número de veces que se entrena cada modelo
-                    with strategy.scope():
-                        model = Sequential()
-                        model.add(Dense(64, activation='relu', input_shape=(numhoras * 5,)))
-                        model.add(Dense(64, activation='relu'))
-                        model.add(Dense(1))
-                        model.compile(optimizer='adam', loss='mape')
+            #with tf.device('/CPU:0'):
+            for m in range(25): # Número de veces que se entrena cada modelo
+                with strategy.scope():
+                    model = Sequential()
+                    model.add(Dense(64, activation='relu', input_shape=(numhoras * 5,)))
+                    model.add(Dense(64, activation='relu'))
+                    model.add(Dense(1))
+                    model.compile(optimizer='adam', loss='mape')
 
-                        history = model.fit(X_train, y_train, epochs=e, batch_size=b, validation_data=(X_vali, y_vali), shuffle=False)
-                    y_pred = model.predict(X_test)
-                    valor = evalRedDensa(y_test, y_pred)
+                    history = model.fit(X_train, y_train, epochs=e, batch_size=b, validation_data=(X_vali, y_vali), shuffle=False)
+                y_pred = model.predict(X_test)
+                valor = evalRedDensa(y_test, y_pred)
 
-                    if valor < best_value_of_the25:
-                        best_value_of_the25 = valor
-                        best_model_of_the25 = model
+                if valor < best_value_of_the25:
+                    best_value_of_the25 = valor
+                    best_model_of_the25 = model
 
             print(f"Epoch: {e}, Batch size: {b}, Value: {best_value_of_the25}")
             
@@ -130,18 +130,19 @@ def opti_redes_densas_multi_gpu(epoch_ini, epoch_fin, batch_array, numhoras, X_t
             
             with open('pasosdados.txt', 'w') as archivo:
                 archivo.write("epoch: "+str(e)+", batch_size:" + str(b))
-            cadena_guardado = f"ModelosDensosOptiMultiGPU/mi_modelo_denso_Opti_e{e}_b{b}_v{round(best_value_of_the25, 3)}_nh{numhoras}"
-            best_model_of_the25.save(cadena_guardado + ".h5")
-            best_model_of_the25.save(cadena_guardado + ".keras")
-
             if best_value_of_the25 < best:
                 best = best_value_of_the25
                 epoch_best = e
                 bacth_best = b
                 best_model = best_model_of_the25
+                if best < 0.75:
+                    cadena_guardado = f"ModelosDensosOptiMultiGPUIMC/mi_modelo_densoIMC_Opti_e{e}_b{b}_v{round(best, 3)}_nh{numhoras}"
+                    best_model.save(cadena_guardado + ".keras")
+
     results_df = pd.DataFrame(training_results)
+    results_df.to_csv("densas.csv", index=False)
     print("Resultados guardados en 'densas.csv'")
-    return epoch_best, bacth_best, best, best_model, results_df
+    return epoch_best, bacth_best, best, best_model
 
 
 # %%
@@ -156,22 +157,19 @@ def opti_rd_h(inih, finh, epoch_ini, epoch_fin, batch_array):
         Xvali, yvali = preparar_datos(df_vali, i)
         Xtest, ytest = preparar_datos(df_test, i)
         valores = opti_redes_densas_multi_gpu(epoch_ini, epoch_fin, batch_array, i, Xtrain, ytrain, Xvali, yvali, Xtest, ytest)
-        cadena_csv = "densas_h" + str(i) + ".csv"
-        valores[3].to_csv(cadena_csv, index=False)
         if valores[2] < best:
             best = valores[2]
             epoch_best = valores[0]
             bacth_best = valores[1]
             h_best = i
             best_model = valores[3]
-            cadena_guardado = "ModelosRDOptiMoreDataIMC/mi_modelo_denso_Opti_e"+str(epoch_best)+"_b"+str(bacth_best)+"_h"+str(i)+"_v"+str(round(best, 3)+"_nh"+str(i))
-            best_model.save(cadena_guardado+".h5")
+            cadena_guardado = "ModelosDensosOptiMoreDataIMCBest/mi_modelo_densoIMC_Opti_e"+str(epoch_best)+"_b"+str(bacth_best)+"_h"+str(i)+"_v"+str(round(best, 3)+"_nh"+str(i))
             best_model.save(cadena_guardado+".keras")
         with open('pasosdadoshoras.txt', 'w') as archivo:
             archivo.write("horas: "+str(i)+"\n")
     return best, epoch_best, bacth_best, h_best, best_model
 
 # %%
-data = opti_rd_h(7, 15, 3, 15, [4, 6, 8, 12, 16, 24, 32, 46, 64, 96, 128, 256])
+data = opti_rd_h(7, 16, 3, 15, [4, 6, 8, 12, 16, 24, 32, 46, 64, 96, 128, 256])
 
 

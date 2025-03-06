@@ -1,17 +1,11 @@
 # %%
 import pandas as pd
-print("He importado pandas")
 import numpy as np
-print("He importado numpy")
 import matplotlib.pyplot as plt 
-print("He importado matplotlib")
 import seaborn as sea
-print("He importado seaborn")
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.datasets import make_regression
-print("He importado sklearn")
 import joblib
-print("He importado joblib")
 
 
 # %%
@@ -109,11 +103,12 @@ def train_randomForestdepth(ini, fin, Xtr, ytr, Xvtaux, yvtaux, numhoras):
         predictT = regr1.predict(Xvtaux)
         valor = evalRandomForest(yvtaux, predictT)
         resultados.append({'numhoras' : numhoras,'max_depth': i, 'valor': valor})
-        cadena = "Modelos/random_forest_model_h" + str(numhoras) + "_d" + str(i) + ".pkl"
-        joblib.dump(regr1, cadena)
         if valor < best:
             best = valor
             posbest = i
+            if valor < 0.8:
+                cadena = "Modelos/random_forest_model_h" + str(numhoras) + "_d" + str(i) + ".pkl"
+                joblib.dump(regr1, cadena)
     return(posbest, best, resultados)
         
 
