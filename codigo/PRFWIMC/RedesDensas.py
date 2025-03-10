@@ -5,10 +5,6 @@ import tensorflow as tf
 
 
 # %%
-tf.config.set_visible_devices([], 'GPU')
-print("Dispositivos tras deshabilitar GPUs:", tf.config.get_visible_devices())
-
-# %%
 df = pd.read_csv('SOLUSTDAtas_tratado.csv')
 df.head()
 
