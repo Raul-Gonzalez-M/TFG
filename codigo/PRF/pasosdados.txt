@@ -1,1 +1,1 @@
-epoch: 6, batch_size:16
+epoch: 7, batch_size:24
