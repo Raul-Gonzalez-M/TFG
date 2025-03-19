@@ -104,30 +104,30 @@ def opti_redes_densas_multi_gpu(epoch_array, batch_array, numhoras, X_train, y_t
         for b in batch_array:
             best_value_of_the25 = 100
             best_model_of_the25 = None
-            #with tf.device('/CPU:0'):
-            for m in range(15): # Número de veces que se entrena cada modelo
-                with strategy.scope():
-                    model = Sequential()
-                    model.add(Dense(64, activation='relu', input_shape=(numhoras * 5,)))
-                    model.add(Dense(64, activation='relu'))
-                    model.add(Dense(1))
-                    model.compile(optimizer='adam', loss='mape')
+            with tf.device('/CPU:0'):
+                for m in range(15): # Número de veces que se entrena cada modelo
+                    with strategy.scope():
+                        model = Sequential()
+                        model.add(Dense(64, activation='relu', input_shape=(numhoras * 5,)))
+                        model.add(Dense(64, activation='relu'))
+                        model.add(Dense(1))
+                        model.compile(optimizer='adam', loss='mape')
 
-                    history = model.fit(X_train, y_train, epochs=e, batch_size=b, validation_data=(X_vali, y_vali), shuffle=False)
-                y_pred = model.predict(X_test)
-                valor = evalRedDensa(y_test, y_pred)
+                        history = model.fit(X_train, y_train, epochs=e, batch_size=b, validation_data=(X_vali, y_vali), shuffle=False)
+                    y_pred = model.predict(X_test)
+                    valor = evalRedDensa(y_test, y_pred)
 
-                if valor < best_value_of_the25:
-                    best_value_of_the25 = valor
-                    best_model_of_the25 = model
+                    if valor < best_value_of_the25:
+                        best_value_of_the25 = valor
+                        best_model_of_the25 = model
 
-            print(f"Epoch: {e}, Batch size: {b}, Value: {best_value_of_the25}")
-            
-            training_results.append({"epoch": e, 
-                                      "batch_size": b, 
-                                      "hours": numhoras, 
-                                      "value": best_value_of_the25})
-            
+                print(f"Epoch: {e}, Batch size: {b}, Value: {best_value_of_the25}")
+                
+                training_results.append({"epoch": e, 
+                                        "batch_size": b, 
+                                        "hours": numhoras, 
+                                        "value": best_value_of_the25})
+                
             with open('pasosdados.txt', 'w') as archivo:
                 archivo.write("epoch: "+str(e)+", batch_size:" + str(b))
             if best_value_of_the25 < best:
