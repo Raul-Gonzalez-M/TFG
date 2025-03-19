@@ -135,7 +135,7 @@ def train_randomForest(inih, finh, inid, find):
     return(posbest, best)
 
 # %%
-tuple = train_randomForest(1, 169, 1, 600)
+tuple = train_randomForest(1, 100, 10, 400)
 
 # %%
 print(tuple[0])

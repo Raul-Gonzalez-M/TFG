@@ -93,19 +93,19 @@ strategy = tf.distribute.MirroredStrategy()
 print(f"Número de GPUs detectadas: {strategy.num_replicas_in_sync}")
 
 # %%
-def opti_redes_densas_multi_gpu(epoch_ini, epoch_fin, batch_array, numhoras, X_train, y_train, X_vali, y_vali, X_test, y_test):
+def opti_redes_densas_multi_gpu(epoch_array, batch_array, numhoras, X_train, y_train, X_vali, y_vali, X_test, y_test):
     best = 100
     epoch_best = 0
     bacth_best = 0
     best_model = None
     training_results = []
 
-    for e in range(epoch_ini, epoch_fin + 1):
+    for e in epoch_array:
         for b in batch_array:
             best_value_of_the25 = 100
             best_model_of_the25 = None
             #with tf.device('/CPU:0'):
-            for m in range(25): # Número de veces que se entrena cada modelo
+            for m in range(15): # Número de veces que se entrena cada modelo
                 with strategy.scope():
                     model = Sequential()
                     model.add(Dense(64, activation='relu', input_shape=(numhoras * 5,)))
@@ -146,7 +146,7 @@ def opti_redes_densas_multi_gpu(epoch_ini, epoch_fin, batch_array, numhoras, X_t
 
 
 # %%
-def opti_rd_h(inih, finh, epoch_ini, epoch_fin, batch_array):
+def opti_rd_h(inih, finh, epoch_array, batch_array):
     best = 100
     epoch_best = 0
     bacth_best = 0
@@ -156,7 +156,7 @@ def opti_rd_h(inih, finh, epoch_ini, epoch_fin, batch_array):
         Xtrain, ytrain = preparar_datos(df_train, i)
         Xvali, yvali = preparar_datos(df_vali, i)
         Xtest, ytest = preparar_datos(df_test, i)
-        valores = opti_redes_densas_multi_gpu(epoch_ini, epoch_fin, batch_array, i, Xtrain, ytrain, Xvali, yvali, Xtest, ytest)
+        valores = opti_redes_densas_multi_gpu(epoch_array, batch_array, i, Xtrain, ytrain, Xvali, yvali, Xtest, ytest)
         if valores[2] < best:
             best = valores[2]
             epoch_best = valores[0]
@@ -170,6 +170,7 @@ def opti_rd_h(inih, finh, epoch_ini, epoch_fin, batch_array):
     return best, epoch_best, bacth_best, h_best, best_model
 
 # %%
-data = opti_rd_h(7, 16, 3, 15, [4, 6, 8, 12, 16, 24, 32, 46, 64, 96, 128, 256])
+data = opti_rd_h(7, 14, [4, 6, 10, 14, 20, 40], [4, 8, 12, 16, 32, 64, 128, 256])
 
-
+print(data)
+print("Ha terminado")
