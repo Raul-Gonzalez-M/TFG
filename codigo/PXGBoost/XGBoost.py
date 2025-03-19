@@ -132,7 +132,7 @@ def train_XGB_depth(maxdepthmin, maxdepthmax, dtrainf, dvalif, dtestf, ytest):
     best = 100
     best_depth = 0
     for i in range(maxdepthmin, maxdepthmax):
-        etaAux = [0.3 , 0.1, 0.01, 0.001]
+        etaAux = [0.3 , 0.1, 0.01]
         for e in etaAux:
             param = {'max_depth': i, 'eta': e, 'objective': 'reg:squarederror'}
             evals = [(dtrainf, 'train'), (dvalif, 'validacion')]
