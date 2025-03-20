@@ -1,0 +1,2 @@
+Numero de horas: 1 Profundidad: 13 Valor de emp obtenido: 0.72525334086671
+Numero de horas: 2 Profundidad: 11 Valor de emp obtenido: 0.735978212478062
