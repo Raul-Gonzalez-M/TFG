@@ -127,11 +127,11 @@ def evalXGB(Test_xgb, predict_xgb_test):
     return emp
 
 # %%
-def train_XGB_depth(maxdepthmin, maxdepthmax, dtrainf, dvalif, dtestf, ytest):
+def train_XGB_depth(d_array, dtrainf, dvalif, dtestf, ytest):
     resultados = []
     best = 100
     best_depth = 0
-    for i in range(maxdepthmin, maxdepthmax):
+    for i in d_array:
         etaAux = [0.3 , 0.1, 0.01]
         for e in etaAux:
             param = {'max_depth': i, 'eta': e, 'objective': 'reg:squarederror'}
@@ -139,7 +139,7 @@ def train_XGB_depth(maxdepthmin, maxdepthmax, dtrainf, dvalif, dtestf, ytest):
             esr = int(1//e)
             if(esr < 10):
                 esr = 10
-            bstaux = xgb.train(param, dtrainf, num_boost_round=int(100//e), evals=evals, early_stopping_rounds=esr, verbose_eval=10)
+            bstaux = xgb.train(param, dtrainf, num_boost_round=int(100//e), evals=evals, early_stopping_rounds=esr, verbose_eval=100)
             predict_xgb_test = bstaux.predict(dtestf)
             valor = evalXGB(ytest, predict_xgb_test)
             resultados.append({'max_depth': i, 'eta': param['eta'], 'valor': valor})
@@ -152,10 +152,10 @@ def train_XGB_depth(maxdepthmin, maxdepthmax, dtrainf, dvalif, dtestf, ytest):
     return (best_depth, best, resultados)
 
 # %%
-def trainGlobalXGB(inid, find, inih, finh):
+def trainGlobalXGB(d_array, h_array):
     best = 100
     best_depth = 0
-    for i in range(inih, finh):
+    for i in h_array:
         df_aux = create_df_n(df, i)
         dtrain_aux = createdftrain(df_aux)
         dvali_aux = createdfvali(df_aux)
@@ -163,7 +163,7 @@ def trainGlobalXGB(inid, find, inih, finh):
         dtrain_prep = preparar_datosXGBoost(dtrain_aux)
         dvali_prep = preparar_datosXGBoost(dvali_aux)
         dtest_prep = preparar_datosXGBoost(dtest_aux)
-        values = train_XGB_depth(inid, find, dtrain_prep[0], dvali_prep[0], dtest_prep[0], dtest_prep[1].values)
+        values = train_XGB_depth(d_array, dtrain_prep[0], dvali_prep[0], dtest_prep[0], dtest_prep[1].values)
         print(str(i)+" "+str(values[0])+" "+str(values))
         df_resultados = pd.DataFrame(values[2])
         cadena = "Dataframes/resultados_xgboost_h" + str(i) + ".csv"
@@ -176,6 +176,6 @@ def trainGlobalXGB(inid, find, inih, finh):
     return best, best_depth
 
 # %%
-data = trainGlobalXGB(10, 151, 1, 100)
+data = trainGlobalXGB([1,2,3,4,5,6,7,8,9,10,15,20,30,40,50,75,100],[1,2,3,4,5,6,7,8,9,10,14,18,20,30,40,50,75,100])
 
 
