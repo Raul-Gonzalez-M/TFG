@@ -142,13 +142,13 @@ def opti_redes_densas_multi_gpu(epoch_array, batch_array, numhoras, X_train, y_t
 
 
 # %%
-def opti_rd_h(inih, finh, epoch_array, batch_array):
+def opti_rd_h(h_array, epoch_array, batch_array):
     best = 100
     epoch_best = 0
     bacth_best = 0
     h_best = 0
     best_model = None
-    for i in range(inih, finh+1):
+    for i in h_array:
         Xtrain, ytrain = preparar_datos(df_train, i)
         Xvali, yvali = preparar_datos(df_vali, i)
         Xtest, ytest = preparar_datos(df_test, i)
@@ -166,7 +166,7 @@ def opti_rd_h(inih, finh, epoch_array, batch_array):
     return best, epoch_best, bacth_best, h_best, best_model
 
 # %%
-data = opti_rd_h(7, 14, [4, 6, 10, 14, 20, 40], [4, 8, 12, 16, 32, 64, 128, 256])
+data = opti_rd_h([5, 7, 10, 12, 14, 18, 21], [4, 6, 10, 14, 20, 40], [4, 8, 12, 16, 32, 64, 128, 256])
 print(data)
 print("Ha terminado")
 
