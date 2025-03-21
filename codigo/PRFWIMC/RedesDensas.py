@@ -136,6 +136,7 @@ def opti_redes_densas_multi_gpu(epoch_array, batch_array, numhoras, X_train, y_t
                     cadena_guardado = f"ModelosDensosOpti/mi_modelo_denso_Opti_e{e}_b{b}_v{round(best, 3)}_nh{numhoras}"
                     best_model.save(cadena_guardado + ".keras")
     results_df = pd.DataFrame(training_results)
+    cadena = "desnsasH" + str(numhoras) + ".csv"
     results_df.to_csv("densas.csv", index=False)
     print("Resultados guardados en 'densas.csv'")
     return epoch_best, bacth_best, best, best_model
