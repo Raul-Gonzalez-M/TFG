@@ -1,0 +1,16 @@
+Número de horas: 1 Profundidad: 8 Valor de emp obtenido: 0.796252974310104
+Número de horas: 2 Profundidad: 9 Valor de emp obtenido: 0.7932716280636998
+Número de horas: 3 Profundidad: 8 Valor de emp obtenido: 0.7826813552879364
+Número de horas: 4 Profundidad: 9 Valor de emp obtenido: 0.7962553406789598
+Número de horas: 5 Profundidad: 8 Valor de emp obtenido: 0.7853053158042627
+Número de horas: 6 Profundidad: 8 Valor de emp obtenido: 0.7943726187109017
+Número de horas: 7 Profundidad: 8 Valor de emp obtenido: 0.7875562855567015
+Número de horas: 8 Profundidad: 8 Valor de emp obtenido: 0.7948873519997947
+Número de horas: 9 Profundidad: 8 Valor de emp obtenido: 0.7888977056710198
+Número de horas: 10 Profundidad: 8 Valor de emp obtenido: 0.7969058615867233
+Número de horas: 15 Profundidad: 8 Valor de emp obtenido: 0.7965864336135173
+Número de horas: 20 Profundidad: 8 Valor de emp obtenido: 0.7931701191685409
+Número de horas: 30 Profundidad: 8 Valor de emp obtenido: 0.8006578323111835
+Número de horas: 40 Profundidad: 8 Valor de emp obtenido: 0.7958725348559726
+Número de horas: 50 Profundidad: 8 Valor de emp obtenido: 0.7832720320725955
+Número de horas: 75 Profundidad: 8 Valor de emp obtenido: 0.8066197323899288
