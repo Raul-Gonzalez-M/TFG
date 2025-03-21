@@ -93,11 +93,11 @@ def evalRandomForest(Testrpr, predictT):
     return emp
 
 # %%
-def train_randomForestdepth(ini, fin, Xtr, ytr, Xvtaux, yvtaux, numhoras):
+def train_randomForestdepth(d_array, Xtr, ytr, Xvtaux, yvtaux, numhoras):
     resultados = []
     posbest = 0
     best = 100
-    for i in range(ini, fin):
+    for i in d_array:
         regr1 = RandomForestRegressor(max_depth=i, random_state=0)
         regr1.fit(Xtr, ytr)
         predictT = regr1.predict(Xvtaux)
@@ -113,14 +113,14 @@ def train_randomForestdepth(ini, fin, Xtr, ytr, Xvtaux, yvtaux, numhoras):
         
 
 # %%
-def train_randomForest(inih, finh, inid, find):
+def train_randomForest(h_array, d_array):
     resultados = []
     posbest = 0
     best = 100
-    for i in range(inih, finh):
+    for i in h_array:
         Xtrain, ytrain = preparar_datosRandomForest(df_train, i)
         Xvtaux, yvtaux = preparar_datosRandomForest(df_valitest, i)
-        valores = train_randomForestdepth(inid, find, Xtrain, ytrain, Xvtaux, yvtaux, i)
+        valores = train_randomForestdepth(d_array, Xtrain, ytrain, Xvtaux, yvtaux, i)
         valor = valores[1]
         resultados.extend(valores[2])
         print(str(i)+" "+str(valores[0])+" "+str(valor))
@@ -135,7 +135,7 @@ def train_randomForest(inih, finh, inid, find):
     return(posbest, best)
 
 # %%
-tuple = train_randomForest(1, 100, 10, 400)
+tuple = train_randomForest([1,2,3,4,5,6,7,8,9,10,15,20,30,40,50,75,100],[1,2,3,4,5,6,7,8,9,10,14,18,20,30,40,50,75,100,150,200,300,400])
 
 # %%
 print(tuple[0])
