@@ -108,7 +108,7 @@ def opti_redes_densas_multi_gpu(epoch_array, batch_array, numhoras, X_train, y_t
                 for m in range(15): # Número de veces que se entrena cada modelo
                     with strategy.scope():
                         model = Sequential()
-                        model.add(Dense(64, activation='relu', input_shape=(numhoras * 5,)))
+                        model.add(Dense(128, activation='relu', input_shape=(numhoras * 5,)))
                         model.add(Dense(64, activation='relu'))
                         model.add(Dense(1))
                         model.compile(optimizer='adam', loss='mape')
@@ -140,19 +140,20 @@ def opti_redes_densas_multi_gpu(epoch_array, batch_array, numhoras, X_train, y_t
                     best_model.save(cadena_guardado + ".keras")
 
     results_df = pd.DataFrame(training_results)
+    cadena = "desnsasH" + str(numhoras) + ".csv"
     results_df.to_csv("densas.csv", index=False)
     print("Resultados guardados en 'densas.csv'")
     return epoch_best, bacth_best, best, best_model
 
 
 # %%
-def opti_rd_h(inih, finh, epoch_array, batch_array):
+def opti_rd_h(h_array, epoch_array, batch_array):
     best = 100
     epoch_best = 0
     bacth_best = 0
     h_best = 0
     best_model = None
-    for i in range(inih, finh+1):
+    for i in h_array:
         Xtrain, ytrain = preparar_datos(df_train, i)
         Xvali, yvali = preparar_datos(df_vali, i)
         Xtest, ytest = preparar_datos(df_test, i)
@@ -170,7 +171,7 @@ def opti_rd_h(inih, finh, epoch_array, batch_array):
     return best, epoch_best, bacth_best, h_best, best_model
 
 # %%
-data = opti_rd_h(7, 14, [4, 6, 10, 14, 20, 40], [4, 8, 12, 16, 32, 64, 128, 256])
+data = opti_rd_h([5, 7, 10, 12, 14, 18, 21], [4, 6, 10, 14, 20, 40], [4, 8, 12, 16, 32, 64, 128, 256])
 
 print(data)
 print("Ha terminado")
