@@ -14,3 +14,4 @@ Número de horas: 30 Profundidad: 8 Valor de emp obtenido: 0.8006578323111835
 Número de horas: 40 Profundidad: 8 Valor de emp obtenido: 0.7958725348559726
 Número de horas: 50 Profundidad: 8 Valor de emp obtenido: 0.7832720320725955
 Número de horas: 75 Profundidad: 8 Valor de emp obtenido: 0.8066197323899288
+Número de horas: 100 Profundidad: 8 Valor de emp obtenido: 0.8074886159987357
