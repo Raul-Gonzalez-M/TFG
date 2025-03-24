@@ -231,6 +231,8 @@ class RegresionSimbolica:
                 best = value
                 candidato_best = self.genes[i]
         while(best > baremo and num_veces < 1000000):
+            candidato_it = []
+            best_it = 1000000
             for j in range (0, len(self.genes)):
                 self.genes[j] = self.mutate2(self.genes[j])
             dicc_aux = {}
@@ -240,6 +242,9 @@ class RegresionSimbolica:
                 value = self.fitness2(X, y, self.genes[r])
                 values_list.append(value)
                 dicc_aux[value] = r
+                if value < best_it:
+                    best_it = value
+                    candidato_it = self.genes[r]
                 if(value < best):
                     best = value
                     candidato_best = self.genes[r]
@@ -248,9 +253,13 @@ class RegresionSimbolica:
             num_veces += 1
             print(f"Vez num:{num_veces}, valor{best}")
             genBest = self.display(candidato_best)
-            resultado.append({'iteracion' : num_veces, 'valor' : best, 'gen' : genBest})
+            resultado.append({'iteracion' : num_veces, 'valor' : best, 'best_iteracion' : best_it, 'gen_it' : candidato_it, 'gen' : genBest})
             with open('genesIteracion.txt', 'a') as archivo:
                 archivo.write(f"Vez num:{num_veces}, valor{best}, gen: {genBest} \n")
+            if num_veces % 100 == 0:
+                df_resultados = pd.DataFrame(resultado)
+                cadena = "Dataframes/resultados_regresionSimbolica_it" + str(num_veces) + ".csv"
+                df_resultados.to_csv(cadena, index=False)
         print("El mejor gen tiene un rendimiento de " + str(best))
         self.display(candidato_best)
         df_resultados = pd.DataFrame(resultado)

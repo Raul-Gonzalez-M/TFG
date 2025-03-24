@@ -171,7 +171,8 @@ def opti_rd_h(h_array, epoch_array, batch_array):
     return best, epoch_best, bacth_best, h_best, best_model
 
 # %%
-data = opti_rd_h([5, 7, 10, 12, 14, 18, 21], [4, 6, 10, 14, 20, 40], [4, 8, 12, 16, 32, 64, 128, 256])
+#data = opti_rd_h([5, 7, 10, 12, 14, 18, 21], [4, 6, 10, 14, 20, 40], [4, 8, 12, 16, 32, 64, 128, 256])
+data = opti_rd_h([12, 14, 18, 21], [4, 6, 10, 14, 20, 40], [4, 8, 12, 16, 32, 64, 128, 256])
 
 print(data)
 print("Ha terminado")
