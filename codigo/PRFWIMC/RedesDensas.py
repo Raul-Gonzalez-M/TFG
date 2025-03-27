@@ -150,6 +150,7 @@ def opti_rd_h(h_array, epoch_array, batch_array):
     h_best = 0
     best_model = None
     for i in h_array:
+        print("lo hago con la hora "+str(i))
         Xtrain, ytrain = preparar_datos(df_train, i)
         Xvali, yvali = preparar_datos(df_vali, i)
         Xtest, ytest = preparar_datos(df_test, i)
