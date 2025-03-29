@@ -80,6 +80,7 @@ def opti_redes_LSTM(epoch_array, batch_array, X_trainLSTM, y_trainLSTM, X_valiLS
     results = []
     for e in epoch_array:
         for b in batch_array:
+            best_value_of_the25 = float('inf')
             for i in range(15):
                 with tf.device('/CPU:0'):
                     modelLSTM = Sequential()
@@ -90,15 +91,17 @@ def opti_redes_LSTM(epoch_array, batch_array, X_trainLSTM, y_trainLSTM, X_valiLS
                     y_pred = modelLSTM.predict(X_testLSTM)
                     valor = evalRedLSTM(y_testLSTM, y_pred)
                     print("epoch: "+str(e)+", batch_size: "+str(b)+", value: "+str(valor))
-                    results.append([e, b, valor])
-                    if valor < best:
-                        best = valor
-                        epoch_best = e
-                        bacth_best = b
-                        best_model = modelLSTM
+                    if valor < best_value_of_the25:
+                        best_value_of_the25 = valor
+                        if valor < best:
+                            epoch_best = e
+                            bacth_best = b
+                            best_model = modelLSTM
+                            best = valor
                         if valor < 0.75:
                             cadena_guardado = "ModelosLSTMOptiMoreDataIMC/mi_modelo_LSTMOpti_e"+str(e)+"_b"+str(b)+"_v"+str(round(valor, 3))
                             best_model.save(cadena_guardado+".keras")
+            results.append([e, b, best_value_of_the25])
     df_results = pd.DataFrame(results, columns=["epoch", "batch_size", "value"])
     return epoch_best, bacth_best, best, best_model, df_results
 
@@ -124,5 +127,4 @@ def opti_rLSTM_h(h_array, epoch_array, batch_array):
 
 # %%
 data = opti_rLSTM_h([1, 3, 5, 7, 10, 12, 14, 18, 21], [4, 6, 10, 14, 20, 40], BATCH_ARRAY)
-
 
