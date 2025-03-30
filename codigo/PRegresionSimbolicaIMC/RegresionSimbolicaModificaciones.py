@@ -255,9 +255,11 @@ class RegresionSimbolica:
             resultado.append({'iteracion' : num_veces, 'valor' : best, 'best_iteracion' : best_it, 'gen_it' : candidato_it, 'gen' : genBest})
             with open('genesIteracion.txt', 'a') as archivo:
                 archivo.write(f"Vez num:{num_veces}, valor{best}, gen: {genBest} \n")
-            if num_veces % 100 == 0:
+            x =num_veces % 100
+            if x == 0:
+                print(x)
                 df_resultados = pd.DataFrame(resultado)
-                cadena = "Dataframes/resultados_regresionSimbolicaIMC_it" + str(num_veces) + ".csv"
+                cadena = "Dataframes/resultados_regresionSimbolicaCIMC_it" + str(num_veces) + ".csv"
                 df_resultados.to_csv(cadena, index=False)
         print("El mejor gen tiene un rendimiento de " + str(best))
         self.display(candidato_best)
@@ -265,7 +267,6 @@ class RegresionSimbolica:
         cadena = "Dataframes/resultados_regresionSimbolica.csv"
         df_resultados.to_csv(cadena, index=False)
         return (candidato_best, best)
-        
 
 # %%
 def funcion_optimizacion_mape(valores_generados, y):
