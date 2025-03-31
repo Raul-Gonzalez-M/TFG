@@ -1,1 +1,1 @@
-horas: 10
+horas: 18
