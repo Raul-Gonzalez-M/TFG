@@ -72,59 +72,59 @@ def evalRedLSTM(ytest, y_pred):
     return emp
 
 # %%
-def opti_redes_LSTM(epoch_ini, epoch_fin, batch_array, X_trainLSTM, y_trainLSTM, X_valiLSTM, y_valiLSTM, X_testLSTM, y_testLSTM, numhoras):
+def opti_redes_LSTM(epoch_array, batch_array, X_trainLSTM, y_trainLSTM, X_valiLSTM, y_valiLSTM, X_testLSTM, y_testLSTM, numhoras):
     epoch_best = 0
     bacth_best = 0
     best_model = None
-    for e in range(epoch_ini, epoch_fin + 1):
+    best = float('inf')
+    results = []
+    for e in epoch_array:
         for b in batch_array:
-            best = 100
-            for i in range(0, 10):
+            best_value_of_the25 = float('inf')
+            for i in range(15):
                 with tf.device('/CPU:0'):
                     modelLSTM = Sequential()
-                    modelLSTM.add(LSTM(64, activation='relu', input_shape=(numhoras, 4)))
+                    modelLSTM.add(LSTM(128, activation='relu', input_shape=(numhoras, 4)))
                     modelLSTM.add(Dense(1))
                     modelLSTM.compile(optimizer='adam', loss='mape')
                     historyLSTM = modelLSTM.fit(X_trainLSTM, y_trainLSTM, epochs=e, batch_size=b, validation_data=(X_valiLSTM, y_valiLSTM), shuffle=False)
                     y_pred = modelLSTM.predict(X_testLSTM)
                     valor = evalRedLSTM(y_testLSTM, y_pred)
                     print("epoch: "+str(e)+", batch_size: "+str(b)+", value: "+str(valor))
-                    if valor < best:
-                        best = valor
-                        epoch_best = e
-                        bacth_best = b
-                        best_model = modelLSTM
-                        if best < 0.75:
-                            cadena_guardado = "ModelosLSTMOptiMoreData/mi_modelo_LSTMOpti_e"+str(e)+"_b"+str(b)+"_v"+str(round(valor, 3))
+                    if valor < best_value_of_the25:
+                        best_value_of_the25 = valor
+                        if valor < best:
+                            epoch_best = e
+                            bacth_best = b
+                            best_model = modelLSTM
+                            best = valor
+                        if valor < 0.75:
+                            cadena_guardado = "ModelosLSTMOptiMoreDataIMC/mi_modelo_LSTMOpti_e"+str(e)+"_b"+str(b)+"_v"+str(round(valor, 3))
                             best_model.save(cadena_guardado+".keras")
-    return epoch_best, bacth_best, valor, best_model
+            results.append([e, b, best_value_of_the25])
+    df_results = pd.DataFrame(results, columns=["epoch", "batch_size", "value"])
+    return epoch_best, bacth_best, best, best_model, df_results
 
 # %%
-BATCH_ARRAY = [4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 64, 96, 128, 192, 256]
+BATCH_ARRAY = [4, 8, 12, 16, 32, 64, 128, 256]
 
 # %%
-def opti_rLSTM_h(inih, finh, epoch_ini, epoch_fin, batch_array):
+def opti_rLSTM_h(h_array, epoch_array, batch_array):
     best = 100
     epoch_best = 0
     bacth_best = 0
     h_best = 0
     best_model = None
-    for i in range(inih, finh+1):
+    for i in h_array:
         Xtrain, ytrain = preparar_datosLSTM(df_train, i)
         Xvali, yvali = preparar_datosLSTM(df_vali, i)
         Xtest, ytest = preparar_datosLSTM(df_test, i)
-        valores = opti_redes_LSTM(epoch_ini, epoch_fin, batch_array, Xtrain, ytrain, Xvali, yvali, Xtest, ytest, i)
-        if valores[2] < best:
-            best = valores[2]
-            epoch_best = valores[0]
-            bacth_best = valores[1]
-            h_best = i
-            best_model = valores[3]
-            cadena_guardado = "ModelosLSTMOptiMoreDataBest/mi_modelo_LSTM_Opti_e"+str(epoch_best)+"_b"+str(bacth_best)+"_h"+str(i)+"_v"+str(round(best, 3))
-            best_model.save(cadena_guardado+".keras")
+        valores = opti_redes_LSTM(epoch_array, batch_array, Xtrain, ytrain, Xvali, yvali, Xtest, ytest, i)
+        df = valores[4]
+        csv_filename = "lstmH" + str(i) + ".csv"
+        df.to_csv(csv_filename, index=False)
     return best, epoch_best, bacth_best, h_best, best_model
 
 # %%
-data = opti_rLSTM_h(7, 16, 3, 20, BATCH_ARRAY)
-
+data = opti_rLSTM_h([1, 3, 5, 7, 10, 12, 14, 18, 21], [4, 6, 10, 14, 20, 40], BATCH_ARRAY)
 
