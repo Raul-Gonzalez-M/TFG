@@ -82,25 +82,25 @@ def opti_redes_LSTM(epoch_array, batch_array, X_trainLSTM, y_trainLSTM, X_valiLS
         for b in batch_array:
             best_value_of_the25 = float('inf')
             for i in range(15):
-                with tf.device('/CPU:0'):
-                    modelLSTM = Sequential()
-                    modelLSTM.add(LSTM(128, activation='relu', input_shape=(numhoras, 4)))
-                    modelLSTM.add(Dense(1))
-                    modelLSTM.compile(optimizer='adam', loss='mape')
-                    historyLSTM = modelLSTM.fit(X_trainLSTM, y_trainLSTM, epochs=e, batch_size=b, validation_data=(X_valiLSTM, y_valiLSTM), shuffle=False)
-                    y_pred = modelLSTM.predict(X_testLSTM)
-                    valor = evalRedLSTM(y_testLSTM, y_pred)
-                    print("epoch: "+str(e)+", batch_size: "+str(b)+", value: "+str(valor))
-                    if valor < best_value_of_the25:
-                        best_value_of_the25 = valor
-                        if valor < best:
-                            epoch_best = e
-                            bacth_best = b
-                            best_model = modelLSTM
-                            best = valor
-                        if valor < 0.75:
-                            cadena_guardado = "ModelosLSTMOptiMoreDataIMC/mi_modelo_LSTMOpti_e"+str(e)+"_b"+str(b)+"_v"+str(round(valor, 3))
-                            best_model.save(cadena_guardado+".keras")
+                #with tf.device('/CPU:0'):
+                modelLSTM = Sequential()
+                modelLSTM.add(LSTM(128, activation='relu', input_shape=(numhoras, 4)))
+                modelLSTM.add(Dense(1))
+                modelLSTM.compile(optimizer='adam', loss='mape')
+                historyLSTM = modelLSTM.fit(X_trainLSTM, y_trainLSTM, epochs=e, batch_size=b, validation_data=(X_valiLSTM, y_valiLSTM), shuffle=False)
+                y_pred = modelLSTM.predict(X_testLSTM)
+                valor = evalRedLSTM(y_testLSTM, y_pred)
+                print("epoch: "+str(e)+", batch_size: "+str(b)+", value: "+str(valor))
+                if valor < best_value_of_the25:
+                    best_value_of_the25 = valor
+                    if valor < best:
+                        epoch_best = e
+                        bacth_best = b
+                        best_model = modelLSTM
+                        best = valor
+                    if valor < 0.75:
+                        cadena_guardado = "ModelosLSTMOptiMoreDataIMC/mi_modelo_LSTMOpti_e"+str(e)+"_b"+str(b)+"_v"+str(round(valor, 3))
+                        best_model.save(cadena_guardado+".keras")
             results.append([e, b, best_value_of_the25])
     df_results = pd.DataFrame(results, columns=["epoch", "batch_size", "value"])
     return epoch_best, bacth_best, best, best_model, df_results
