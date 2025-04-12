@@ -126,6 +126,6 @@ def opti_rLSTM_h(h_array, epoch_array, batch_array):
     return best, epoch_best, bacth_best, h_best, best_model
 
 # %%
-data = opti_rLSTM_h([5, 7, 10, 12, 14, 18, 21], [4, 6, 10, 14, 20, 40], BATCH_ARRAY)
+data = opti_rLSTM_h([7, 10, 12, 14, 18, 21], [4, 6, 10, 14, 20, 40], BATCH_ARRAY)
 
 
