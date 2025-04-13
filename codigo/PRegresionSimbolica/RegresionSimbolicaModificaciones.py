@@ -2,6 +2,9 @@
 import pandas as pd
 import numpy as np
 import random
+import re
+
+
 
 # %%
 df = pd.read_csv('SOLUSTDAtas_tratado.csv')
@@ -210,12 +213,18 @@ class RegresionSimbolica:
                     genescreados = self.create(num_del)
                     for gen in genescreados:
                         self.genes.append(gen)
-            print("El mejor gen," + str(display(candidato_best)) + ",de la ronda " + str(ronda) + " tiene un rendimiento de " + str(best))
+            print("El mejor gen," + str(self.display(candidato_best)) + ",de la ronda " + str(ronda) + " tiene un rendimiento de " + str(best))
             with open('candidatos.txt', 'a') as archivo:
-                archivo.write("El mejor gen," + str(display(candidato_best)) + ",de la ronda " + str(ronda) + " tiene un rendimiento de " + str(best) + "\n")
+                archivo.write("El mejor gen," + str(self.display(candidato_best)) + ",de la ronda " + str(ronda) + " tiene un rendimiento de " + str(best) + "\n")
         print("El mejor gen tiene un rendimiento de " + str(best))
         self.display(candidato_best)
         return (candidato_best, best)
+
+    def cargar(self, linea):
+        gen = []
+        gen = re.findall(r'\d+|[+\-*/]', linea)
+        gen = [int(tok) if tok.isdigit() else tok for tok in gen]
+        return gen
 
 
 
@@ -224,7 +233,15 @@ class RegresionSimbolica:
         num_veces = 0
         best = 1000000
         candidato_best = []
-        self.genes = self.create(numGenes)
+        cargar = True
+        if cargar:
+            with open('estado.txt', 'r') as archivo:
+                for linea in archivo:
+                    linea = linea.strip()
+                    self.genes.append(self.cargar(linea))
+                numGenes = len(self.genes)
+        else:
+            self.genes = self.create(numGenes)
         for i in range (0, len(self.genes)):
             value = self.fitness2(X, y, self.genes[i])
             if(value < best):
@@ -262,6 +279,9 @@ class RegresionSimbolica:
                 df_resultados = pd.DataFrame(resultado)
                 cadena = "Dataframes/resultados_regresionSimbolicaC_it" + str(num_veces) + ".csv"
                 df_resultados.to_csv(cadena, index=False)
+                for gen in self.genes:
+                    with open('estado.txt', 'w') as archivo_estado:
+                        archivo_estado.write(str(self.display(gen))+ "\n")
         print("El mejor gen tiene un rendimiento de " + str(best))
         self.display(candidato_best)
         df_resultados = pd.DataFrame(resultado)
@@ -295,7 +315,7 @@ objeto_regresion = RegresionSimbolica(
 )
 
 # %%
-print(objeto_regresion.display([1, '+', 3, '*', 5, '-', 6, '+', 9, '/', 2]))
+print(objeto_regresion.display([1, '+', 32, '*', 5, '-', 6, '+', 9, '/', 2]))
 objeto_regresion.fitness([[1, 3,1,4,5,2,5,8,5]], [10.2], [1, '+', 3, '*', 5])
 candidato = [1, '+', 3, '*', 5]
 for i in range(0, 300):
