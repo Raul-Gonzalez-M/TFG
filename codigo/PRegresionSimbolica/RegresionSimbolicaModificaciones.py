@@ -41,7 +41,7 @@ class RegresionSimbolica:
     
     def __create_priv(self, r : int, numGenes: int):
         genes = []
-        for j in range(random.randint(2, numGenes)):   # Se genera un número aleatorio de genes entre 2 y numGenes
+        for j in range (numGenes):   # Se genera un número aleatorio de genes entre 2 y numGenes
             aux = []
             aux.append(random.randint(0, r))
             for i in range(random.randint(self.minSize, self.maxSize - 1)):
@@ -279,9 +279,10 @@ class RegresionSimbolica:
                 df_resultados = pd.DataFrame(resultado)
                 cadena = "Dataframes/resultados_regresionSimbolicaC_it" + str(num_veces) + ".csv"
                 df_resultados.to_csv(cadena, index=False)
-                for gen in self.genes:
-                    with open('estado.txt', 'w') as archivo_estado:
-                        archivo_estado.write(str(self.display(gen))+ "\n")
+                with open('estado.txt', 'w') as archivo_estado:
+                    for gen in self.genes:
+                        cadena  = str(self.display(gen)) + "\n"
+                        archivo_estado.write(cadena)
         print("El mejor gen tiene un rendimiento de " + str(best))
         self.display(candidato_best)
         df_resultados = pd.DataFrame(resultado)
@@ -309,8 +310,8 @@ operations = [
 objeto_regresion = RegresionSimbolica(
     funcionOptimizacion=funcion_optimizacion_mape,  # Pasas tu función de optimización
     operations=operations,                          # Pasas la lista de operaciones
-    maxSize=80,                                     # Tamaño máximo del cromosoma
-    minSize=3,                                      # Tamaño mínimo del cromosoma
+    maxSize=50,                                     # Tamaño máximo del cromosoma
+    minSize=5,                                      # Tamaño mínimo del cromosoma
     n=NUMHORAS                                            # Cantidad de horas anteriores a considerar
 )
 
