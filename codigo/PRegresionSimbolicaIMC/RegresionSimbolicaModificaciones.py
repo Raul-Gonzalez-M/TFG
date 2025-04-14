@@ -2,6 +2,7 @@
 import pandas as pd
 import numpy as np
 import random
+import re
 
 # %%
 df = pd.read_csv('SolAtasIMC_tratado.csv')
@@ -38,7 +39,7 @@ class RegresionSimbolica:
     
     def __create_priv(self, r : int, numGenes: int):
         genes = []
-        for j in range(random.randint(2, numGenes)):   # Se genera un número aleatorio de genes entre 2 y numGenes
+        for j in range(numGenes):   # Se genera un número aleatorio de genes entre 2 y numGenes
             aux = []
             aux.append(random.randint(0, r))
             for i in range(random.randint(self.minSize, self.maxSize - 1)):
@@ -218,20 +219,34 @@ class RegresionSimbolica:
         return (candidato_best, best)
     
     
+    def cargar(self, linea):
+        gen = []
+        gen = re.findall(r'\d+|[+\-*/]', linea)
+        gen = [int(tok) if tok.isdigit() else tok for tok in gen]
+        return gen
+
+
+
     def runcopy(self, numGenes, X, y, baremo: float):
         resultado = []
         num_veces = 0
         best = 1000000
         candidato_best = []
-        self.genes = self.create(numGenes)
+        cargar = False
+        if cargar:
+            with open('estado.txt', 'r') as archivo:
+                for linea in archivo:
+                    linea = linea.strip()
+                    self.genes.append(self.cargar(linea))
+                numGenes = len(self.genes)
+        else:
+            self.genes = self.create(numGenes)
         for i in range (0, len(self.genes)):
             value = self.fitness2(X, y, self.genes[i])
             if(value < best):
                 best = value
                 candidato_best = self.genes[i]
         while(best > baremo and num_veces < 1000000):
-            best_it = 1000000
-            candidato_it = []
             for j in range (0, len(self.genes)):
                 self.genes[j] = self.mutate2(self.genes[j])
             dicc_aux = {}
@@ -241,26 +256,32 @@ class RegresionSimbolica:
                 value = self.fitness2(X, y, self.genes[r])
                 values_list.append(value)
                 dicc_aux[value] = r
-                if value < best_it:
-                    best_it = value
-                    candidato_it = self.genes[r]
                 if(value < best):
                     best = value
                     candidato_best = self.genes[r]
             values_array = np.array(values_list)
             values_array.sort()
+            if(num_veces > 200):
+                aux = self.genes[dicc_aux[values_array[0]]]
+                for ind in range(1,20):
+                    indice =  dicc_aux[values_array[values_array.size - ind]]
+                    del self.genes[indice]
+                for rs in range(1,20):
+                    self.genes.append(aux)
             num_veces += 1
             print(f"Vez num:{num_veces}, valor{best}")
             genBest = self.display(candidato_best)
-            resultado.append({'iteracion' : num_veces, 'valor' : best, 'best_iteracion' : best_it, 'gen_it' : candidato_it, 'gen' : genBest})
+            resultado.append({'iteracion' : num_veces, 'valor' : best, 'gen' : genBest})
             with open('genesIteracion.txt', 'a') as archivo:
                 archivo.write(f"Vez num:{num_veces}, valor{best}, gen: {genBest} \n")
-            x =num_veces % 100
-            if x == 0:
-                print(x)
+            if num_veces % 100 == 0:
                 df_resultados = pd.DataFrame(resultado)
-                cadena = "Dataframes/resultados_regresionSimbolicaCIMC_it" + str(num_veces) + ".csv"
+                cadena = "Dataframes/resultados_regresionSimbolicaC_it" + str(num_veces) + ".csv"
                 df_resultados.to_csv(cadena, index=False)
+                with open('estado.txt', 'w') as archivo_estado:
+                    for gen in self.genes:
+                        cadena  = str(self.display(gen)) + "\n"
+                        archivo_estado.write(cadena)
         print("El mejor gen tiene un rendimiento de " + str(best))
         self.display(candidato_best)
         df_resultados = pd.DataFrame(resultado)
@@ -288,8 +309,8 @@ operations = [
 objeto_regresion = RegresionSimbolica(
     funcionOptimizacion=funcion_optimizacion_mape,  # Pasas tu función de optimización
     operations=operations,                          # Pasas la lista de operaciones
-    maxSize=80,                                     # Tamaño máximo del cromosoma
-    minSize=3,                                      # Tamaño mínimo del cromosoma
+    maxSize=50,                                     # Tamaño máximo del cromosoma
+    minSize=5,                                      # Tamaño mínimo del cromosoma
     n=NUMHORAS                                            # Cantidad de horas anteriores a considerar
 )
 
