@@ -233,7 +233,7 @@ class RegresionSimbolica:
         num_veces = 0
         best = 1000000
         candidato_best = []
-        cargar = True
+        cargar = False
         if cargar:
             with open('estado.txt', 'r') as archivo:
                 for linea in archivo:
