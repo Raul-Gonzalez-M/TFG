@@ -249,25 +249,28 @@ class RegresionSimbolica:
         while(best > baremo and num_veces < 1000000):
             for j in range (0, len(self.genes)):
                 self.genes[j] = self.mutate2(self.genes[j])
-            dicc_aux = {}
-            genes_aux = self.genes.copy()
             values_list = []
             for r in range (0, len(self.genes)):
                 value = self.fitness2(X, y, self.genes[r])
                 values_list.append(value)
-                dicc_aux[value] = r
                 if(value < best):
                     best = value
                     candidato_best = self.genes[r]
-            values_array = np.array(values_list)
-            values_array.sort()
-            if num_veces > 200 and num_veces % 50 == 0:
-                aux = self.genes[dicc_aux[values_array[0]]] # Selecciono el mejor gen
-                peores_indices = [dicc_aux[values_array[-ind]] for ind in range(1, 6)]    # Obtengo los índices de los peores 5 genes
-                peores_indices.sort(reverse=True)   # Ordeno los índices de mayor a menor para evitar errores al eliminar
-                for indice in peores_indices:  # Elimino los peores genes de self.genes
+            if num_veces > 200 and num_veces % 100 == 0:
+                indexed_fitness = list(enumerate(values_list))
+                indexed_fitness.sort(key=lambda x: x[1])  # Ordenar por fitness
+
+                mejor_indice = indexed_fitness[0][0]
+                aux = self.genes[mejor_indice]
+
+                # Obtener los índices de los 19 peores
+                peores_indices = [idx for idx, _ in indexed_fitness[-5:]]
+                peores_indices.sort(reverse=True)
+
+                for indice in peores_indices:
                     del self.genes[indice]
-                for _ in range(5): # Añade 5 copias del mejor gen
+
+                for _ in range(5):
                     self.genes.append(aux)
             num_veces += 1
             print(f"Vez num:{num_veces}, valor{best}")
