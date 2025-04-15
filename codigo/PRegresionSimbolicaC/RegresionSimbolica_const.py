@@ -1,7 +1,7 @@
 # %%
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt 
+import re
 import random
 
 # %%
@@ -55,6 +55,14 @@ def aniadirNum(n:int):
             return position(random.randrange(0, n))
 
 # %%
+def _constant(n):
+    return constant(n)
+
+def _position(n):
+    return position(n)
+
+
+# %%
 class RegresionSimbolica:
     def __init__(self, funcionOptimizacion: callable, operations: list[list], maxSize: int, minSize: int, n : int): # n es la cantidad de horas anteriores que se tienen en cuenta
         self.funcionOptimizacion = funcionOptimizacion
@@ -65,6 +73,19 @@ class RegresionSimbolica:
         self.n = n
         pass
     
+    
+    def cargar(self, linea):
+        gen = []
+        tokens = re.findall(r'c\d+(?:\.\d+)?|p\d+|[+\-*/()]', linea)
+        for tok in tokens:
+            if tok.startswith('c'):
+                gen.append(_constant(float(tok[1:])))
+            elif tok.startswith('p'):
+                gen.append(_position(int(tok[1:])))
+            else:
+                gen.append(tok)
+        return gen
+        
     def create_gen(self, r : int):
         aux = []
         aux.append(aniadirNum(r))
@@ -88,7 +109,7 @@ class RegresionSimbolica:
         else:
             raise Exception("El número de genes no puede ser menor que 1")
         
-    def __aplica_operacion(self, op, i, j):
+    def __aplica_operacion(self, op, i:float, j:float):
         if op == '+':
             return i + j
         elif op == '-':
@@ -96,7 +117,7 @@ class RegresionSimbolica:
         elif op == '*':
             return i * j
         elif op == '/':
-            return i / j
+            return i / j if j != 0 else 1e6
         elif op == '^':
             return i ** j
         
@@ -151,48 +172,21 @@ class RegresionSimbolica:
             numberC -= 2
         return candidato
         
-        
-    def run2(self, numGenes, X, y, baremo: float):
-        num_veces = 0
-        best = 1000000
-        candidato_best = []
-        self.genes = self.create(numGenes)
-        for i in range (0, len(self.genes)):
-            value = self.fitness2(X, y, self.genes[i])
-            if(value < best):
-                best = value
-                candidato_best = self.genes[i]
-        while(best > baremo and num_veces < 100000):
-            for j in range (0, len(self.genes)):
-                self.genes[j] = self.mutate2(self.genes[j])
-            dicc_aux = {}
-            genes_aux = self.genes.copy()
-            values_list = []
-            for r in range (0, len(self.genes)):
-                value = self.fitness2(X, y, self.genes[r])
-                values_list.append(value)
-                dicc_aux[value] = r
-                if(value < best):
-                    best = value
-                    candidato_best = self.genes[r]
-            values_array = np.array(values_list)
-            values_array.sort()
-            indice =  dicc_aux[values_array[values_array.size - 1]]
-            del self.genes[indice]
-            aux = self.create_gen(4*self.n - 1)
-            self.genes.append(aux)
-            num_veces += 1
-            print(best)
-        print("El mejor gen tiene un rendimiento de " + str(best))
-        self.display(candidato_best)
-        return (candidato_best, best)
     
-    def runcopy(self, numGenes, X, y, baremo: float):
+    def runcopy(self, numGenes, X, y, baremo: float, cargar):
         resultado = []
         num_veces = 0
         best = 1000000
         candidato_best = []
-        self.genes = self.create(numGenes)
+        self.genes = []
+        if cargar:
+            with open('estado.txt', 'r') as archivo:
+                for linea in archivo:
+                    linea = linea.strip()
+                    self.genes.append(self.cargar(linea))
+                numGenes = len(self.genes)
+        else:
+            self.genes = self.create(numGenes)
         for i in range (0, len(self.genes)):
             value = self.fitness2(X, y, self.genes[i])
             if(value < best):
@@ -226,10 +220,14 @@ class RegresionSimbolica:
             resultado.append({'iteracion' : num_veces, 'valor' : best, 'gen' : genBest})
             with open('genesIteracion.txt', 'a') as archivo:
                 archivo.write(f"Vez num:{num_veces}, valor{best}, gen: {genBest} \n")
-            if num_veces % 100 == 0:
+            if num_veces % 2 == 0:
                 df_resultados = pd.DataFrame(resultado)
                 cadena = "Dataframes/resultados_regresionSimbolicaC_it" + str(num_veces) + ".csv"
                 df_resultados.to_csv(cadena, index=False)
+                with open('estado.txt', 'w') as archivo_estado:
+                    for gen in self.genes:
+                        cadena  = str(self.display(gen)) + "\n"
+                        archivo_estado.write(cadena)
         print("El mejor gen tiene un rendimiento de " + str(best))
         self.display(candidato_best)
         df_resultados = pd.DataFrame(resultado)
@@ -266,8 +264,8 @@ objeto_regresion = RegresionSimbolica(
 # %%
 
 candidato = [constant(3), '+', position(3), '*', constant(5)]
-for i in range(0, 300):
-    objeto_regresion.mutate2(candidato)
+#for i in range(0, 300):
+    #objeto_regresion.mutate2(candidato)
 objeto_regresion.display(candidato)    
 
 # %% [markdown]
@@ -287,7 +285,7 @@ for i in range(0, df_train.shape[0] - NUMHORAS):
     y.append(df_train.iloc[i + NUMHORAS].close)
 
 # %%
-pos = objeto_regresion.runcopy(200, X, y, 0.5)
+pos = objeto_regresion.runcopy(200, X, y, 0.5, False)
 
 # %%
 pos
