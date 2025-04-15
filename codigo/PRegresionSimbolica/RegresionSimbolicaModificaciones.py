@@ -142,7 +142,7 @@ class RegresionSimbolica:
     def cargar(self, linea):
         gen = []
         gen = re.findall(r'\d+|[+\-*/]', linea)
-        gen = [float(tok) if tok.isdigit() else tok for tok in gen]
+        gen = [int(tok) if tok.isdigit() else tok for tok in gen]
         return gen
 
 
@@ -266,7 +266,7 @@ for i in range(0, df_train.shape[0] - NUMHORAS):
     y.append(df_train.iloc[i + NUMHORAS].close)
 
 # %%
-pos = objeto_regresion.runcopy(200, X, y, 0.5, False)
+pos = objeto_regresion.runcopy(200, X, y, 0.5, True)
 
 # %%
 pos
