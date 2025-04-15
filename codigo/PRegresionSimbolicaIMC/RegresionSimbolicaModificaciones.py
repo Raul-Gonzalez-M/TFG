@@ -261,12 +261,13 @@ class RegresionSimbolica:
                     candidato_best = self.genes[r]
             values_array = np.array(values_list)
             values_array.sort()
-            if(num_veces > 200):
-                aux = self.genes[dicc_aux[values_array[0]]]
-                for ind in range(1,20):
-                    indice =  dicc_aux[values_array[values_array.size - ind]]
+            if num_veces > 200 and num_veces % 50 == 0:
+                aux = self.genes[dicc_aux[values_array[0]]] # Selecciono el mejor gen
+                peores_indices = [dicc_aux[values_array[-ind]] for ind in range(1, 6)]    # Obtengo los índices de los peores 5 genes
+                peores_indices.sort(reverse=True)   # Ordeno los índices de mayor a menor para evitar errores al eliminar
+                for indice in peores_indices:  # Elimino los peores genes de self.genes
                     del self.genes[indice]
-                for rs in range(1,20):
+                for _ in range(5): # Añade 5 copias del mejor gen
                     self.genes.append(aux)
             num_veces += 1
             print(f"Vez num:{num_veces}, valor{best}")
