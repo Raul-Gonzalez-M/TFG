@@ -65,7 +65,7 @@ class RegresionSimbolica:
         elif op == '*':
             return i * j
         elif op == '/':
-            return i / j
+            return i / j if j != 0 else 1e6
         elif op == '^':
             return i ** j
         
@@ -274,7 +274,7 @@ class RegresionSimbolica:
             resultado.append({'iteracion' : num_veces, 'valor' : best, 'gen' : genBest})
             with open('genesIteracion.txt', 'a') as archivo:
                 archivo.write(f"Vez num:{num_veces}, valor{best}, gen: {genBest} \n")
-            if num_veces % 100 == 0:
+            if num_veces % 5 == 0:
                 df_resultados = pd.DataFrame(resultado)
                 cadena = "Dataframes/resultados_regresionSimbolicaC_it" + str(num_veces) + ".csv"
                 df_resultados.to_csv(cadena, index=False)
@@ -342,7 +342,7 @@ for i in range(0, df_train.shape[0] - NUMHORAS):
     y.append(df_train.iloc[i + NUMHORAS].close)
 
 # %%
-pos = objeto_regresion.runcopy(200, X, y, 0.5)
+pos = objeto_regresion.runcopy(10, X, y, 0.5)
 
 # %%
 pos

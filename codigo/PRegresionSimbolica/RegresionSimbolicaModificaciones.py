@@ -67,7 +67,7 @@ class RegresionSimbolica:
         elif op == '*':
             return i * j
         elif op == '/':
-            return i / j
+            return i / j if j != 0 else 1e6
         elif op == '^':
             return i ** j
         
@@ -138,102 +138,21 @@ class RegresionSimbolica:
             del candidato[indice]
             numberC -= 2
         return candidato
-    
-    def run(self, numGenes, X, y, baremo: float):
-        best = 1000000
-        post_best = 0
-        self.genes = self.create(numGenes)
-        for i in range (0, len(self.genes)):
-            value = self.fitness(X, y, self.genes[i])
-            if(value < best):
-                best = value
-                post_best = i
-        while(best > baremo):
-            for j in range (0, len(self.genes)):
-                self.genes[j] = self.mutate2(self.genes[j])
-            for i in range (0, len(self.genes)):
-                value = self.fitness(X, y, self.genes[i])
-                if(value < best):
-                    best = value
-                    post_best = i
-        print("El mejor gen tiene un rendimiento de " + str(best))
-        self.display(self.genes[post_best])
-        return (post_best, best)
-        
-        
-    def run2(self, numGenes, X, y, baremo: float):
-        best = 1000000
-        candidato_best = []
-        self.genes = self.create(numGenes)
-        for i in range (0, len(self.genes)):
-            value = self.fitness(X, y, self.genes[i])
-            if(value < best):
-                best = value
-                candidato_best = self.genes[i]
-        ronda = 0
-        while(best > baremo):
-            ronda +=1
-            for j in range (0, len(self.genes)):
-                self.genes[j] = self.mutate2(self.genes[j])
-            dicc_aux = {}
-            genes_aux = self.genes.copy()
-            values_list = []
-            for r in range (0, len(self.genes)):
-                value = self.fitness(X, y, self.genes[r])
-                values_list.append(value)
-                dicc_aux[value] = r
-                if(value < best):
-                    best = value
-                    candidato_best = self.genes[r]
-            values_array = np.array(values_list)
-            values_array.sort()
-            #Crear la lista que va a ir en el dataFrame
-            genesauxiliares = []
-            for value in values_array:
-                genesauxiliares.append(self.genes[dicc_aux[value]])
-            df = pd.DataFrame({
-                'Genes': genesauxiliares,
-                'Valor': values_array,
-                'NumHoras': NUMHORAS,
-                'Ronda': ronda
-            })
-            nombre = "pandas/dataframe" + str(ronda) + ".csv"
-            df.to_csv(nombre, index=False) 
-            num_del = 0
-            if(values_array.size <= (numGenes - 4)/2):
-                genescreados = self.create(4)
-                for gen in genescreados:
-                    self.genes.append(gen)
-            else:
-                for z in range(int(values_array.size/ 2), values_array.size):
-                    if genes_aux[dicc_aux[values_array[z]]] in self.genes:
-                        self.genes.remove(genes_aux[dicc_aux[values_array[z]]])
-                        num_del += 1
-                if num_del > 2:
-                    genescreados = self.create(num_del)
-                    for gen in genescreados:
-                        self.genes.append(gen)
-            print("El mejor gen," + str(self.display(candidato_best)) + ",de la ronda " + str(ronda) + " tiene un rendimiento de " + str(best))
-            with open('candidatos.txt', 'a') as archivo:
-                archivo.write("El mejor gen," + str(self.display(candidato_best)) + ",de la ronda " + str(ronda) + " tiene un rendimiento de " + str(best) + "\n")
-        print("El mejor gen tiene un rendimiento de " + str(best))
-        self.display(candidato_best)
-        return (candidato_best, best)
 
     def cargar(self, linea):
         gen = []
         gen = re.findall(r'\d+|[+\-*/]', linea)
-        gen = [int(tok) if tok.isdigit() else tok for tok in gen]
+        gen = [float(tok) if tok.isdigit() else tok for tok in gen]
         return gen
 
 
 
-    def runcopy(self, numGenes, X, y, baremo: float):
+    def runcopy(self, numGenes, X, y, baremo: float, cargar: bool):
         resultado = []
         num_veces = 0
         best = 1000000
         candidato_best = []
-        cargar = False
+        self.genes = []
         if cargar:
             with open('estado.txt', 'r') as archivo:
                 for linea in archivo:
@@ -290,6 +209,7 @@ class RegresionSimbolica:
         df_resultados.to_csv(cadena, index=False)
         return (candidato_best, best)
 
+
 # %%
 def funcion_optimizacion_mape(valores_generados, y):
     suma = 0
@@ -342,7 +262,7 @@ for i in range(0, df_train.shape[0] - NUMHORAS):
     y.append(df_train.iloc[i + NUMHORAS].close)
 
 # %%
-pos = objeto_regresion.runcopy(200, X, y, 0.5)
+pos = objeto_regresion.runcopy(200, X, y, 0.5, False)
 
 # %%
 pos
