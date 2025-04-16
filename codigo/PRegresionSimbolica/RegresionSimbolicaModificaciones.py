@@ -204,7 +204,7 @@ class RegresionSimbolica:
             resultado.append({'iteracion' : num_veces, 'valor' : best_iteracion, 'gen' : genBest})
             with open('genesIteracion.txt', 'a') as archivo:
                 archivo.write(f"Vez num:{num_veces}, valor{best_iteracion}, gen: {genBest} \n")
-            if num_veces % 10 == 0:
+            if num_veces % 100 == 0:
                 df_resultados = pd.DataFrame(resultado)
                 cadena = "Dataframes/resultados_regresionSimbolicaC_it" + str(num_veces) + ".csv"
                 df_resultados.to_csv(cadena, index=False)
