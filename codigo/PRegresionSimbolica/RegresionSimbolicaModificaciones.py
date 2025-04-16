@@ -199,7 +199,7 @@ class RegresionSimbolica:
                 for _ in range(5):
                     self.genes.append(aux)
             num_veces += 1
-            print(f"Vez num:{num_veces}, valor{best}")
+            print(f"Vez num:{num_veces}, valorit{best_iteracion}, valor{best}")
             genBest = self.display(candi_it)
             resultado.append({'iteracion' : num_veces, 'valor' : best_iteracion, 'gen' : genBest})
             with open('genesIteracion.txt', 'a') as archivo:
