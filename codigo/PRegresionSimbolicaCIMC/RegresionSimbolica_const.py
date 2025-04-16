@@ -1,7 +1,7 @@
 # %%
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt 
+import  re
 import random
 
 # %%
@@ -53,6 +53,13 @@ def aniadirNum(n:int):
             return constant(random.uniform(0.0, 5.0))
         else:
             return position(random.randrange(0, n))
+
+# %%
+def _constant(n):
+    return constant(n)
+
+def _position(n):
+    return position(n)
 
 # %%
 class RegresionSimbolica:
@@ -187,12 +194,32 @@ class RegresionSimbolica:
         self.display(candidato_best)
         return (candidato_best, best)
     
-    def runcopy(self, numGenes, X, y, baremo: float):
+    def cargar(self, linea):
+        gen = []
+        tokens = re.findall(r'c\d+(?:\.\d+)?|p\d+|[+\-*/()]', linea)
+        for tok in tokens:
+            if tok.startswith('c'):
+                gen.append(_constant(float(tok[1:])))
+            elif tok.startswith('p'):
+                gen.append(_position(int(tok[1:])))
+            else:
+                gen.append(tok)
+        return gen
+    
+    def runcopy(self, numGenes, X, y, baremo: float, cargar:bool):
         resultado = []
         num_veces = 0
         best = 1000000
         candidato_best = []
-        self.genes = self.create(numGenes)
+        self.genes = []
+        if cargar:
+            with open('estado.txt', 'r') as archivo:
+                for linea in archivo:
+                    linea = linea.strip()
+                    self.genes.append(self.cargar(linea))
+                numGenes = len(self.genes)
+        else:
+            self.genes = self.create(numGenes)
         for i in range (0, len(self.genes)):
             value = self.fitness2(X, y, self.genes[i])
             if(value < best):
@@ -234,6 +261,10 @@ class RegresionSimbolica:
                 df_resultados = pd.DataFrame(resultado)
                 cadena = "Dataframes/resultados_regresionSimbolicaC_it" + str(num_veces) + ".csv"
                 df_resultados.to_csv(cadena, index=False)
+                with open('estado.txt', 'w') as archivo_estado:
+                    for gen in self.genes:
+                        cadena  = str(self.display(gen)) + "\n"
+                        archivo_estado.write(cadena)
         print("El mejor gen tiene un rendimiento de " + str(best))
         self.display(candidato_best)
         df_resultados = pd.DataFrame(resultado)
@@ -262,8 +293,8 @@ operations = [
 objeto_regresion = RegresionSimbolica(
     funcionOptimizacion=funcion_optimizacion_mape,  # Pasas tu función de optimización
     operations=operations,                          # Pasas la lista de operaciones
-    maxSize=80,                                     # Tamaño máximo del cromosoma
-    minSize=3,                                      # Tamaño mínimo del cromosoma
+    maxSize=50,                                     # Tamaño máximo del cromosoma
+    minSize=5,                                      # Tamaño mínimo del cromosoma
     n=NUMHORAS                                             # Cantidad de horas anteriores a considerar
 )
 
@@ -292,7 +323,7 @@ for i in range(0, df_train.shape[0] - NUMHORAS):
     y.append(df_train.iloc[i + NUMHORAS].close)
 
 # %%
-pos = objeto_regresion.runcopy(200, X, y, 0.5)
+pos = objeto_regresion.runcopy(200, X, y, 0.5, False)
 
 # %%
 pos
