@@ -120,35 +120,36 @@ dtrainvali = xgb.DMatrix(data=XvtXGB, label=yvtXGB)
 def evalXGB(Test_xgb, predict_xgb_test):
     suma = 0
     n = len(Test_xgb)
-    for i in range(0,n):
+    for i in range(0,n):    # Suma el error relativo de todas las predicciones.
         suma = abs(predict_xgb_test[i] - Test_xgb[i])/Test_xgb[i] +  suma
-    error_medio = suma/n
-    emp = error_medio*100 # error medio en porcentaje
+    error_medio = suma/n    # Divido la suma entre el número de predicciones para calcular la media
+    emp = error_medio*100   # Multiplico por 100 para obtener el error porcentual medio
     return emp
 
 # %%
 def train_XGB_depth(d_array, dtrainf, dvalif, dtestf, ytest):
     resultados = []
-    best = 100
-    best_depth = 0
-    for i in d_array:
-        etaAux = [0.3 , 0.1, 0.01]
-        for e in etaAux:
-            param = {'max_depth': i, 'eta': e, 'objective': 'reg:squarederror'}
-            evals = [(dtrainf, 'train'), (dvalif, 'validacion')]
-            esr = int(1//e)
-            if(esr < 10):
+    best = float('inf') # Variable en la que guardo el mejor resultado
+    best_depth = 0  # Variable en la que guardo la profundidad que genera el mejor resultado
+    for i in d_array:   # Genero un modelo para todas las profundidades
+        etaAux = [0.3 , 0.1, 0.01]  # Diferentes parámetro eta que vamos a utilizar
+        for e in etaAux:    # Genero un modelo para todas las eta
+            param = {'max_depth': i, 'eta': e, 'objective': 'reg:squarederror'} # Asigno los parámetros para el modelo
+            evals = [(dtrainf, 'train'), (dvalif, 'validacion')]  # Asigno los datos para entrenar y validar el modelo
+            esr = int(1//e) # Calculo el parámetro early stoping rounds en función del valor de eta que este usando
+            if(esr < 10): # Si el parámetro early stoping rounds es menor que 10 lo cambio a 10
                 esr = 10
+            # Entreno el modelo
             bstaux = xgb.train(param, dtrainf, num_boost_round=int(100//e), evals=evals, early_stopping_rounds=esr, verbose_eval=100)
-            predict_xgb_test = bstaux.predict(dtestf)
-            valor = evalXGB(ytest, predict_xgb_test)
-            resultados.append({'max_depth': i, 'eta': param['eta'], 'valor': valor})
-            if(valor < best):
+            predict_xgb_test = bstaux.predict(dtestf)   # Utilizo el modelo que acabo de entrenar para predecir usando los datos para test
+            valor = evalXGB(ytest, predict_xgb_test)    # Evalúo el rendimiento del modelo usando la predicción y los datos reales
+            resultados.append({'max_depth': i, 'eta': param['eta'], 'valor': valor})  # Guaro los resultados del rendimiento de este modelo
+            if(valor < best):   # Si el rendimiento del modelo es menor que el mejor rendimiento hasta ahora lo asigno como el mejor
                 best = valor
-                best_depth = i
-                if best < 0.75:
+                best_depth = i  # Guardo la profundidad del mejor modelo hasta el moemnto
+                if best < 0.75: # Si el rendimiento es menor que 0.75 guardo el modelo
                     cadena = "Modelos/modelo_xgb_v.json" + str(valor)+ "_d" + str(i) + "_eta" + str(param.get("eta")) + ".json"
-                    bstaux.save_model(cadena) 
+                    bstaux.save_model(cadena) # Guardo el modelo
     return (best_depth, best, resultados)
 
 # %%
