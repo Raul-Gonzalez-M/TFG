@@ -146,7 +146,7 @@ def train_XGB_depth(d_array, dtrainf, dvalif, dtestf, ytest):
             resultados.append({'max_depth': i, 'eta': param['eta'], 'valor': valor})  # Guaro los resultados del rendimiento de este modelo
             if(valor < best):   # Si el rendimiento del modelo es menor que el mejor rendimiento hasta ahora lo asigno como el mejor
                 best = valor
-                best_depth = i  # Guardo la profundidad del mejor modelo hasta el moemnto
+                best_depth = i  # Guardo la profundidad del mejor modelo hasta el momento
                 if best < 0.75: # Si el rendimiento es menor que 0.75 guardo el modelo
                     cadena = "Modelos/modelo_xgb_v.json" + str(valor)+ "_d" + str(i) + "_eta" + str(param.get("eta")) + ".json"
                     bstaux.save_model(cadena) # Guardo el modelo
@@ -154,26 +154,26 @@ def train_XGB_depth(d_array, dtrainf, dvalif, dtestf, ytest):
 
 # %%
 def trainGlobalXGB(d_array, h_array):
-    best = 100
-    best_depth = 0
+    best = float('inf') # Variable en la que guardo el mejor resultado
+    best_depth = 0  # Variable en la que guardo la profundidad que genera el mejor resultado
     for i in h_array:
         df_aux = create_df_n(df, i)
         dtrain_aux = createdftrain(df_aux)
         dvali_aux = createdfvali(df_aux)
         dtest_aux = createdftest(df_aux)
-        dtrain_prep = preparar_datosXGBoost(dtrain_aux)
-        dvali_prep = preparar_datosXGBoost(dvali_aux)
-        dtest_prep = preparar_datosXGBoost(dtest_aux)
+        dtrain_prep = preparar_datosXGBoost(dtrain_aux) # Función con la que preparo los datos que voy a usar para el entrenamiento
+        dvali_prep = preparar_datosXGBoost(dvali_aux) # Función con la que preparo los datos que voy a usar para la validación
+        dtest_prep = preparar_datosXGBoost(dtest_aux)   # Función con la que preparo los datos que voy a usar para el testeo
         values = train_XGB_depth(d_array, dtrain_prep[0], dvali_prep[0], dtest_prep[0], dtest_prep[1].values)
         print(str(i)+" "+str(values[0])+" "+str(values))
-        df_resultados = pd.DataFrame(values[2])
+        df_resultados = pd.DataFrame(values[2]) # Convierto los resultados del modelo en un dataframe
         cadena = "Dataframes/resultados_xgboost_h" + str(i) + ".csv"
-        df_resultados.to_csv(cadena, index=False)
+        df_resultados.to_csv(cadena, index=False)   # Guardo el dataframe
         with open('OptimizaciónXGBoostIMC.txt', 'a') as archivo:
             archivo.write("Numero de horas: "+str(i)+" Profundidad: "+str(values[0])+" Valor de emp obtenido: "+str(values[1]) + "\n")
-        if(values[1] < best):
+        if(values[1] < best): # Si el rendimiento obtenido durante el entrenamiento es menor que el mejor rendimiento hasta ahora lo asigno como el mejor
             best = values[1]
-            best_depth = values[0]
+            best_depth = values[0]  # Guardo la profundidad del mejor modelo hasta el momento
     return best, best_depth
 
 # %%
