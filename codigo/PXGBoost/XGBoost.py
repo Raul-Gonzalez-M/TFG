@@ -120,59 +120,60 @@ dtrainvali = xgb.DMatrix(data=XvtXGB, label=yvtXGB)
 def evalXGB(Test_xgb, predict_xgb_test):
     suma = 0
     n = len(Test_xgb)
-    for i in range(0,n):
+    for i in range(0,n):    # Suma el error relativo de todas las predicciones.
         suma = abs(predict_xgb_test[i] - Test_xgb[i])/Test_xgb[i] +  suma
-    error_medio = suma/n
-    emp = error_medio*100 # error medio en porcentaje
+    error_medio = suma/n    # Divido la suma entre el número de predicciones para calcular la media
+    emp = error_medio*100   # Multiplico por 100 para obtener el error porcentual medio
     return emp
 
 # %%
 def train_XGB_depth(d_array, dtrainf, dvalif, dtestf, ytest):
     resultados = []
-    best = 100
-    best_depth = 0
-    for i in d_array:
-        etaAux = [0.3 , 0.1, 0.01]
-        for e in etaAux:
-            param = {'max_depth': i, 'eta': e, 'objective': 'reg:squarederror'}
-            evals = [(dtrainf, 'train'), (dvalif, 'validacion')]
-            esr = int(1//e)
-            if(esr < 10):
+    best = float('inf') # Variable en la que guardo el mejor resultado
+    best_depth = 0  # Variable en la que guardo la profundidad que genera el mejor resultado
+    for i in d_array:   # Genero un modelo para todas las profundidades
+        etaAux = [0.3 , 0.1, 0.01]  # Diferentes parámetro eta que vamos a utilizar
+        for e in etaAux:    # Genero un modelo para todas las eta
+            param = {'max_depth': i, 'eta': e, 'objective': 'reg:squarederror'} # Asigno los parámetros para el modelo
+            evals = [(dtrainf, 'train'), (dvalif, 'validacion')]  # Asigno los datos para entrenar y validar el modelo
+            esr = int(1//e) # Calculo el parámetro early stoping rounds en función del valor de eta que este usando
+            if(esr < 10): # Si el parámetro early stoping rounds es menor que 10 lo cambio a 10
                 esr = 10
+            # Entreno el modelo
             bstaux = xgb.train(param, dtrainf, num_boost_round=int(100//e), evals=evals, early_stopping_rounds=esr, verbose_eval=100)
-            predict_xgb_test = bstaux.predict(dtestf)
-            valor = evalXGB(ytest, predict_xgb_test)
-            resultados.append({'max_depth': i, 'eta': param['eta'], 'valor': valor})
-            if(valor < best):
+            predict_xgb_test = bstaux.predict(dtestf)   # Utilizo el modelo que acabo de entrenar para predecir usando los datos para test
+            valor = evalXGB(ytest, predict_xgb_test)    # Evalúo el rendimiento del modelo usando la predicción y los datos reales
+            resultados.append({'max_depth': i, 'eta': param['eta'], 'valor': valor})  # Guaro los resultados del rendimiento de este modelo
+            if(valor < best):   # Si el rendimiento del modelo es menor que el mejor rendimiento hasta ahora lo asigno como el mejor
                 best = valor
-                best_depth = i
-                if best < 0.75:
+                best_depth = i  # Guardo la profundidad del mejor modelo hasta el momento
+                if best < 0.75: # Si el rendimiento es menor que 0.75 guardo el modelo
                     cadena = "Modelos/modelo_xgb_v.json" + str(valor)+ "_d" + str(i) + "_eta" + str(param.get("eta")) + ".json"
-                    bstaux.save_model(cadena) 
+                    bstaux.save_model(cadena) # Guardo el modelo
     return (best_depth, best, resultados)
 
 # %%
 def trainGlobalXGB(d_array, h_array):
-    best = 100
-    best_depth = 0
+    best = float('inf') # Variable en la que guardo el mejor resultado
+    best_depth = 0  # Variable en la que guardo la profundidad que genera el mejor resultado
     for i in h_array:
         df_aux = create_df_n(df, i)
         dtrain_aux = createdftrain(df_aux)
         dvali_aux = createdfvali(df_aux)
         dtest_aux = createdftest(df_aux)
-        dtrain_prep = preparar_datosXGBoost(dtrain_aux)
-        dvali_prep = preparar_datosXGBoost(dvali_aux)
-        dtest_prep = preparar_datosXGBoost(dtest_aux)
+        dtrain_prep = preparar_datosXGBoost(dtrain_aux) # Función con la que preparo los datos que voy a usar para el entrenamiento
+        dvali_prep = preparar_datosXGBoost(dvali_aux) # Función con la que preparo los datos que voy a usar para la validación
+        dtest_prep = preparar_datosXGBoost(dtest_aux)   # Función con la que preparo los datos que voy a usar para el testeo
         values = train_XGB_depth(d_array, dtrain_prep[0], dvali_prep[0], dtest_prep[0], dtest_prep[1].values)
         print(str(i)+" "+str(values[0])+" "+str(values))
-        df_resultados = pd.DataFrame(values[2])
+        df_resultados = pd.DataFrame(values[2]) # Convierto los resultados del modelo en un dataframe
         cadena = "Dataframes/resultados_xgboost_h" + str(i) + ".csv"
-        df_resultados.to_csv(cadena, index=False)
+        df_resultados.to_csv(cadena, index=False)   # Guardo el dataframe
         with open('OptimizaciónXGBoostIMC.txt', 'a') as archivo:
             archivo.write("Numero de horas: "+str(i)+" Profundidad: "+str(values[0])+" Valor de emp obtenido: "+str(values[1]) + "\n")
-        if(values[1] < best):
+        if(values[1] < best): # Si el rendimiento obtenido durante el entrenamiento es menor que el mejor rendimiento hasta ahora lo asigno como el mejor
             best = values[1]
-            best_depth = values[0]
+            best_depth = values[0]  # Guardo la profundidad del mejor modelo hasta el momento
     return best, best_depth
 
 # %%

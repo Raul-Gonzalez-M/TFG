@@ -193,15 +193,20 @@ class RegresionSimbolica:
                 best = value
                 candidato_best = self.genes[i]
         while(best > baremo and num_veces < 1000000):
+            best_iteracion = 1000000
+            candi_it = []
             for j in range (0, len(self.genes)):
                 self.genes[j] = self.mutate2(self.genes[j])
             values_list = []
             for r in range (0, len(self.genes)):
                 value = self.fitness2(X, y, self.genes[r])
                 values_list.append(value)
-                if(value < best):
-                    best = value
-                    candidato_best = self.genes[r]
+                if(value < best_iteracion):
+                    best_iteracion = value
+                    candi_it = self.genes[r]
+                    if value < best:
+                        best = value
+                        candidato_best = self.genes[r]
             if num_veces > 200 and num_veces % 100 == 0:
                 indexed_fitness = list(enumerate(values_list))
                 indexed_fitness.sort(key=lambda x: x[1])  # Ordenar por fitness
@@ -219,11 +224,11 @@ class RegresionSimbolica:
                 for _ in range(5):
                     self.genes.append(aux)
             num_veces += 1
-            print(f"Vez num:{num_veces}, valor{best}")
-            genBest = self.display(candidato_best)
-            resultado.append({'iteracion' : num_veces, 'valor' : best, 'gen' : genBest})
+            print(f"Vez num:{num_veces}, valorit{best_iteracion}, valor{best}")
+            genBest = self.display(candi_it)
+            resultado.append({'iteracion' : num_veces, 'valor' : best_iteracion, 'gen' : genBest})
             with open('genesIteracion.txt', 'a') as archivo:
-                archivo.write(f"Vez num:{num_veces}, valor{best}, gen: {genBest} \n")
+                archivo.write(f"Vez num:{num_veces}, valor{best_iteracion}, gen: {genBest} \n")
             if num_veces % 2 == 0:
                 df_resultados = pd.DataFrame(resultado)
                 cadena = "Dataframes/resultados_regresionSimbolicaC_it" + str(num_veces) + ".csv"
