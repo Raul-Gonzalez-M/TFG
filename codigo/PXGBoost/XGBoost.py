@@ -83,10 +83,9 @@ def createdftest(df_aux):
 
 # %%
 def preparar_datosXGBoost(df_aux):
-    X = df_aux.drop(['date', 'close_next'], axis=1)
-    #X = df_aux[['open', 'high', 'low', 'close', 'open_before1', 'high_before1', 'low_before1', 'close_before1']] 
-    y = df_aux['close_next']
-    return (xgb.DMatrix(data=X, label=y), y)
+    X = df_aux.drop(['date', 'close_next'], axis=1) # Elimino la columna date y la columna close_next
+    y = df_aux['close_next']    # Asigno a y los valores de la columna close_next
+    return (xgb.DMatrix(data=X, label=y), y)    # Convierto X en una matriz
 
 # %%
 df_train_xgb = createdftrain(df_xgb)
@@ -157,15 +156,15 @@ def trainGlobalXGB(d_array, h_array):
     best = float('inf') # Variable en la que guardo el mejor resultado
     best_depth = 0  # Variable en la que guardo la profundidad que genera el mejor resultado
     for i in h_array:
-        df_aux = create_df_n(df, i)
-        dtrain_aux = createdftrain(df_aux)
-        dvali_aux = createdfvali(df_aux)
-        dtest_aux = createdftest(df_aux)
+        df_aux = create_df_n(df, i) # Creo el dataframe acorde al número de horas de esta iteración, i
+        dtrain_aux = createdftrain(df_aux)  # Creo el dataframe que voy a usar para el entrenamiento
+        dvali_aux = createdfvali(df_aux)    # Creo el dataframe que voy a usar para la validación
+        dtest_aux = createdftest(df_aux)    # Creo el dataframe que voy a usar para el test
         dtrain_prep = preparar_datosXGBoost(dtrain_aux) # Función con la que preparo los datos que voy a usar para el entrenamiento
         dvali_prep = preparar_datosXGBoost(dvali_aux) # Función con la que preparo los datos que voy a usar para la validación
         dtest_prep = preparar_datosXGBoost(dtest_aux)   # Función con la que preparo los datos que voy a usar para el testeo
         values = train_XGB_depth(d_array, dtrain_prep[0], dvali_prep[0], dtest_prep[0], dtest_prep[1].values)
-        print(str(i)+" "+str(values[0])+" "+str(values))
+        print(str(i)+" "+str(values[0])+" "+str(values[1]))    # Imprimo por pantalla el número de horas, la mejor profundidad de la iteración y el mejor rendimiento de la iteración
         df_resultados = pd.DataFrame(values[2]) # Convierto los resultados del modelo en un dataframe
         cadena = "Dataframes/resultados_xgboost_h" + str(i) + ".csv"
         df_resultados.to_csv(cadena, index=False)   # Guardo el dataframe
@@ -177,6 +176,7 @@ def trainGlobalXGB(d_array, h_array):
     return best, best_depth
 
 # %%
+# Ejecuto la función principal trainGlobalXGB, la primera lista es la lista que contiene las profundidades y la segunda lista es la lista que contiene las horas 
 data = trainGlobalXGB([1,2,3,4,5,6,7,8,9,10,15,20,30,40,50,75,100],[1,2,3,4,5,6,7,8,9,10,14,18,20,30,40,50,75,100])
 
 
