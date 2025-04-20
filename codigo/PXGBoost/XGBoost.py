@@ -43,16 +43,16 @@ numhorasconst = 4
 # # Predicción Utilizando XGBoost
 
 # %%
-def create_df_n(df, n):
+def create_df_n(df, n): # Creo un nuevo dataframe con un formato adecuado para el XGBoost
     df_aux = df.copy()
-    for i in range(1, n):
-        df_aux['open_before' + str(i)] = df_aux['open'].shift(+i)
+    for i in range(1, n):   # Añado en el dataframe que he creado los valores de hace n - 1 horas como columnas 
+        df_aux['open_before' + str(i)] = df_aux['open'].shift(+i) # Por ejemplo el valor de apertura de hace 2 horas se añade como open_before2
         df_aux['high_before' + str(i)] = df_aux['high'].shift(+i)
         df_aux['low_before' + str(i)] = df_aux['low'].shift(+i)
         df_aux['close_before' + str(i)] = df_aux['close'].shift(+i)
         df_aux['value_before' + str(i)] = df_aux['value'].shift(+i)
-    df_aux['close_next'] = df_aux['close'].shift(-1)
-    df_aux = df_aux.dropna()
+    df_aux['close_next'] = df_aux['close'].shift(-1) # Añado en el dataframe el valor de cierre de la siguiente hora 
+    df_aux = df_aux.dropna()    # Elimino todas las filas que no tengan todos los valores
     return df_aux
 
 # %% [markdown]
@@ -68,18 +68,18 @@ tamanio_xgb
 
 # %%
 def createdftrain(df_aux):
-    tamanio_aux = df_aux.shape[0]
-    return df_aux.copy().iloc[0:int(tamanio_aux*0.7)]
+    tamanio_aux = df_aux.shape[0]   # Obtengo el tamaño del dataframe
+    return df_aux.copy().iloc[0:int(tamanio_aux*0.7)]   # Selecciono el 70% inicial para ser el dataframe para training
 
 # %%
 def createdfvali(df_aux):
-    tamanio_aux = df_aux.shape[0]
-    return df_aux.copy().iloc[int(tamanio_aux*0.7 + 1):int(tamanio_aux*0.9)]
+    tamanio_aux = df_aux.shape[0]   # Obtengo el tamaño del dataframe
+    return df_aux.copy().iloc[int(tamanio_aux*0.7 + 1):int(tamanio_aux*0.9)]    # Selecciono los datos entre el 70% y el 90% para ser el dataframe para training
 
 # %%
 def createdftest(df_aux):
-    tamanio_aux = df_aux.shape[0]
-    return df_aux.copy().iloc[int(tamanio_aux*0.9 + 1):tamanio_aux]
+    tamanio_aux = df_aux.shape[0]   # Obtengo el tamaño del dataframe
+    return df_aux.copy().iloc[int(tamanio_aux*0.9 + 1):tamanio_aux] # Selecciono el 10% final para ser el dataframe para training
 
 # %%
 def preparar_datosXGBoost(df_aux):
