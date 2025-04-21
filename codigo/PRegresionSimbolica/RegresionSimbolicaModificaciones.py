@@ -155,6 +155,8 @@ class RegresionSimbolica:
         self.genes = []
         if cargar:
             with open('estado.txt', 'r') as archivo:
+                primera_linea = archivo.readline()
+                num_veces = int(primera_linea.strip())
                 for linea in archivo:
                     linea = linea.strip()
                     self.genes.append(self.cargar(linea))
