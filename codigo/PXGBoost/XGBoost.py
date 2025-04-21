@@ -163,7 +163,8 @@ def trainGlobalXGB(d_array, h_array):
         dtrain_prep = preparar_datosXGBoost(dtrain_aux) # Función con la que preparo los datos que voy a usar para el entrenamiento
         dvali_prep = preparar_datosXGBoost(dvali_aux) # Función con la que preparo los datos que voy a usar para la validación
         dtest_prep = preparar_datosXGBoost(dtest_aux)   # Función con la que preparo los datos que voy a usar para el testeo
-        values = train_XGB_depth(d_array, dtrain_prep[0], dvali_prep[0], dtest_prep[0], dtest_prep[1].values)
+        # Entreno los modelos usando los datos preparados con la cantidad de horas correcta
+        values = train_XGB_depth(d_array, dtrain_prep[0], dvali_prep[0], dtest_prep[0], dtest_prep[1].values)   
         print(str(i)+" "+str(values[0])+" "+str(values[1]))    # Imprimo por pantalla el número de horas, la mejor profundidad de la iteración y el mejor rendimiento de la iteración
         df_resultados = pd.DataFrame(values[2]) # Convierto los resultados del modelo en un dataframe
         cadena = "Dataframes/resultados_xgboost_h" + str(i) + ".csv"
