@@ -154,7 +154,7 @@ class RegresionSimbolica:
         candidato_best = []
         self.genes = []
         if cargar:
-            with open('estado.txt', 'r') as archivo:
+            with open('estado_generado2.txt', 'r') as archivo:
                 primera_linea = archivo.readline()
                 num_veces = int(primera_linea.strip())
                 for linea in archivo:
