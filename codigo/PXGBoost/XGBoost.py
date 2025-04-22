@@ -74,12 +74,12 @@ def createdftrain(df_aux):
 # %%
 def createdfvali(df_aux):
     tamanio_aux = df_aux.shape[0]   # Obtengo el tamaño del dataframe
-    return df_aux.copy().iloc[int(tamanio_aux*0.7 + 1):int(tamanio_aux*0.9)]    # Selecciono los datos entre el 70% y el 90% para ser el dataframe para training
+    return df_aux.copy().iloc[int(tamanio_aux*0.7 + 1):int(tamanio_aux*0.9)]    # Selecciono los datos entre el 70% y el 90% para ser el dataframe para validación
 
 # %%
 def createdftest(df_aux):
     tamanio_aux = df_aux.shape[0]   # Obtengo el tamaño del dataframe
-    return df_aux.copy().iloc[int(tamanio_aux*0.9 + 1):tamanio_aux] # Selecciono el 10% final para ser el dataframe para training
+    return df_aux.copy().iloc[int(tamanio_aux*0.9 + 1):tamanio_aux] # Selecciono el 10% final para ser el dataframe para test
 
 # %%
 def preparar_datosXGBoost(df_aux):
