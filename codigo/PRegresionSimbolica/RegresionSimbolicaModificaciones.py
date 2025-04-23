@@ -191,7 +191,7 @@ class RegresionSimbolica:
                 mejor_indice = indexed_fitness[0][0]
                 aux = self.genes[mejor_indice]
 
-                # Obtener los índices de los 19 peores
+                # Obtener los índices de los 5 peores
                 peores_indices = [idx for idx, _ in indexed_fitness[-5:]]
                 peores_indices.sort(reverse=True)
 

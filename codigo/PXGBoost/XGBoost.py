@@ -74,12 +74,13 @@ def createdftrain(df_aux):
 # %%
 def createdfvali(df_aux):
     tamanio_aux = df_aux.shape[0]   # Obtengo el tamaño del dataframe
-    return df_aux.copy().iloc[int(tamanio_aux*0.7 + 1):int(tamanio_aux*0.9)]    # Selecciono los datos entre el 70% y el 90% para ser el dataframe para training
+    # Selecciono los datos entre el 70% y el 90% para ser el dataframe para validación
+    return df_aux.copy().iloc[int(tamanio_aux*0.7 + 1):int(tamanio_aux*0.9)]   
 
 # %%
 def createdftest(df_aux):
     tamanio_aux = df_aux.shape[0]   # Obtengo el tamaño del dataframe
-    return df_aux.copy().iloc[int(tamanio_aux*0.9 + 1):tamanio_aux] # Selecciono el 10% final para ser el dataframe para training
+    return df_aux.copy().iloc[int(tamanio_aux*0.9 + 1):tamanio_aux] # Selecciono el 10% final para ser el dataframe para test
 
 # %%
 def preparar_datosXGBoost(df_aux):
@@ -163,8 +164,10 @@ def trainGlobalXGB(d_array, h_array):
         dtrain_prep = preparar_datosXGBoost(dtrain_aux) # Función con la que preparo los datos que voy a usar para el entrenamiento
         dvali_prep = preparar_datosXGBoost(dvali_aux) # Función con la que preparo los datos que voy a usar para la validación
         dtest_prep = preparar_datosXGBoost(dtest_aux)   # Función con la que preparo los datos que voy a usar para el testeo
-        values = train_XGB_depth(d_array, dtrain_prep[0], dvali_prep[0], dtest_prep[0], dtest_prep[1].values)
-        print(str(i)+" "+str(values[0])+" "+str(values[1]))    # Imprimo por pantalla el número de horas, la mejor profundidad de la iteración y el mejor rendimiento de la iteración
+        # Entreno los modelos usando los datos preparados con la cantidad de horas correcta
+        values = train_XGB_depth(d_array, dtrain_prep[0], dvali_prep[0], dtest_prep[0], dtest_prep[1].values)   
+        # Imprimo por pantalla el número de horas, la mejor profundidad de la iteración y el mejor rendimiento de la iteración
+        print(str(i)+" "+str(values[0])+" "+str(values[1]))    
         df_resultados = pd.DataFrame(values[2]) # Convierto los resultados del modelo en un dataframe
         cadena = "Dataframes/resultados_xgboost_h" + str(i) + ".csv"
         df_resultados.to_csv(cadena, index=False)   # Guardo el dataframe

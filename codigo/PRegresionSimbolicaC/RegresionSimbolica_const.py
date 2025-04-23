@@ -176,11 +176,13 @@ class RegresionSimbolica:
     def runcopy(self, numGenes, X, y, baremo: float, cargar):
         resultado = []
         num_veces = 0
-        best = 1000000
+        best = float('inf')
         candidato_best = []
         self.genes = []
         if cargar:
             with open('estado.txt', 'r') as archivo:
+                primera_linea = archivo.readline()
+                num_veces = int(primera_linea.strip())
                 for linea in archivo:
                     linea = linea.strip()
                     self.genes.append(self.cargar(linea))
@@ -192,8 +194,8 @@ class RegresionSimbolica:
             if(value < best):
                 best = value
                 candidato_best = self.genes[i]
-        while(best > baremo and num_veces < 1000000):
-            best_iteracion = 1000000
+        while(best > baremo and num_veces < 100000):
+            best_iteracion = float('inf')
             candi_it = []
             for j in range (0, len(self.genes)):
                 self.genes[j] = self.mutate2(self.genes[j])
@@ -214,14 +216,14 @@ class RegresionSimbolica:
                 mejor_indice = indexed_fitness[0][0]
                 aux = self.genes[mejor_indice]
 
-                # Obtener los índices de los 19 peores
-                peores_indices = [idx for idx, _ in indexed_fitness[-5:]]
+                # Obtener los índices de los 2 peores
+                peores_indices = [idx for idx, _ in indexed_fitness[-2:]]
                 peores_indices.sort(reverse=True)
 
                 for indice in peores_indices:
                     del self.genes[indice]
 
-                for _ in range(5):
+                for _ in range(2):
                     self.genes.append(aux)
             num_veces += 1
             print(f"Vez num:{num_veces}, valorit{best_iteracion}, valor{best}")
@@ -229,11 +231,12 @@ class RegresionSimbolica:
             resultado.append({'iteracion' : num_veces, 'valor' : best_iteracion, 'gen' : genBest})
             with open('genesIteracion.txt', 'a') as archivo:
                 archivo.write(f"Vez num:{num_veces}, valor{best_iteracion}, gen: {genBest} \n")
-            if num_veces % 2 == 0:
+            if num_veces % 100 == 0:
                 df_resultados = pd.DataFrame(resultado)
                 cadena = "Dataframes/resultados_regresionSimbolicaC_it" + str(num_veces) + ".csv"
                 df_resultados.to_csv(cadena, index=False)
                 with open('estado.txt', 'w') as archivo_estado:
+                    archivo_estado.write(str(num_veces))
                     for gen in self.genes:
                         cadena  = str(self.display(gen)) + "\n"
                         archivo_estado.write(cadena)
