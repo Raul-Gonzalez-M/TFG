@@ -225,16 +225,21 @@ class RegresionSimbolica:
             if(value < best):
                 best = value
                 candidato_best = self.genes[i]
-        while(best > baremo and num_veces < 1000000):
+        while(best > baremo and num_veces < 100000):
+            best_iteracion = float('inf')
+            candi_it = []
             for j in range (0, len(self.genes)):
                 self.genes[j] = self.mutate2(self.genes[j])
             values_list = []
             for r in range (0, len(self.genes)):
                 value = self.fitness2(X, y, self.genes[r])
                 values_list.append(value)
-                if(value < best):
-                    best = value
-                    candidato_best = self.genes[r]
+                if(value < best_iteracion):
+                    best_iteracion = value
+                    candi_it = self.genes[r]
+                    if value < best:
+                        best = value
+                        candidato_best = self.genes[r]
             if num_veces > 200 and num_veces % 100 == 0:
                 indexed_fitness = list(enumerate(values_list))
                 indexed_fitness.sort(key=lambda x: x[1])  # Ordenar por fitness
@@ -242,26 +247,27 @@ class RegresionSimbolica:
                 mejor_indice = indexed_fitness[0][0]
                 aux = self.genes[mejor_indice]
 
-                # Obtener los índices de los 19 peores
-                peores_indices = [idx for idx, _ in indexed_fitness[-5:]]
+                # Obtener los índices de los 2 peores
+                peores_indices = [idx for idx, _ in indexed_fitness[-2:]]
                 peores_indices.sort(reverse=True)
 
                 for indice in peores_indices:
                     del self.genes[indice]
 
-                for _ in range(5):
+                for _ in range(2):
                     self.genes.append(aux)
             num_veces += 1
-            print(f"Vez num:{num_veces}, valor{best}")
-            genBest = self.display(candidato_best)
-            resultado.append({'iteracion' : num_veces, 'valor' : best, 'gen' : genBest})
+            print(f"Vez num:{num_veces}, valorit{best_iteracion}, valor{best}")
+            genBest = self.display(candi_it)
+            resultado.append({'iteracion' : num_veces, 'valor' : best_iteracion, 'gen' : genBest})
             with open('genesIteracion.txt', 'a') as archivo:
-                archivo.write(f"Vez num:{num_veces}, valor{best}, gen: {genBest} \n")
+                archivo.write(f"Vez num:{num_veces}, valor{best_iteracion}, gen: {genBest} \n")
             if num_veces % 100 == 0:
                 df_resultados = pd.DataFrame(resultado)
-                cadena = "Dataframes/resultados_regresionSimbolicaC_it" + str(num_veces) + ".csv"
+                cadena = "Dataframes/resultados_regresionSimbolicaCIMC_it" + str(num_veces) + ".csv"
                 df_resultados.to_csv(cadena, index=False)
                 with open('estado.txt', 'w') as archivo_estado:
+                    archivo_estado.write(str(num_veces))
                     for gen in self.genes:
                         cadena  = str(self.display(gen)) + "\n"
                         archivo_estado.write(cadena)
