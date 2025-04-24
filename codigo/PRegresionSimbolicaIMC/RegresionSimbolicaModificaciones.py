@@ -263,7 +263,7 @@ class RegresionSimbolica:
                     if value < best:
                         best = value
                         candidato_best = self.genes[r]
-            if num_veces > 200 and num_veces % 100 == 0:
+            if num_veces > 200 and num_veces % 5 == 0:
                 indexed_fitness = list(enumerate(values_list))
                 indexed_fitness.sort(key=lambda x: x[1])  # Ordenar por fitness
 
