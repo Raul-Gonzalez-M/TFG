@@ -160,12 +160,13 @@ class RegresionSimbolica:
     
     def mutate2(self, candidato: list):
         numberC = (1 + len(candidato)) / 2
-        if numberC < self.maxSize and random.randint(0,50) == 0:
+        n = random.randint(0,1)
+        if numberC < self.maxSize and n == 0:
             op_cat = random.randint(0, len(self.operations) - 1)
             candidato.append(self.operations[op_cat][random.randint(0, len(self.operations[op_cat]) - 1)])
             candidato.append(aniadirNum(4*self.n))
             numberC += 2
-        elif numberC > self.minSize and random.randint(0,50) == 0:
+        elif numberC > self.minSize and n == 1:
             indice = random.randrange(0, len(candidato) - 1)
             del candidato[indice]
             del candidato[indice]
@@ -209,7 +210,7 @@ class RegresionSimbolica:
                     if value < best:
                         best = value
                         candidato_best = self.genes[r]
-            if num_veces > 200 and num_veces % 100 == 0:
+            if num_veces > 200 and num_veces % 5 == 0:
                 indexed_fitness = list(enumerate(values_list))
                 indexed_fitness.sort(key=lambda x: x[1])  # Ordenar por fitness
 
@@ -236,7 +237,8 @@ class RegresionSimbolica:
                 cadena = "Dataframes/resultados_regresionSimbolicaC_it" + str(num_veces) + ".csv"
                 df_resultados.to_csv(cadena, index=False)
                 with open('estado.txt', 'w') as archivo_estado:
-                    archivo_estado.write(str(num_veces))
+                    cad = str(num_veces) + "\n"
+                    archivo_estado.write(cad)
                     for gen in self.genes:
                         cadena  = str(self.display(gen)) + "\n"
                         archivo_estado.write(cadena)
@@ -297,7 +299,7 @@ for i in range(0, df_train.shape[0] - NUMHORAS):
     y.append(df_train.iloc[i + NUMHORAS].close)
 
 # %%
-pos = objeto_regresion.runcopy(200, X, y, 0.5, False)
+pos = objeto_regresion.runcopy(200, X, y, 0.5, True)
 
 # %%
 pos
