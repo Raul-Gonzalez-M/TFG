@@ -123,6 +123,7 @@ def opti_rLSTM_h(h_array, epoch_array, batch_array):
     return "He terminado"
 
 # %%
+# Llamo a la función de entrenamiento principal, la primera es la lista con las horas, al segunda es la lista con las epoch y la tercera es la lista de los batch_size
 data = opti_rLSTM_h([10, 12, 14, 18, 21], [4, 6, 10, 14, 20, 40], BATCH_ARRAY)
 
 
