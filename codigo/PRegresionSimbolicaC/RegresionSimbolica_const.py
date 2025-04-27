@@ -31,10 +31,10 @@ class position:
         self.value = value
     
     def getValue(self, valores : list[float]):
-        return valores[self.value]
+        return valores[self.value]  # Devuelve el valor asociado a esa posición
     
     def display(self):
-        return ("p"+ str(self.value))
+        return ("p"+ str(self.value))   # Devuelve el objeto posición como string
 
 # %%
 class constant:
@@ -42,17 +42,18 @@ class constant:
         self.value = value
     
     def getValue(self, valores : list[float]):
-        return self.value
+        return self.value   # Devuelve el valor de la constante
     
     def display(self):
-        return ("c"+ str(self.value))
+        return ("c"+ str(self.value))   # Devuelve el objeto constante como string
+
 
 # %%
 def aniadirNum(n:int):
-        if random.randint(0,2) == 0:
-            return constant(random.uniform(0.0, 5.0))
-        else:
-            return position(random.randrange(0, n))
+        if random.randint(0,1) == 0:    # Si es número aleatrio es 0 añado una constante
+            return constant(random.uniform(0.0, 5.0))   # Añado una constante con valor entre 0 y 5
+        else:   # Si es número aleatrio es 1 añado una posicion
+            return position(random.randrange(0, n))     # Añado una posición con valor entre 0 y n-1
 
 # %%
 def _constant(n):
@@ -76,24 +77,35 @@ class RegresionSimbolica:
     
     def cargar(self, linea):
         gen = []
+        # Uso una expresión regular para encontrar:
+        # constantes que empiezan con 'c' seguidas de dígitos y opcionalmente decimales (c\d+(?:\.\d+)?)
+        # posiciones que empiezan con 'p' seguidas de dígitos (p\d+)
+        # o operadores (+, -, *, /)
         tokens = re.findall(r'c\d+(?:\.\d+)?|p\d+|[+\-*/()]', linea)
         for tok in tokens:
             if tok.startswith('c'):
+                # Si el token empieza con 'c', creo una constante convirtiendo el valor a float
                 gen.append(_constant(float(tok[1:])))
             elif tok.startswith('p'):
+                # Si el token empieza con 'p', creo una posición convirtiendo el valor a int
                 gen.append(_position(int(tok[1:])))
             else:
+                # Si es un operador, lo agrego como cadena
                 gen.append(tok)
-        return gen
+        return gen  # Devuelvo el gen
+
         
     def create_gen(self, r : int):
         aux = []
-        aux.append(aniadirNum(r))
+        aux.append(aniadirNum(r))   # Añado al gen una posición o constante
+        # Genero un tamaño aleatorio para el gen comprendido entre el tamaño máximo y el tamaño mínimo
         for i in range(random.randint(self.minSize, self.maxSize - 1)):
+            # Selecciono aleatoriamente una categoría de operación
             numLO = random.randint(0, len(self.operations) - 1)
+            # Añado al gen una operación elegida aleatoriamente de entre las de la categoría 
             aux.append(self.operations[numLO][random.randint(0, len(self.operations[numLO]) - 1)])
-            aux.append(aniadirNum(r))
-        return aux
+            aux.append(aniadirNum(r))   # Añado al gen una posición o constante
+        return aux  # Devuelvo el gen generado
     
     
     def __create_priv(self, r : int, numGenes: int):
@@ -150,12 +162,13 @@ class RegresionSimbolica:
    
     def display(self,  candidato: list):
         cadena = ""
-        for i in range(0, len(candidato)):
-            if i % 2 == 1:
-                cadena = cadena + candidato[i] + ' '
-            else:
-                cadena = cadena + candidato[i].display() + ' '
-        return cadena
+        for i in range(0, len(candidato)):  # Recorro el gen
+            if i % 2 == 1:  # Si i es impar estoy añadiendo una operación a la cadena
+                cadena = cadena + candidato[i] + ' '    # Añado la operación con un espacio detrás
+            else:   # Si i es impar estoy añadiendo una posició o constante a la cadena
+                # Añado la posición o constante, transformada en un string, con un espacio detrás
+                cadena = cadena + candidato[i].display() + ' ' 
+        return cadena   # Devuelvo la cadena como string
         
     
     def mutate2(self, candidato: list):

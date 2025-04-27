@@ -140,21 +140,23 @@ class RegresionSimbolica:
             candidato.append(self.operations[op_cat][random.randint(0, len(self.operations[op_cat]) - 1)])
             # Añado al gen un número aleatorio entre 0 y la posición máxima
             candidato.append(random.randrange(0, 4*self.n))
-            # Si no se ha añadido, el tamaño del gen menos 2 no es menor que el tamaño mínimo y el número aleatorio es 0 el gen se muta quitando
+        # Si no se ha añadido, el tamaño del gen menos 2 no es menor que el tamaño mínimo y el número aleatorio es 0 el gen se muta quitando
         elif numberC - 2 > self.minSize and random.randint(0,49) == 0:
             # Selecciono aleatoriamente un índice del gen
             indice = random.randrange(0, len(candidato) - 1)
-            #Elimino el elemento que está en al posición del índice
+            # Elimino el elemento que está en la posición del índice
             del candidato[indice]
-            #Elimino el elemento que está en al posición del índice
+            # Elimino el elemento que está en la posición del índice
             del candidato[indice]
         return candidato    # Devuelvo el gen resultante
 
     def cargar(self, linea):
         gen = []
+        # Uso una expresión regular para encontrar todos los números (\d+) o los operadores (+, -, *, /) en la línea
         gen = re.findall(r'\d+|[+\-*/]', linea)
+        # Convierto a entero todos los tokens que sean números y mantengo como cadenas los operadores
         gen = [int(tok) if tok.isdigit() else tok for tok in gen]
-        return gen
+        return gen  # Devuelvo el gen
 
 
 
