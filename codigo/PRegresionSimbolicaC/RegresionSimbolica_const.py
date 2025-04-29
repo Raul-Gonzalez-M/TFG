@@ -189,7 +189,7 @@ class RegresionSimbolica:
     
     def runcopy(self, numGenes, X, y, baremo: float, cargar):
         resultado = []
-        num_veces = 0
+        num_veces = 3000
         best = float('inf')
         candidato_best = []
         self.genes = []
@@ -283,7 +283,7 @@ operations = [
 objeto_regresion = RegresionSimbolica(
     funcionOptimizacion=funcion_optimizacion_mape,  # Pasas tu función de optimización
     operations=operations,                          # Pasas la lista de operaciones
-    maxSize=80,                                     # Tamaño máximo del cromosoma
+    maxSize=30,                                     # Tamaño máximo del cromosoma
     minSize=3,                                      # Tamaño mínimo del cromosoma
     n=NUMHORAS                                             # Cantidad de horas anteriores a considerar
 )
@@ -312,7 +312,7 @@ for i in range(0, df_train.shape[0] - NUMHORAS):
     y.append(df_train.iloc[i + NUMHORAS].close)
 
 # %%
-pos = objeto_regresion.runcopy(200, X, y, 0.5, True)
+pos = objeto_regresion.runcopy(200, X, y, 0.5, False)
 
 # %%
 pos
