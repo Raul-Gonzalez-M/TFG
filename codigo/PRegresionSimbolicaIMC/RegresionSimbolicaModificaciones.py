@@ -234,7 +234,7 @@ class RegresionSimbolica:
 
     def runcopy(self, numGenes, X, y, baremo: float, cargar):
         resultado = []  # Lista en la que guardo los resultados de cada iteración
-        num_veces = 0   # Variable en la que guardo al cantidad de iteraciones
+        num_veces = 4700   # Variable en la que guardo al cantidad de iteraciones
         best = float('inf') # Variable en la que guardo el mejor resultado
         candidato_best = [] # Variable en la que guardo el mejor gen
         if cargar:  # Si cargar es true la población inicial se obtiene del archivo de texto estado
