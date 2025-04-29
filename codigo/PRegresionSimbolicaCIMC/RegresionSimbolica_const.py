@@ -146,12 +146,13 @@ class RegresionSimbolica:
     
     def mutate2(self, candidato: list):
         numberC = (1 + len(candidato)) / 2
-        if numberC < self.maxSize and random.randint(0,50) == 0:
+        n = random.randint(0,1)
+        if numberC < self.maxSize and n == 0:
             op_cat = random.randint(0, len(self.operations) - 1)
             candidato.append(self.operations[op_cat][random.randint(0, len(self.operations[op_cat]) - 1)])
-            candidato.append(aniadirNum(4*self.n))
+            candidato.append(aniadirNum(5*self.n))
             numberC += 2
-        elif numberC > self.minSize and random.randint(0,50) == 0:
+        elif numberC > self.minSize and n == 1:
             indice = random.randrange(0, len(candidato) - 1)
             del candidato[indice]
             del candidato[indice]
@@ -169,7 +170,7 @@ class RegresionSimbolica:
             if(value < best):
                 best = value
                 candidato_best = self.genes[i]
-        while(best > baremo and num_veces < 100000):
+        while(best > baremo and num_veces < 8001):
             for j in range (0, len(self.genes)):
                 self.genes[j] = self.mutate2(self.genes[j])
             dicc_aux = {}
@@ -240,7 +241,7 @@ class RegresionSimbolica:
                     if value < best:
                         best = value
                         candidato_best = self.genes[r]
-            if num_veces > 200 and num_veces % 100 == 0:
+            if num_veces > 200 and num_veces % 5 == 0:
                 indexed_fitness = list(enumerate(values_list))
                 indexed_fitness.sort(key=lambda x: x[1])  # Ordenar por fitness
 
@@ -299,7 +300,7 @@ operations = [
 objeto_regresion = RegresionSimbolica(
     funcionOptimizacion=funcion_optimizacion_mape,  # Pasas tu función de optimización
     operations=operations,                          # Pasas la lista de operaciones
-    maxSize=50,                                     # Tamaño máximo del cromosoma
+    maxSize=30,                                     # Tamaño máximo del cromosoma
     minSize=5,                                      # Tamaño mínimo del cromosoma
     n=NUMHORAS                                             # Cantidad de horas anteriores a considerar
 )

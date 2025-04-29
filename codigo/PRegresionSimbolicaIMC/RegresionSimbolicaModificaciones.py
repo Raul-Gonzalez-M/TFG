@@ -113,7 +113,7 @@ class RegresionSimbolica:
         if numberC < self.maxSize and random.randint(0,100) == 0:
             op_cat = random.randint(0, len(self.operations) - 1)
             candidato.append(self.operations[op_cat][random.randint(0, len(self.operations[op_cat]) - 1)])
-            candidato.append(random.randrange(0, 4*self.n))
+            candidato.append(random.randrange(0, 5*self.n))
             return candidato
         elif numberC > self.minSize and random.randint(0,50) == 0:
             indice = random.randrange(0, len(candidato) - 1)
@@ -131,7 +131,7 @@ class RegresionSimbolica:
             # Añado al gen una operación elegida aleatoriamente de entre las de la categoría 
             candidato.append(self.operations[op_cat][random.randint(0, len(self.operations[op_cat]) - 1)])
             # Añado al gen un número aleatorio entre 0 y la posición máxima
-            candidato.append(random.randrange(0, 4*self.n))
+            candidato.append(random.randrange(0, 5*self.n))
         # Si no se ha añadido, el tamaño del gen menos 2 no es menor que el tamaño mínimo y n es 1 el gen se muta quitando 
         if numberC > self.minSize and n == 1:
             # Selecciono aleatoriamente un índice del gen
