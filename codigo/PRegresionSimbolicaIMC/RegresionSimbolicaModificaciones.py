@@ -230,7 +230,7 @@ class RegresionSimbolica:
 
     def runcopy(self, numGenes, X, y, baremo: float, cargar):
         resultado = []
-        num_veces = 0
+        num_veces = 4700
         best = 1000000
         candidato_best = []
         if cargar:
@@ -355,7 +355,7 @@ for i in range(0, df_train.shape[0] - NUMHORAS):
     y.append(df_train.iloc[i + NUMHORAS].close)
 
 # %%
-pos = objeto_regresion.runcopy(200, X, y, 0.5, True)
+pos = objeto_regresion.runcopy(200, X, y, 0.5, False)
 
 # %%
 pos
