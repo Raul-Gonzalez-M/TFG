@@ -29,85 +29,92 @@ df_test = df.copy().loc[int(tamanio*0.9 + 1):tamanio]
 
 # %%
 class RegresionSimbolica:
-    def __init__(self, funcionOptimizacion: callable, operations: list[list], maxSize: int, minSize: int, n : int): # n es la cantidad de horas anteriores que se tienen en cuenta
-        self.funcionOptimizacion = funcionOptimizacion
-        self.operations = operations  # La primera lista contendrá las operaciones más prioritarias y así progresivamente
-        self.maxSize = maxSize
-        self.minSize = minSize
-        self.genes: list[list] = []
-        self.n = n
+    def __init__(self, funcionOptimizacion: callable, operations: list[list], maxSize: int, minSize: int, n : int): 
+        # Asigno a funcionOptimizacion la función que se debe utilizar para calcular el rendimiento de los genes
+        self.funcionOptimizacion = funcionOptimizacion  
+        self.operations = operations  # Asigno a operations la lista de listas de operaciones
+        self.maxSize = maxSize  # Asigno a maxSize el tamañao máximo que puede tener un gen
+        self.minSize = minSize  # Asigno a minSize el tamaño mínimo que puede tener un gen
+        self.genes: list[list] = [] # Asigno a genes una lista vacía
+        self.n = n  # Asigno a n la cantidad de horas anteriores que se tienen en cuenta
         pass
     
     
     def __create_priv(self, r : int, numGenes: int):
         genes = []
-        for j in range (numGenes):   # Se genera un número aleatorio de genes entre 2 y numGenes
+        for j in range (numGenes):   
             aux = []
-            aux.append(random.randint(0, r))
-            for i in range(random.randint(self.minSize, self.maxSize - 1)):
-                numLO = random.randint(0, len(self.operations) - 1)
-                aux.append(self.operations[numLO][random.randint(0, len(self.operations[numLO]) - 1)])
+            aux.append(random.randint(0, r)) # Añado al gen un número aleatorio entre 0 y la posición máxima
+            # Genero un tamaño aleatorio para el gen comprendido entre el tamaño máximo y el tamaño mínimo
+            for i in range(random.randint(self.minSize, self.maxSize - 1)): 
+                # Selecciono aleatoriamente una categoría de operación
+                numLO = random.randint(0, len(self.operations) - 1) 
+                # Añado al gen una operación elegida aleatoriamente de entre las de la categoría 
+                aux.append(self.operations[numLO][random.randint(0, len(self.operations[numLO]) - 1)])  
+                # Añado al gen un número aleatorio entre 0 y la posición máxima
                 aux.append(random.randint(0, r))
-            genes.append(aux)
+            genes.append(aux)   # Añado el gen generado a la lista de genes
         return genes
             
     
     
     def create(self, numGenes: int):
-        if numGenes > 0:
+        if numGenes > 0:    # Compruebo que el número de genes sea al menos 1
             return self.__create_priv(4*self.n - 1, numGenes)
         else:
-            raise Exception("El número de genes no puede ser menor que 1")
+            # Levanto una excepción porque el número de genes es menor que 1
+            raise Exception("El número de genes no puede ser menor que 1")  
         
     def __aplica_operacion(self, op, i, j):
-        if op == '+':
-            return i + j
-        elif op == '-':
-            return i - j
-        elif op == '*':
-            return i * j
-        elif op == '/':
-            return i / j if j != 0 else 1e6
-        elif op == '^':
-            return i ** j
+        if op == '+':   # Compruebo si la operación es la suma
+            return i + j    # Sumo i más j
+        elif op == '-': # Compruebo si la operación es la resta
+            return i - j    # Resto i menos j
+        elif op == '*': # Compruebo si la operación es la multiplicación
+            return i * j    # Multiplico i por j
+        elif op == '/': # Compruebo si la operación es la división
+            return i / j if j != 0 else 1e6 # Si j es distinto de 0 divido i entre j
+        elif op == '^': # Compruebo si la operación es la potencia
+            return i ** j   # Elevo i a j
         
     def __evaluate(self, valores: list[float], candidato: list):
         candidato_aux = []
-        for i in range(0, len(candidato) - 1, 2):
-            candidato_aux.append(valores[candidato[i]])
-            candidato_aux.append(candidato[i+1])
-        candidato_aux.append(valores[candidato[len(candidato) - 1]])
-        for categoria_operaciones in self.operations:
-            j_offset = 0
+        # Recorro el gen y sustituyo las posiciones por sus valores correspondientes creando una lista auxiliar
+        for i in range(0, len(candidato) - 1, 2):  
+            candidato_aux.append(valores[candidato[i]]) # Añado el valor correspondiente a esa posición
+            candidato_aux.append(candidato[i+1])    # Añado la operación
+        candidato_aux.append(valores[candidato[len(candidato) - 1]]) # Añado el valor correspondiente a esa posición
+        # Recorro las categorías de operaciones ejecutando las operaciones de cada categoría
+        for categoria_operaciones in self.operations:   
+            j_offset = 0    # offset del índice
+            # Recorro las operaciones del gen
             for j in range(1, len(candidato_aux), 2):
                 indice = j + j_offset
-                op = candidato_aux[indice]
-                if(op in categoria_operaciones):
+                op = candidato_aux[indice]  # Asigno la operación a op
+                # Compruebo si la operación esta en al categoría de operaciones de esta iteración
+                if(op in categoria_operaciones): 
+                    # Realizo la operación
                     op_result = self.__aplica_operacion( op, candidato_aux[indice-1], candidato_aux[indice+1])
-                    candidato_aux[indice-1] = op_result
-                    del candidato_aux[indice+1]
-                    del candidato_aux[indice]
-                    j_offset = j_offset - 2
-        return candidato_aux[0]   
+                    candidato_aux[indice-1] = op_result # Asigno el resultado de la operación al lugar del operador izquierdo
+                    del candidato_aux[indice+1] # Elimino la operación del gen
+                    del candidato_aux[indice]   # Elimino el operador derecho del gen
+                    j_offset = j_offset - 2 # Reduzco en 2 el offset
+        return candidato_aux[0]   # Devuelvo el valor obtenido
     
-    
-    def fitness(self, X, y, candidato: list):
-        valores_generados = []
-        for elem in X:
-            valores_generados.append(self.__evaluate(elem, candidato))
-        return self.funcionOptimizacion(valores_generados, y)
     
     def fitness2(self, X, y, candidato: list):
         valores_generados = []
-        for elem in X:
+        for elem in X: # Recorro X obteniendo la predicción del modelo para cada entrada de X
             valores_generados.append(self.__evaluate(elem, candidato))
-        return self.funcionOptimizacion(valores_generados, y)
+        # Ejecuto al función de optimización en al predicción e y
+        return self.funcionOptimizacion(valores_generados, y)   
                
                 
         
             
         
     def display(self,  candidato: list):
+        # Decuelvo el gen como string
         return  ' '.join(map(str, [i for i in candidato]))
         
     def mutate(self, candidato: list):
@@ -125,25 +132,31 @@ class RegresionSimbolica:
         return candidato
     
     def mutate2(self, candidato: list):
-        numberC = (1 + len(candidato)) / 2
-        #for i in range(0,20):
-        if numberC < self.maxSize and random.randint(0,50) == 0:
-            op_cat = random.randint(0, len(self.operations) - 1)
+        numberC = (1 + len(candidato)) / 2  # Tamaño del gen
+        # Si el tamaño del gen no es mayor que el tamaño máximo y el número aleatorio es 0 el gen se muta añadiendo
+        if numberC < self.maxSize and random.randint(0,49) == 0:    
+            op_cat = random.randint(0, len(self.operations) - 1) # Selecciono aleatoriamente una categoría de operación
+            # Añado al gen una operación elegida aleatoriamente de entre las de la categoría 
             candidato.append(self.operations[op_cat][random.randint(0, len(self.operations[op_cat]) - 1)])
+            # Añado al gen un número aleatorio entre 0 y la posición máxima
             candidato.append(random.randrange(0, 4*self.n))
-            numberC += 2
-        elif numberC > self.minSize and random.randint(0,50) == 0:
+        # Si no se ha añadido, el tamaño del gen menos 2 no es menor que el tamaño mínimo y el número aleatorio es 0 el gen se muta quitando
+        elif numberC - 2 > self.minSize and random.randint(0,49) == 0:
+            # Selecciono aleatoriamente un índice del gen
             indice = random.randrange(0, len(candidato) - 1)
+            # Elimino el elemento que está en la posición del índice
             del candidato[indice]
+            # Elimino el elemento que está en la posición del índice
             del candidato[indice]
-            numberC -= 2
-        return candidato
+        return candidato    # Devuelvo el gen resultante
 
     def cargar(self, linea):
         gen = []
+        # Uso una expresión regular para encontrar todos los números (\d+) o los operadores (+, -, *, /) en la línea
         gen = re.findall(r'\d+|[+\-*/]', linea)
+        # Convierto a entero todos los tokens que sean números y mantengo como cadenas los operadores
         gen = [int(tok) if tok.isdigit() else tok for tok in gen]
-        return gen
+        return gen  # Devuelvo el gen
 
 
 
@@ -183,21 +196,15 @@ class RegresionSimbolica:
                     if value < best:
                         best = value
                         candidato_best = self.genes[r]
-
             if num_veces > 200 and num_veces % 100 == 0:
                 indexed_fitness = list(enumerate(values_list))
-                indexed_fitness.sort(key=lambda x: x[1])  # Ordenar por fitness
-
+                indexed_fitness.sort(key=lambda x: x[1])  # Ordeno los genes según su rendimiento
                 mejor_indice = indexed_fitness[0][0]
                 aux = self.genes[mejor_indice]
-
-                # Obtener los índices de los 5 peores
                 peores_indices = [idx for idx, _ in indexed_fitness[-5:]]
                 peores_indices.sort(reverse=True)
-
                 for indice in peores_indices:
                     del self.genes[indice]
-
                 for _ in range(5):
                     self.genes.append(aux)
             num_veces += 1

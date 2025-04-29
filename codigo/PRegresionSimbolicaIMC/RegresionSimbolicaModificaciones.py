@@ -123,20 +123,24 @@ class RegresionSimbolica:
         return candidato
     
     def mutate2(self, candidato: list):
-        numberC = (1 + len(candidato)) / 2
-        #for i in range(0,20):
-        n = random.randint(0,1)
+        numberC = (1 + len(candidato)) / 2  # Tamaño del gen
+        n = random.randint(0,1) # Genero un 0 o un 1
+        # Si el tamaño del gen no es mayor que el tamaño máximo y n es 0 el gen se muta añadiendo
         if numberC < self.maxSize and n == 0:
-            op_cat = random.randint(0, len(self.operations) - 1)
+            op_cat = random.randint(0, len(self.operations) - 1)    # Selecciono aleatoriamente una categoría de operación
+            # Añado al gen una operación elegida aleatoriamente de entre las de la categoría 
             candidato.append(self.operations[op_cat][random.randint(0, len(self.operations[op_cat]) - 1)])
+            # Añado al gen un número aleatorio entre 0 y la posición máxima
             candidato.append(random.randrange(0, 4*self.n))
-            numberC += 2
+        # Si no se ha añadido, el tamaño del gen menos 2 no es menor que el tamaño mínimo y n es 1 el gen se muta quitando 
         if numberC > self.minSize and n == 1:
+            # Selecciono aleatoriamente un índice del gen
             indice = random.randrange(0, len(candidato) - 1)
+            # Elimino el elemento que está en la posición del índice
             del candidato[indice]
+            # Elimino el elemento que está en la posición del índice
             del candidato[indice]
-            numberC -= 2
-        return candidato
+        return candidato    # Devuelvo el gen resultante
     
     def run(self, numGenes, X, y, baremo: float):
         best = 1000000
@@ -229,78 +233,77 @@ class RegresionSimbolica:
 
 
     def runcopy(self, numGenes, X, y, baremo: float, cargar):
-        resultado = []
-        num_veces = 4700
-        best = 1000000
-        candidato_best = []
-        if cargar:
-            with open('estado.txt', 'r') as archivo:
-                primera_linea = archivo.readline()
-                num_veces = int(primera_linea.strip())
-                for linea in archivo:
-                    linea = linea.strip()
-                    self.genes.append(self.cargar(linea))
-                numGenes = len(self.genes)
-        else:
-            self.genes = self.create(numGenes)
-        for i in range (0, len(self.genes)):
-            value = self.fitness2(X, y, self.genes[i])
-            if(value < best):
+        resultado = []  # Lista en la que guardo los resultados de cada iteración
+        num_veces = 0   # Variable en la que guardo al cantidad de iteraciones
+        best = float('inf') # Variable en la que guardo el mejor resultado
+        candidato_best = [] # Variable en la que guardo el mejor gen
+        if cargar:  # Si cargar es true la población inicial se obtiene del archivo de texto estado
+            with open('estado.txt', 'r') as archivo:    # Abro el archivo en modo lectura
+                primera_linea = archivo.readline()  # Leo la primera línea
+                num_veces = int(primera_linea.strip())  # Transformo lo leído en un entero y se lo asigno a número de veces
+                for linea in archivo:   # Leo cada línea del archivo de una en una
+                    linea = linea.strip() # Elimino espacios al principio y al final
+                    self.genes.append(self.cargar(linea))   # Transformo la línea leída en un gen y lo añado a la lista de genes
+                numGenes = len(self.genes)  # Asigno al número de genes la longitud de la lista de genes
+        else:   # Si cargar es false al población inicial se genera aleatoriamente
+            self.genes = self.create(numGenes)  # Creo la población inicial y la asigno a la lista de genes
+        for i in range (0, len(self.genes)):     # Evalúo el rendimiento de cada gen y obtengo el mejor rendimiento
+            value = self.fitness2(X, y, self.genes[i])   # Evalúo el rendimiento del gen
+            if(value < best):   # Si es mejor que el mejor hasta ahora lo sustituye
                 best = value
-                candidato_best = self.genes[i]
-        while(best > baremo and num_veces < 100000):
-            best_iteracion = float('inf')
+                candidato_best = self.genes[i]  # Guardo el gen como el mejor hasta el momento
+        while(best > baremo and num_veces < 100000):    # Mientras que el mejor no sea mejor que el baremo y el número de iteraciones sea menor de 100000 se ejecuta el bucle
+            best_iteracion = float('inf')   # Variable en la que guardo el mejor resultado de esta iteración
             candi_it = []
-            for j in range (0, len(self.genes)):
-                self.genes[j] = self.mutate2(self.genes[j])
+            for j in range (0, len(self.genes)):  # Recorro la lista de genes
+                self.genes[j] = self.mutate2(self.genes[j]) # Ejecuto mutate2 con el gen correspondiente
             values_list = []
-            for r in range (0, len(self.genes)):
-                value = self.fitness2(X, y, self.genes[r])
-                values_list.append(value)
-                if(value < best_iteracion):
+            for r in range (0, len(self.genes)):    # Recorro la lista de genes
+                value = self.fitness2(X, y, self.genes[r])   # Evalúo el rendimiento del gen
+                values_list.append(value)   # Añado el rendimiento a la lista de rendimientos
+                if(value < best_iteracion): # Si es mejor que el mejor de la iteración hasta ahora lo sustituye
                     best_iteracion = value
-                    candi_it = self.genes[r]
-                    if value < best:
+                    candi_it = self.genes[r]    # Guardo el gen como el mejor de la iteración hasta el momento
+                    if value < best:    # Si es mejor que el mejor hasta ahora lo sustituye
                         best = value
-                        candidato_best = self.genes[r]
-            if num_veces > 200 and num_veces % 5 == 0:
-                indexed_fitness = list(enumerate(values_list))
-                indexed_fitness.sort(key=lambda x: x[1])  # Ordenar por fitness
-
-                mejor_indice = indexed_fitness[0][0]
-                aux = self.genes[mejor_indice]
-
-                # Obtener los índices de los 2 peores
-                peores_indices = [idx for idx, _ in indexed_fitness[-2:]]
-                peores_indices.sort(reverse=True)
-
-                for indice in peores_indices:
-                    del self.genes[indice]
-
-                for _ in range(2):
+                        candidato_best = self.genes[r]  # Guardo el gen como el mejor hasta el momento
+            if num_veces > 200 and num_veces % 5 == 0:  # Si el num de iteraciones es mayor de 200 y multiplo de 5 se ejecuta el proceso de eliminación de los peores genes
+                indexed_fitness = list(enumerate(values_list))  # Asigno índices a cada valor de la lista de valores y lo guardo como lista de tuplas (índice, valor)
+                indexed_fitness.sort(key=lambda x: x[1])  # Ordeno la lista por rendimiento
+                mejor_indice = indexed_fitness[0][0]    # Guardo el índice del mejor gen de la lista 
+                aux = self.genes[mejor_indice]  # Guardo en aux el mejor gen de la lista
+                peores_indices = [idx for idx, _ in indexed_fitness[-2:]]   # Guardo el índice de los dos peores genes de la lista 
+                peores_indices.sort(reverse=True)   # Ordeno los índices de mayor a menor
+                for indice in peores_indices:   # Recorro la lista de índices
+                    del self.genes[indice]  # Elimino el gen que se encuentra en este índice
+                for _ in range(2):  # Añado a la lista de genes dos copias de el mejor gen de la lista de genes
                     self.genes.append(aux)
-            num_veces += 1
+            num_veces += 1  # Sumo 1 al número de iteraciones
+            # Imprimo el número de iteraciones, el mejor rendimiento de la iteración y el mejor rendimiento hasta ahora
             print(f"Vez num:{num_veces}, valorit{best_iteracion}, valor{best}")
-            genBest = self.display(candi_it)
+            genBest = self.display(candi_it)     # Guardo el mejor gen de la iteración como string
+            # Guardo el número de iteración, el mejor rendimiento de la iteración y el mejor gen de la iteración como string
             resultado.append({'iteracion' : num_veces, 'valor' : best_iteracion, 'gen' : genBest})
-            with open('genesIteracion.txt', 'a') as archivo:
+            with open('genesIteracion.txt', 'a') as archivo:    # Abro el archivo en modo append
+                # Guardo en el archivo de texto el número de iteración, el mejor rendimiento de la iteración y el mejor gen de la iteración como string
                 archivo.write(f"Vez num:{num_veces}, valor{best_iteracion}, gen: {genBest} \n")
-            if num_veces % 100 == 0:
-                df_resultados = pd.DataFrame(resultado)
+            if num_veces % 100 == 0:    # Si el número de iteraciones en múltiplo de 100
+                df_resultados = pd.DataFrame(resultado) # Transformo la lista en un dataframe
+                # Creo el nombre de guardado del dataframe
                 cadena = "Dataframes/resultados_regresionSimbolicaC_it" + str(num_veces) + ".csv"
-                df_resultados.to_csv(cadena, index=False)
-                with open('estado.txt', 'w') as archivo_estado:
-                    cad = str(num_veces)+ "\n"
-                    archivo_estado.write(cad)
-                    for gen in self.genes:
-                        cadena  = str(self.display(gen)) + "\n"
-                        archivo_estado.write(cadena)
-        print("El mejor gen tiene un rendimiento de " + str(best))
-        self.display(candidato_best)
-        df_resultados = pd.DataFrame(resultado)
-        cadena = "Dataframes/resultados_regresionSimbolica.csv"
-        df_resultados.to_csv(cadena, index=False)
-        return (candidato_best, best)
+                df_resultados.to_csv(cadena, index=False)   # Guardo el dataframe como csv
+                with open('estado.txt', 'w') as archivo_estado: # Abro el archivo en modo escritura
+                    cad = str(num_veces)+ "\n"  # Creo un string con el número de iteraciones y un salto de línea
+                    archivo_estado.write(cad)   # Lo escribo en el archivo
+                    for gen in self.genes:  # Recorro la lista de genes
+                        cadena  = str(self.display(gen)) + "\n" # Creo un string con el gen y un salto de línea
+                        archivo_estado.write(cadena)# Lo escribo en el archivo
+        print("El mejor gen tiene un rendimiento de " + str(best))  # Imprimo el mejor rendimiento obtenido
+        self.display(candidato_best)    # Guardo el mejor gen como string
+        df_resultados = pd.DataFrame(resultado) # Guardo los resultados como dataframe
+        cadena = "Dataframes/resultados_regresionSimbolica.csv" # Creo el nombre de guardado del dataframe
+        df_resultados.to_csv(cadena, index=False)   # Guardo el dataframe como csv
+        return (candidato_best, best)   # Devuelvo el mejor gen y su rendimiento
 
 # %%
 def funcion_optimizacion_mape(valores_generados, y):
