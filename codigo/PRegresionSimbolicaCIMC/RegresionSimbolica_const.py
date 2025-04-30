@@ -209,7 +209,7 @@ class RegresionSimbolica:
     
     def runcopy(self, numGenes, X, y, baremo: float, cargar:bool):
         resultado = []
-        num_veces = 400
+        num_veces = 425
         best = 1000000
         candidato_best = []
         self.genes = []
