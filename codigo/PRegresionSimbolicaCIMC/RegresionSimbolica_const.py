@@ -209,7 +209,7 @@ class RegresionSimbolica:
     
     def runcopy(self, numGenes, X, y, baremo: float, cargar:bool):
         resultado = []
-        num_veces = 0
+        num_veces = 400
         best = 1000000
         candidato_best = []
         self.genes = []
@@ -263,7 +263,7 @@ class RegresionSimbolica:
             resultado.append({'iteracion' : num_veces, 'valor' : best_iteracion, 'gen' : genBest})
             with open('genesIteracion.txt', 'a') as archivo:
                 archivo.write(f"Vez num:{num_veces}, valor{best_iteracion}, gen: {genBest} \n")
-            if num_veces % 100 == 0:
+            if num_veces % 25 == 0:
                 df_resultados = pd.DataFrame(resultado)
                 cadena = "Dataframes/resultados_regresionSimbolicaCIMC_it" + str(num_veces) + ".csv"
                 df_resultados.to_csv(cadena, index=False)
@@ -300,8 +300,8 @@ operations = [
 objeto_regresion = RegresionSimbolica(
     funcionOptimizacion=funcion_optimizacion_mape,  # Pasas tu función de optimización
     operations=operations,                          # Pasas la lista de operaciones
-    maxSize=30,                                     # Tamaño máximo del cromosoma
-    minSize=5,                                      # Tamaño mínimo del cromosoma
+    maxSize=15,                                     # Tamaño máximo del cromosoma
+    minSize=3,                                      # Tamaño mínimo del cromosoma
     n=NUMHORAS                                             # Cantidad de horas anteriores a considerar
 )
 
@@ -330,7 +330,7 @@ for i in range(0, df_train.shape[0] - NUMHORAS):
     y.append(df_train.iloc[i + NUMHORAS].close)
 
 # %%
-pos = objeto_regresion.runcopy(200, X, y, 0.5, False)
+pos = objeto_regresion.runcopy(200, X, y, 0.5, True)
 
 # %%
 pos
