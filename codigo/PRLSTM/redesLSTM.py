@@ -79,7 +79,7 @@ def opti_redes_LSTM(epoch_array, batch_array, X_trainLSTM, y_trainLSTM, X_valiLS
     for e in epoch_array:   # Genero modelos con todos los epoch pasados como parámetro en el array
         for b in batch_array:   # Genero modelos con todos los batch_size pasados como parámetro en el array
             best_value_of_the15 = float('inf')  # Asigno a best_value_of_the15 un valor infinito de tipo float
-            for i in range(15): # Genero 15 modelos con cada de par epoch, bacth_size 
+            for i in range(8): # Genero 15 modelos con cada de par epoch, bacth_size 
                 with tf.device('/CPU:0'):   # Fuerzo que el código debajo de esta línea se ejecute usando la CPU
                     modelLSTM = Sequential()    # Declaro el modelo como secuencial
                     # Creo la capa de entrada con 128 neuronas, definiendo la forma de la entrada y y cuya función de activacion es Rectified Linear Unit

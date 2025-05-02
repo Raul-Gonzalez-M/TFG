@@ -81,7 +81,7 @@ def opti_redes_LSTM(epoch_array, batch_array, X_trainLSTM, y_trainLSTM, X_valiLS
     for e in epoch_array:
         for b in batch_array:
             best_value_of_the25 = float('inf')
-            for i in range(15):
+            for i in range(8):
                 #with tf.device('/CPU:0'):
                 modelLSTM = Sequential()
                 modelLSTM.add(LSTM(128, activation='relu', input_shape=(numhoras, 4)))
