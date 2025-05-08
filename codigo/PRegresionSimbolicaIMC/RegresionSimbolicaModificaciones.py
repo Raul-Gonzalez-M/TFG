@@ -234,7 +234,7 @@ class RegresionSimbolica:
 
     def runcopy(self, numGenes, X, y, baremo: float, cargar):
         resultado = []  # Lista en la que guardo los resultados de cada iteración
-        num_veces = 4700   # Variable en la que guardo al cantidad de iteraciones
+        num_veces = 6825   # Variable en la que guardo al cantidad de iteraciones
         best = float('inf') # Variable en la que guardo el mejor resultado
         candidato_best = [] # Variable en la que guardo el mejor gen
         if cargar:  # Si cargar es true la población inicial se obtiene del archivo de texto estado
@@ -287,7 +287,7 @@ class RegresionSimbolica:
             with open('genesIteracion.txt', 'a') as archivo:    # Abro el archivo en modo append
                 # Guardo en el archivo de texto el número de iteración, el mejor rendimiento de la iteración y el mejor gen de la iteración como string
                 archivo.write(f"Vez num:{num_veces}, valor{best_iteracion}, gen: {genBest} \n")
-            if num_veces % 100 == 0:    # Si el número de iteraciones en múltiplo de 100
+            if num_veces % 25 == 0:    # Si el número de iteraciones en múltiplo de 100
                 df_resultados = pd.DataFrame(resultado) # Transformo la lista en un dataframe
                 # Creo el nombre de guardado del dataframe
                 cadena = "Dataframes/resultados_regresionSimbolicaC_it" + str(num_veces) + ".csv"
